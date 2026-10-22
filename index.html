@@ -1,1 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Syuzanna Sargsyan - E-commerce & Shopify Growth Specialist. Building better e-commerce experiences through strategy, design, and technology.">
+    <title>Syuzanna Sargsyan | E-commerce & Shopify Growth Specialist</title>
+    
+    <!-- Google Fonts: Playfair Display (Editorial Serif) & Inter (Modern Sans-Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for subtle, professional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        /* =========================================
+           1. DESIGN TOKENS & VARIABLES
+           ========================================= */
+        :root {
+            --color-navy: #17283F;
+            --color-ivory: #F7F5F0;
+            --color-champagne: #B5A184;
+            --color-sage: #303A37;
+            --color-white: #FFFFFF;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            
+            --spacing-xs: 1rem;
+            --spacing-sm: 2rem;
+            --spacing-md: 4rem;
+            --spacing-lg: 6rem;
+            --spacing-xl: 8rem;
+            
+            --container-max: 1200px;
+            --border-radius: 4px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* =========================================
+           2. GLOBAL RESET & BASE STYLES
+           ========================================= */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-ivory);
+            color: var(--color-navy);
+            line-height: 1.7;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--color-navy);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--spacing-sm); }
+        h3 { font-size: 1.5rem; font-family: var(--font-sans); font-weight: 500; }
+        
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--color-sage);
+            font-size: 1.05rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .section-header {
+            margin-bottom: var(--spacing-md);
+            max-width: 700px;
+        }
+
+        .eyebrow {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-champagne);
+            margin-bottom: var(--spacing-xs);
+            display: block;
+        }
+
+        /* =========================================
+           3. UI COMPONENTS
+           ========================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--color-navy);
+            color: var(--color-white);
+            border-color: var(--color-navy);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-sage);
+            border-color: var(--color-sage);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-navy);
+            border-color: var(--color-navy);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-navy);
+            color: var(--color-white);
+        }
+
+        .btn-text {
+            color: var(--color-champagne);
+            font-weight: 500;
+            border-bottom: 1px solid var(--color-champagne);
+            padding: 0.25rem 0;
+        }
+
+        .btn-text:hover {
+            color: var(--color-navy);
+            border-color: var(--color-navy);
+        }
+
+        /* =========================================
+           4. HEADER & NAVIGATION
+           ========================================= */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(247, 245, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(23, 40, 63, 0.08);
+            padding: 1.25rem 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wordmark {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-navy);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-sage);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color-champagne);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--color-navy);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--color-navy);
+            cursor: pointer;
+        }
+
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-ivory);
+            padding: 2rem;
+            border-bottom: 1px solid rgba(23, 40, 63, 0.1);
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 999;
+        }
+
+        .nav-mobile.active {
+            display: flex;
+        }
+
+        /* =========================================
+           5. HERO SECTION
+           ========================================= */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: var(--spacing-lg);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            max-width: 540px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Refined typographic placeholder for portrait */
+        .portrait-placeholder {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 4/5;
+            background-color: var(--color-white);
+            border: 1px solid rgba(181, 161, 132, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .portrait-placeholder::before {
+            content: 'SS';
+            font-family: var(--font-serif);
+            font-size: 6rem;
+            color: var(--color-champagne);
+            opacity: 0.4;
+            letter-spacing: -0.05em;
+        }
+
+        .portrait-placeholder::after {
+            content: 'Professional Portrait';
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-sage);
+            margin-top: 1rem;
+            opacity: 0.6;
+        }
+
+        .credibility-strip {
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-sm);
+            border-top: 1px solid rgba(23, 40, 63, 0.1);
+            display: flex;
+            justify-content: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .credibility-item {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-sage);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .credibility-item i {
+            color: var(--color-champagne);
+        }
+
+        /* =========================================
+           6. ABOUT SECTION
+           ========================================= */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .about-text ul {
+            list-style: none;
+            margin-top: var(--spacing-sm);
+        }
+
+        .about-text li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-sage);
+        }
+
+        .about-text li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            background-color: var(--color-champagne);
+            border-radius: 50%;
+        }
+
+        /* =========================================
+           7. SERVICES SECTION
+           ========================================= */
+        .services {
+            background-color: var(--color-white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2.5rem;
+            border: 1px solid rgba(23, 40, 63, 0.08);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            background-color: var(--color-ivory);
+        }
+
+        .service-card:hover {
+            border-color: var(--color-champagne);
+            transform: translateY(-4px);
+        }
+
+        .service-number {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--color-champagne);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--color-navy);
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--color-sage);
+        }
+
+        .service-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .service-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--color-champagne);
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: var(--color-sage);
+            font-style: italic;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(23, 40, 63, 0.08);
+        }
+
+        /* =========================================
+           8. PORTFOLIO SECTION
+           ========================================= */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background-color: var(--color-sage);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            opacity: 0.9;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.03);
+            opacity: 1;
+        }
+
+        .project-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-champagne);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(181, 161, 132, 0.15);
+            color: var(--color-navy);
+            border-radius: 20px;
+        }
+
+        .portfolio-cta {
+            text-align: center;
+            margin-top: var(--spacing-md);
+        }
+
+        /* =========================================
+           9. PROFESSIONAL JOURNEY
+           ========================================= */
+        .journey {
+            background-color: var(--color-navy);
+            color: var(--color-ivory);
+        }
+
+        .journey h2 {
+            color: var(--color-ivory);
+        }
+
+        .journey p {
+            color: rgba(247, 245, 240, 0.7);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--color-champagne);
+            opacity: 0.4;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            padding-bottom: var(--spacing-md);
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0.5rem;
+            width: 9px;
+            height: 9px;
+            background-color: var(--color-champagne);
+            border-radius: 50%;
+        }
+
+        .timeline-item h3 {
+            color: var(--color-ivory);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* =========================================
+           10. HOW I WORK
+           ========================================= */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            counter-reset: process-counter;
+        }
+
+        .process-step {
+            position: relative;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(23, 40, 63, 0.15);
+        }
+
+        .process-step::before {
+            counter-increment: process-counter;
+            content: "0" counter(process-counter);
+            position: absolute;
+            top: -1rem;
+            left: 0;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-champagne);
+            background-color: var(--color-ivory);
+            padding-right: 1rem;
+        }
+
+        .process-step h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .process-step p {
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           11. CONTACT SECTION
+           ========================================= */
+        .contact {
+            background-color: var(--color-white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: var(--spacing-md);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-method {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-method label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-champagne);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-method a {
+            font-size: 1.1rem;
+            color: var(--color-navy);
+            font-weight: 500;
+        }
+
+        .contact-method a:hover {
+            color: var(--color-champagne);
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+
+        .contact-form {
+            background-color: var(--color-ivory);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(23, 40, 63, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-navy);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            border: 1px solid rgba(23, 40, 63, 0.15);
+            background-color: var(--color-white);
+            color: var(--color-navy);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-champagne);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-status {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-sage);
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            color: var(--color-sage);
+            padding: 1rem;
+            background-color: rgba(181, 161, 132, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        /* =========================================
+           12. FOOTER
+           ========================================= */
+        .footer {
+            background-color: var(--color-navy);
+            color: var(--color-ivory);
+            padding: var(--spacing-md) 0;
+            border-top: 1px solid rgba(181, 161, 132, 0.2);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-brand h4 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-ivory);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand p {
+            color: rgba(247, 245, 240, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(247, 245, 240, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-champagne);
+        }
+
+        .footer-bottom {
+            margin-top: var(--spacing-sm);
+            padding-top: var(--spacing-sm);
+            border-top: 1px solid rgba(247, 245, 240, 0.1);
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(247, 245, 240, 0.5);
+        }
+
+        /* =========================================
+           13. RESPONSIVE DESIGN
+           ========================================= */
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                order: -1;
+                margin-bottom: var(--spacing-sm);
+            }
+
+            .portrait-placeholder {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .section {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#home" class="wordmark">Syuzanna Sargsyan</a>
+            
+            <nav class="nav-desktop">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#contact" class="btn btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.8rem;">Let’s Talk</a>
+            </nav>
+
+            <button class="mobile-menu-btn" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="nav-mobile" id="mobileNav">
+            <a href="#home" class="nav-link" onclick="toggleMenu()">Home</a>
+            <a href="#about" class="nav-link" onclick="toggleMenu()">About</a>
+            <a href="#services" class="nav-link" onclick="toggleMenu()">Services</a>
+            <a href="#portfolio" class="nav-link" onclick="toggleMenu()">Portfolio</a>
+            <a href="#contact" class="nav-link" onclick="toggleMenu()">Contact</a>
+            <a href="#contact" class="btn btn-primary" onclick="toggleMenu()">Let’s Talk</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <span class="eyebrow">E-commerce · Strategy · Digital Experience</span>
+                        <h1>Building Better E-commerce Experiences Through Strategy, Design & Technology.</h1>
+                        <p>I bring together analytical thinking, business operations experience, and practical e-commerce skills to create thoughtful digital storefronts and improve online business processes.</p>
+                        <div class="hero-buttons">
+                            <a href="#portfolio" class="btn btn-primary">Explore My Work</a>
+                            <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                        </div>
+                        
+                        <div class="credibility-strip">
+                            <div class="credibility-item"><i class="fas fa-graduation-cap"></i> Economics Background</div>
+                            <div class="credibility-item"><i class="fas fa-cogs"></i> Operations Experience</div>
+                            <div class="credibility-item"><i class="fas fa-shopping-bag"></i> E-commerce Practice</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-visual">
+                        <!-- Refined typographic placeholder as requested, avoiding fake stock portraits -->
+                        <div class="portrait-placeholder" role="img" aria-label="Professional portrait placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">About Me</span>
+                    <h2>A Business Mindset. A Digital Focus.</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>My career is a logical progression of structured thinking and practical business management. It began with a Master’s degree in Economics from the Armenian State University of Economics, where I graduated with honors. This foundation developed my analytical and commercial thinking, teaching me how to evaluate systems, resources, and outcomes with precision.</p>
+                        <p>For over a decade, I worked in Armenia’s public sector, progressing from specialist to chief specialist. This environment demanded rigorous attention to detail and process management. I worked extensively with databases, property management, contracts, privatization, free-use projects, documentation, and operational processes. This experience ingrained in me a deep respect for structured workflows and compliance.</p>
+                    </div>
+                    <div class="about-text">
+                        <p>In 2022, I applied this operational discipline to the private sector by starting and operating an independent marketplace business. Over the first two years, the business experienced positive sales growth. This hands-on experience shifted my focus toward the digital realm, revealing the direct impact of user experience and operational efficiency on commercial success.</p>
+                        <p>Today, I am actively developing practical skills in Shopify, e-commerce store architecture, theme customization, Liquid, CSS, product page design, and storefront optimization. My interests lie at the intersection of digital business, operational efficiency, user experience, AI-assisted workflows, and international e-commerce. I do not view this as a career restart, but rather as the natural evolution of my analytical and operational expertise into the digital commerce space.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="section services">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Services</span>
+                    <h2>Structured Solutions for Digital Growth</h2>
+                </div>
+                <div class="services-grid">
+                    <!-- Service 01 -->
+                    <div class="service-card">
+                        <span class="service-number">01</span>
+                        <h3>Shopify Store Setup & Customization</h3>
+                        <p>Thoughtful Shopify storefront setup and customization focused on clear structure, consistent design, and a better customer experience.</p>
+                        <ul class="service-list">
+                            <li>Shopify theme customization</li>
+                            <li>Store structure and navigation</li>
+                            <li>Product page layout improvements</li>
+                            <li>Custom sections and storefront styling</li>
+                            <li>Responsive design improvements</li>
+                            <li>Basic storefront content organization</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 02 -->
+                    <div class="service-card">
+                        <span class="service-number">02</span>
+                        <h3>E-commerce UX & Store Optimization</h3>
+                        <p>Practical improvements that make online stores easier to navigate, understand, and use.</p>
+                        <ul class="service-list">
+                            <li>Product page reviews</li>
+                            <li>Customer journey evaluation</li>
+                            <li>Navigation and information hierarchy</li>
+                            <li>Call-to-action placement</li>
+                            <li>Store usability recommendations</li>
+                            <li>Conversion-focused design improvements</li>
+                        </ul>
+                        <p class="disclaimer">Note: Specific conversion rate increases are not promised without measured, post-implementation evidence.</p>
+                    </div>
+
+                    <!-- Service 03 -->
+                    <div class="service-card">
+                        <span class="service-number">03</span>
+                        <h3>E-commerce Operations & Process Improvement</h3>
+                        <p>Structured thinking and practical process improvements to help online businesses organize their work more effectively.</p>
+                        <ul class="service-list">
+                            <li>Product and data organization</li>
+                            <li>Workflow documentation</li>
+                            <li>Operational process reviews</li>
+                            <li>Identification of repetitive tasks</li>
+                            <li>Practical process-improvement recommendations</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 04 -->
+                    <div class="service-card">
+                        <span class="service-number">04</span>
+                        <h3>AI-Assisted E-commerce Workflows</h3>
+                        <p>Exploring practical ways to use AI and digital tools to simplify repetitive tasks and improve e-commerce workflows.</p>
+                        <ul class="service-list">
+                            <li>Workflow opportunity assessments</li>
+                            <li>AI-assisted content workflows</li>
+                            <li>Customer support automation concepts</li>
+                            <li>Recommendations for suitable digital tools</li>
+                        </ul>
+                        <p class="disclaimer">Note: Advanced implementation is available only where the necessary technical capability and integrations are established. Enterprise automation certifications are not implied.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Selected Work</span>
+                    <h2>Portfolio</h2>
+                </div>
+                <div class="portfolio-grid">
+                    <!-- Project 01 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=800&q=80" alt="MiraOn Korean Skincare Store Concept">
+                        </div>
+                        <span class="project-category">Shopify · Korean Skincare · Store Design</span>
+                        <h3>MiraOn</h3>
+                        <p>A Korean skincare e-commerce storefront concept focused on premium visual presentation, product discovery, and a cohesive shopping experience.</p>
+                        <p style="font-size: 0.85rem; font-style: italic; color: var(--color-champagne);">*This is a self-initiated concept project. Work highlights include brand presentation, homepage structure, product page layouts, Shopify theme customization, and an AI skincare adviser concept.</p>
+                        <div class="project-tags">
+                            <span class="tag">Store Design</span>
+                            <span class="tag">UX Concept</span>
+                            <span class="tag">Shopify</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 02 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80" alt="Sonax Automotive E-commerce Concept">
+                        </div>
+                        <span class="project-category">Automotive E-commerce · Shopify</span>
+                        <h3>Sonax</h3>
+                        <p>An automotive e-commerce storefront concept exploring product presentation, usability, and a structured digital shopping experience.</p>
+                        <p style="font-size: 0.85rem; font-style: italic; color: var(--color-champagne);">*This is a self-initiated concept project. No official affiliation with the brand is implied, nor is it claimed to be a commissioned project.</p>
+                        <div class="project-tags">
+                            <span class="tag">Product Presentation</span>
+                            <span class="tag">Usability</span>
+                            <span class="tag">Concept</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 03 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Independent Marketplace Operations">
+                        </div>
+                        <span class="project-category">E-commerce · Business Operations</span>
+                        <h3>Independent Marketplace Business</h3>
+                        <p>An independently operated marketplace business launched in 2022, demonstrating positive sales growth across the first two years of operation.</p>
+                        <p>Focus areas include business ownership, product and listing management, marketplace operations, commercial decision-making, and continuous learning through real business activity.</p>
+                        <div class="project-tags">
+                            <span class="tag">Operations</span>
+                            <span class="tag">Management</span>
+                            <span class="tag">Growth</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 04 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Operational Process Improvement Template">
+                        </div>
+                        <span class="project-category">Operations · Process Management · Analytical Thinking</span>
+                        <h3>Operational Process Improvement</h3>
+                        <p>A structured case-study template designed to be populated with real project data. This framework is used to analyze workflows, identify bottlenecks, and document process improvements.</p>
+                        <p style="font-size: 0.85rem; font-style: italic; color: var(--color-champagne);">*Template view. No specific client, business, implementation, or result is fabricated for this placeholder.</p>
+                        <div class="project-tags">
+                            <span class="tag">Workflow</span>
+                            <span class="tag">Analysis</span>
+                            <span class="tag">Documentation</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="portfolio-cta">
+                    <a href="https://www.behance.net/syuzisargsyan2" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        View My Behance Portfolio <i class="fas fa-external-link-alt" style="margin-left: 8px; font-size: 0.8em;"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL JOURNEY -->
+        <section class="section journey">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Background</span>
+                    <h2>Professional Journey</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>01 — Economics & Analytical Thinking</h3>
+                        <p>Master’s-level economics education providing a strong foundation in structured analysis, resource evaluation, and business understanding. Graduated with honors from the Armenian State University of Economics.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>02 — Public-Sector Operations</h3>
+                        <p>More than a decade of professional experience involving property management, database administration, documentation, contract management, and the oversight of complex operational processes. Progressed from specialist to chief specialist.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>03 — E-commerce & Digital Business</h3>
+                        <p>Independent marketplace business experience combined with practical, ongoing specialization in Shopify, storefront design, theme customization, and digital commerce operations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW I WORK -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Methodology</span>
+                    <h2>A Structured Approach to Digital Business.</h2>
+                </div>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <h3>Understand the Business</h3>
+                        <p>Clarify objectives, target customers, operational context, and specific business needs before proposing any technical solution.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>Identify the Opportunity</h3>
+                        <p>Evaluate the current storefront, customer journey, or internal workflow to identify practical, high-impact areas for improvement.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>Design the Solution</h3>
+                        <p>Develop a clear, considered, and commercially relevant approach tailored to the specific constraints and goals of the project.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>Implement and Refine</h3>
+                        <p>Apply the agreed improvements, test functionality rigorously, and refine the result based on practical feedback and observation.</p>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Contact</span>
+                    <h2>Let’s Build Something Meaningful.</h2>
+                    <p>Have a Shopify project, an e-commerce challenge, or an opportunity to collaborate? Get in touch to discuss your goals and explore practical solutions.</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        
+                        <div class="contact-method">
+                            <label>Email</label>
+                            <a href="mailto:sargsyansyuz@gmail.com">sargsyansyuz@gmail.com</a>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <label>Phone / WhatsApp</label>
+                            <a href="tel:+37441003001">+374 41 00 30 01</a>
+                        </div>
+
+                        <div class="contact-links">
+                            <a href="https://wa.me/37441003001" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.75rem 1.25rem;">
+                                <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp
+                            </a>
+                            <a href="https://www.linkedin.com/in/syuzannasargsyan/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.75rem 1.25rem;">
+                                <i class="fab fa-linkedin-in" style="margin-right: 8px;"></i> Connect on LinkedIn
+                            </a>
+                            <a href="https://www.behance.net/syuzisargsyan2" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.75rem 1.25rem;">
+                                <i class="fab fa-behance" style="margin-right: 8px;"></i> View My Portfolio
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-wrapper">
+                        <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-type">Project Type</label>
+                                <select id="project-type" name="project-type" required>
+                                    <option value="" disabled selected>Select a service...</option>
+                                    <option value="shopify-setup">Shopify Store Setup & Customization</option>
+                                    <option value="ux-optimization">E-commerce UX & Store Optimization</option>
+                                    <option value="operations">E-commerce Operations & Process Improvement</option>
+                                    <option value="ai-workflows">AI-Assisted E-commerce Workflows</option>
+                                    <option value="other">Other / General Inquiry</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                            <div id="formStatus" class="form-status"></div>
+                        </form>
+                    </div2>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h4>Syuzanna Sargsyan</h4>
+                    <p>E-commerce · Shopify · Digital Business</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="mailto:sargsyansyuz@gmail.com">Email</a>
+                    <a href="https://www.linkedin.com/in/syuzannasargsyan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://www.behance.net/syuzisargsyan2" target="_blank" rel="noopener noreferrer">Behance</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Syuzanna Sargsyan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. Dynamic Year for Copyright
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // 2. Mobile Menu Toggle
+        function toggleMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        // 3. Contact Form Handling (Frontend Demo with Mailto Fallback)
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const projectType = document.getElementById('project-type').value;
+            const message = document.getElementById('message').value;
+            const statusDiv = document.getElementById('formStatus');
+
+            // Construct mailto link as a functional fallback since no backend is connected
+            const subject = encodeURIComponent(`Portfolio Inquiry: ${projectType} from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProject Type: ${projectType}\n\nMessage:\n${message}`);
+            const mailtoLink = `mailto:sargsyansyuz@gmail.com?subject=${subject}&body=${body}`;
+
+            // Show success message
+            statusDiv.className = 'form-status success';
+            statusDiv.innerHTML = `
+                <strong>Thank you, ${name}.</strong><br>
+                As this is a frontend demonstration, your default email client will now open with your message pre-filled. 
+                Please click "Send" in your email app to complete the submission to sargsyansyuz@gmail.com.
+            `;
+
+            // Trigger mailto
+            window.location.href = mailtoLink;
+
+            // Reset form after a short delay
+            setTimeout(() => {
+                document.getElementById('contactForm').reset();
+            }, 2000);
+        }
+
+        // 4. Smooth Scroll for Anchor Links (enhanced for older browsers)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
