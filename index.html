@@ -3,315 +3,1392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Portfolio | Economist & UX/UI Designer</title>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Syuzanna Sargsyan | Shopify Specialist & eCommerce UX/UI Designer</title>
     
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* ===================================
+           BRAND COLORS & VARIABLES
+           =================================== */
         :root {
-            --primary-dark: #1e293b;      
-            --primary-accent: #0f766e;    
-            --accent-light: #14b8a6;      
-            --gold: #f59e0b;              
-            --white: #ffffff;
-            --light-gray: #f8fafc;
-            --text-dark: #334155;
-            --text-light: #64748b;
+            --primary: #292524;       /* Charcoal */
+            --accent: #B68A74;        /* Warm Taupe */
+            --background: #FAF6F2;    /* Warm Ivory */
+            --secondary-bg: #E9D9CE;  /* Soft Beige */
+            --white: #FFFFFF;
+            --text-light: #6B6563;
+            --transition: all 0.3s ease;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--light-gray); color: var(--text-dark); line-height: 1.6; }
-
-        /* --- Header & Nav --- */
-        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1200px; margin: 0 auto; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-dark); }
-        .logo span { color: var(--primary-accent); }
-        .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; transition: 0.3s; font-size: 0.95rem; }
-        .nav-links a:hover { color: var(--primary-accent); }
-        .cta-btn { background: var(--primary-accent); color: var(--white); padding: 10px 25px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .cta-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
-
-        /* --- Hero Section --- */
-        .hero { background: linear-gradient(135deg, var(--primary-dark) 0%, #334155 100%); color: var(--white); padding: 80px 5%; text-align: center; }
-        .hero-content { max-width: 800px; margin: 0 auto; }
+        /* Reset & Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* Profile Photo Styles */
-        .profile-img-container { margin-bottom: 30px; }
-        .profile-img { 
-            width: 180px; height: 180px; border-radius: 50%; object-fit: cover; 
-            border: 5px solid var(--accent-light); box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .hero h1 { font-size: 3rem; margin-bottom: 15px; line-height: 1.2; }
-        .hero .subtitle { font-size: 1.3rem; color: var(--accent-light); margin-bottom: 25px; font-weight: 500; }
-        .hero p { font-size: 1.1rem; color: #cbd5e1; max-width: 600px; margin: 0 auto 30px; }
-        .hero-badges { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
-        .badge { background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); }
-        .badge i { color: var(--gold); margin-right: 5px; }
-
-        /* --- Section Styling --- */
-        section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 2.2rem; color: var(--primary-dark); margin-bottom: 50px; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary-accent); margin: 15px auto 0; border-radius: 2px; }
-
-        /* --- Cards (Experience/Education) --- */
-        .timeline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        .card { background: var(--white); padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 4px solid var(--primary-accent); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
-        .card h3 { color: var(--primary-dark); font-size: 1.3rem; margin-bottom: 5px; }
-        .card .period { color: var(--primary-accent); font-weight: 600; font-size: 0.9rem; background: rgba(15, 118, 110, 0.1); padding: 4px 10px; border-radius: 4px; }
-        .card .institution { color: var(--text-light); font-style: italic; margin-bottom: 15px; display: block; }
-        .card ul { list-style: none; padding-left: 5px; }
-        .card ul li { margin-bottom: 8px; position: relative; padding-left: 20px; color: var(--text-dark); }
-        .card ul li::before { content: '▹'; position: absolute; left: 0; color: var(--primary-accent); font-weight: bold; }
-        .highlight-box { background: rgba(245, 158, 11, 0.1); border-left-color: var(--gold); }
-        .highlight-box h3 { color: #92400e; }
-
-        /* --- Certificates Section --- */
-        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .cert-card { background: var(--white); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid var(--gold); transition: 0.3s; }
-        .cert-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .cert-card i.cert-icon { font-size: 3rem; color: var(--gold); margin-bottom: 15px; }
-        .cert-card h4 { color: var(--primary-dark); margin-bottom: 5px; font-size: 1.1rem; }
-        .cert-card p.cert-issuer { color: var(--text-light); font-size: 0.9rem; margin-bottom: 15px; }
-        .cert-link { display: inline-block; margin-top: 10px; color: var(--primary-accent); font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
-        .cert-link:hover { border-bottom-color: var(--primary-accent); }
-
-        /* --- Skills Section --- */
-        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .skill-category h3 { color: var(--primary-dark); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .skill-category h3 i { color: var(--primary-accent); }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill-tag { background: var(--white); border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; color: var(--text-dark); transition: 0.3s; }
-        .skill-tag:hover { background: var(--primary-accent); color: var(--white); border-color: var(--primary-accent); }
-
-        /* --- Languages --- */
-        .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center; }
-        .lang-card { background: var(--white); padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .lang-card h4 { font-size: 1.2rem; margin-bottom: 5px; color: var(--primary-dark); }
-        .lang-card p { color: var(--primary-accent); font-weight: 600; }
-        .lang-card i { font-size: 2rem; color: var(--text-light); margin-bottom: 10px; }
-
-        /* --- Professional Profiles (Portfolio, LinkedIn, Upwork) --- */
-        .profiles-section { background: var(--primary-dark); color: var(--white); padding: 80px 5%; text-align: center; }
-        .profiles-section .section-title { color: var(--white); }
-        .profiles-section .section-title::after { background: var(--accent-light); }
-        .profiles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 900px; margin: 0 auto; }
-        .profile-card { 
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); 
-            padding: 35px 20px; border-radius: 12px; text-align: center; transition: 0.3s; 
-            text-decoration: none; color: var(--white); display: block;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
         }
-        .profile-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-8px); border-color: var(--accent-light); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        .profile-card i { font-size: 2.5rem; margin-bottom: 15px; color: var(--accent-light); }
-        .profile-card h4 { margin-bottom: 8px; font-size: 1.2rem; }
-        .profile-card p { font-size: 0.9rem; color: #cbd5e1; }
 
-        /* --- Contact / Footer --- */
-        .contact-section { background: #0f172a; color: var(--white); text-align: center; padding: 60px 5%; }
-        .contact-links { display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
-        .contact-btn { background: transparent; border: 2px solid var(--accent-light); color: var(--accent-light); padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .contact-btn:hover { background: var(--accent-light); color: var(--primary-dark); }
-        footer { background: #020617; color: #64748b; text-align: center; padding: 20px; font-size: 0.9rem; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===================================
+           HEADER & NAVIGATION
+           =================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(250, 246, 242, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(182, 138, 116, 0.2);
+        }
+
+        .header.scrolled { box-shadow: 0 2px 20px rgba(41, 37, 36, 0.1); }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 { font-size: 24px; color: var(--primary); font-weight: 700; }
+
+        .nav-list { display: flex; list-style: none; gap: 30px; align-items: center; }
+
+        .nav-list a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-list a:hover { color: var(--accent); }
+
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-list a:hover::after { width: 100%; }
+
+        .btn-primary-nav {
+            background: var(--accent);
+            color: var(--white) !important;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .btn-primary-nav:hover { background: var(--primary); transform: translateY(-2px); }
+
+        .header-right { display: flex; align-items: center; gap: 20px; }
+
+        /* Language Selector */
+        .language-selector { position: relative; }
+        
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--secondary-bg);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(41, 37, 36, 0.15);
+            margin-top: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            min-width: 150px;
+        }
+
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .lang-option {
+            display: block;
+            width: 100%;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        .lang-option:hover { background: var(--secondary-bg); }
+
+        /* Social Icons */
+        .social-icons { display: flex; gap: 12px; }
+        .social-icons a { color: var(--primary); font-size: 18px; transition: var(--transition); }
+        .social-icons a:hover { color: var(--accent); transform: translateY(-2px); }
+
+        .mobile-menu-btn { display: none; background: transparent; border: none; font-size: 24px; cursor: pointer; color: var(--primary); }
+
+        /* ===================================
+           HERO SECTION
+           =================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--background) 0%, var(--secondary-bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(182, 138, 116, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero-title { font-size: 56px; color: var(--primary); margin-bottom: 24px; line-height: 1.1; }
+
+        .hero-description { font-size: 18px; color: var(--text-light); margin-bottom: 32px; line-height: 1.8; }
+
+        .hero-buttons { display: flex; gap: 16px; }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary { background: var(--accent); color: var(--white); }
+        .btn-primary:hover { background: var(--primary); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(182, 138, 116, 0.3); }
+
+        .btn-secondary { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-secondary:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); }
+
+        .hero-image { position: relative; }
+        
+        .profile-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(41, 37, 36, 0.2);
+        }
+
+        /* ===================================
+           GENERAL SECTIONS
+           =================================== */
+        section { padding: 100px 0; }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title { font-size: 44px; color: var(--primary); margin-bottom: 16px; }
+        .section-subtitle { font-size: 18px; color: var(--text-light); max-width: 700px; margin: 0 auto; }
+
+        /* ===================================
+           PORTFOLIO / WORK
+           =================================== */
+        .work { background: var(--white); }
+        
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(41, 37, 36, 0.1);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(41, 37, 36, 0.2); }
+
+        .portfolio-image { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+        
+        .portfolio-image img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        
+        .portfolio-item:hover .portfolio-image img { transform: scale(1.1); }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(41, 37, 36, 0.95), transparent);
+            padding: 30px;
+            color: var(--white);
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay { transform: translateY(0); }
+        .portfolio-overlay h3 { font-size: 22px; margin-bottom: 8px; }
+        .portfolio-overlay p { font-size: 14px; opacity: 0.9; }
+
+        /* ===================================
+           PROBLEMS I SOLVE
+           =================================== */
+        .problems { background: var(--background); }
+        
+        .problems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+        .problem-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 12px;
+            transition: var(--transition);
+            border: 1px solid rgba(182, 138, 116, 0.2);
+        }
+
+        .problem-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(41, 37, 36, 0.1); border-color: var(--accent); }
+
+        .problem-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .problem-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--primary); }
+        .problem-card p { color: var(--text-light); line-height: 1.7; }
+
+        /* ===================================
+           SERVICES
+           =================================== */
+        .services { background: var(--white); }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+        .service-card {
+            background: var(--background);
+            padding: 40px 30px;
+            border-radius: 12px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(182, 138, 116, 0.15); }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--white);
+        }
+
+        .service-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--primary); }
+        .service-card p { color: var(--text-light); line-height: 1.7; }
+
+        /* ===================================
+           ABOUT ME
+           =================================== */
+        .about { background: var(--secondary-bg); }
+        .about-content { max-width: 900px; margin: 0 auto; }
+        .about-tagline { font-size: 18px; color: var(--accent); font-weight: 600; margin-bottom: 24px; }
+        .about-text p { font-size: 17px; color: var(--text-light); margin-bottom: 20px; line-height: 1.8; }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 50px 0;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 12px;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-item h3 { font-size: 36px; color: var(--accent); margin-bottom: 8px; }
+        .stat-item p { font-size: 14px; color: var(--text-light); margin: 0; }
+
+        .about-cta { background: var(--white); padding: 40px; border-radius: 12px; margin-top: 40px; }
+        .about-cta h3 { font-size: 28px; margin-bottom: 16px; color: var(--primary); }
+        .about-cta p { margin-bottom: 24px; }
+        .about-buttons { display: flex; gap: 16px; }
+
+        /* ===================================
+           ARTICLE
+           =================================== */
+        .article { background: var(--white); }
+        .article-header { max-width: 900px; margin: 0 auto 60px; text-align: center; }
+        
+        .article-category {
+            display: inline-block;
+            background: var(--secondary-bg);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .article-title { font-size: 40px; color: var(--primary); margin-bottom: 20px; }
+        .article-subtitle { font-size: 18px; color: var(--text-light); margin-bottom: 16px; line-height: 1.7; }
+        .article-meta { font-size: 14px; color: var(--text-light); }
+
+        .article-content { max-width: 900px; margin: 0 auto; }
+        .article-content h3 { font-size: 28px; margin: 40px 0 20px; color: var(--primary); }
+        .article-content p { font-size: 17px; color: var(--text-light); margin-bottom: 20px; line-height: 1.8; }
+
+        blockquote {
+            background: var(--secondary-bg);
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent);
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        blockquote p { font-size: 18px; font-style: italic; color: var(--primary); margin: 0; }
+
+        .article-cta {
+            background: var(--secondary-bg);
+            padding: 50px;
+            border-radius: 12px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .article-cta h3 { font-size: 28px; margin-bottom: 16px; }
+        .article-cta p { margin-bottom: 24px; }
+
+        /* ===================================
+           FAQ
+           =================================== */
+        .faq { background: var(--background); }
+        .faq-list { max-width: 900px; margin: 0 auto 50px; }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(182, 138, 116, 0.2);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px 30px;
+            background: transparent;
+            border: none;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover { color: var(--accent); }
+        .faq-question i { transition: var(--transition); }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        .faq-answer { padding: 0 30px 24px; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-answer p { color: var(--text-light); line-height: 1.7; }
+
+        .faq-cta {
+            text-align: center;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .faq-cta h3 { font-size: 28px; margin-bottom: 16px; color: var(--primary); }
+        .faq-cta p { color: var(--text-light); margin-bottom: 24px; font-size: 17px; }
+
+        /* ===================================
+           AI CHAT ASSISTANT
+           =================================== */
+        .ai-chat { background: var(--white); }
+        .chat-container { max-width: 800px; margin: 0 auto; }
+
+        .chat-window {
+            background: var(--background);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(41, 37, 36, 0.15);
+        }
+
+        .chat-messages { height: 400px; overflow-y: auto; padding: 30px; }
+
+        .message { display: flex; gap: 12px; margin-bottom: 20px; }
+        .bot-message { justify-content: flex-start; }
+        .user-message { justify-content: flex-end; }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 18px;
+        }
+
+        .message-content {
+            max-width: 70%;
+            background: var(--white);
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(41, 37, 36, 0.08);
+        }
+
+        .user-message .message-content { background: var(--accent); color: var(--white); }
+        .message-content p { margin: 0; font-size: 15px; line-height: 1.6; }
+
+        .quick-options {
+            display: flex;
+            gap: 12px;
+            padding: 20px 30px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(182, 138, 116, 0.2);
+        }
+
+        .quick-option {
+            padding: 10px 20px;
+            background: var(--white);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-option:hover { background: var(--accent); color: var(--white); }
+
+        .chat-input-area {
+            display: flex;
+            gap: 12px;
+            padding: 20px 30px;
+            border-top: 1px solid rgba(182, 138, 116, 0.2);
+        }
+
+        #chatInput {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid var(--secondary-bg);
+            border-radius: 8px;
+            font-size: 15px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        #chatInput:focus { outline: none; border-color: var(--accent); }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border: none;
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .send-btn:hover { background: var(--primary); }
+
+        /* ===================================
+           CONTACT
+           =================================== */
+        .contact { background: var(--secondary-bg); }
+        .contact-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
+
+        .contact-info h3 { font-size: 28px; margin-bottom: 30px; color: var(--primary); }
+
+        .contact-item { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 18px;
+        }
+
+        .contact-item h4 { font-size: 16px; margin-bottom: 4px; color: var(--primary); }
+        .contact-item a { color: var(--text-light); text-decoration: none; transition: var(--transition); }
+        .contact-item a:hover { color: var(--accent); }
+
+        .contact-social h4 { font-size: 18px; margin: 30px 0 16px; color: var(--primary); }
+        .social-links { display: flex; gap: 12px; }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover { background: var(--accent); color: var(--white); transform: translateY(-3px); }
+
+        .contact-form-wrapper {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(41, 37, 36, 0.1);
+        }
+
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary); font-size: 15px; }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--secondary-bg);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            background: var(--background);
+        }
+
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); background: var(--white); }
+        .form-group textarea { resize: vertical; }
+
+        /* ===================================
+           FOOTER
+           =================================== */
+        .footer { background: var(--primary); color: var(--white); padding: 60px 0 30px; }
+        
+        .footer-content { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        
+        .footer-left h3 { font-size: 24px; margin-bottom: 12px; }
+        .footer-left p { color: rgba(255, 255, 255, 0.7); font-size: 15px; }
+
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-social { display: flex; gap: 12px; }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover { background: var(--accent); transform: translateY(-3px); }
+
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-bottom p { color: rgba(255, 255, 255, 0.6); font-size: 14px; }
+
+        /* ===================================
+           RESPONSIVE DESIGN
+           =================================== */
+        @media (max-width: 992px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-title { font-size: 44px; }
+            .hero-buttons { justify-content: center; }
+            .hero-image { order: -1; }
+            .profile-img { max-width: 400px; }
+            .about-stats { grid-template-columns: repeat(2, 1fr); }
+            .contact-content { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-links { justify-content: center; }
+            .footer-social { justify-content: center; }
+        }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .nav-links { display: none; } 
-            .timeline-grid, .cert-grid, .profiles-grid { grid-template-columns: 1fr; }
-            .profile-img { width: 140px; height: 140px; }
+            .nav { display: none; }
+            .mobile-menu-btn { display: block; }
+            .social-icons { display: none; }
+            .hero-title { font-size: 36px; }
+            .section-title { font-size: 32px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .problems-grid, .services-grid { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr; }
+            .article-title { font-size: 32px; }
+            .quick-options { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 28px; }
+            .hero-buttons { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+            .section-title { font-size: 28px; }
+            .about-buttons { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <div class="logo">[Your Name]<span>.</span></div>
-            <ul class="nav-links">
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#certificates">Certificates</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#profiles">Hire Me</a></li>
-            </ul>
-            <a href="#contact" class="cta-btn">Get in Touch</a>
-        </nav>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Sargsyan Syuzanna</h1>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="#work" data-en="Work" data-am="Աշխատանքներ" data-ru="Работы" data-es="Trabajos">Work</a></li>
+                        <li><a href="#services" data-en="Services" data-am="Ծառայություններ" data-ru="Услуги" data-es="Servicios">Services</a></li>
+                        <li><a href="#about" data-en="About" data-am="Մասին" data-ru="Обо мне" data-es="Sobre mí">About</a></li>
+                        <li><a href="#contact" data-en="Contact" data-am="Կապ" data-ru="Контакт" data-es="Contacto">Contact</a></li>
+                        <li><a href="#lets-talk" class="btn-primary-nav" data-en="Let's Talk" data-am="Խոսենք" data-ru="Давайте поговорим" data-es="Hablemos">Let's Talk</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-right">
+                    <div class="language-selector">
+                        <button class="lang-btn" id="langBtn">
+                            <i class="fas fa-globe"></i>
+                            <span id="currentLang">EN</span>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <button class="lang-option" data-lang="en">English</button>
+                            <button class="lang-option" data-lang="am">Հայերեն</button>
+                            <button class="lang-option" data-lang="ru">Русский</button>
+                            <button class="lang-option" data-lang="es">Español</button>
+                        </div>
+                    </div>
+                    
+                    <div class="social-icons">
+                        <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" target="_blank" title="Upwork"><i class="fas fa-briefcase"></i></a>
+                        <a href="#" target="_blank" title="Behance"><i class="fab fa-behance"></i></a>
+                        <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="mailto:your-email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                    
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <!-- PROFILE PHOTO PLACEHOLDER -->
-            <div class="profile-img-container">
-                <!-- Replace the src below with your actual photo URL -->
-                <img src="https://ui-avatars.com/api/?name=Your+Name&size=180&background=14b8a6&color=fff" alt="Profile Photo" class="profile-img">
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="hero-subtitle" data-en="Shopify Specialist & eCommerce UX/UI Designer" data-am="Shopify մասնագետ և էլեկտրոնային առևտրի UX/UI դիզայներ" data-ru="Специалист по Shopify и UX/UI дизайнер электронной коммерции" data-es="Especialista en Shopify y Diseñador UX/UI de Comercio Electrónico">Shopify Specialist & eCommerce UX/UI Designer</p>
+                    <h2 class="hero-title" data-en="Creating Digital Experiences That Drive Growth" data-am="Ստեղծում եմ թվային փորձառություններ, որոնք նպաստում են աճին" data-ru="Создаю цифровой опыт, который стимулирует рост" data-es="Creando Experiencias Digitales Que Impulsan el Crecimiento">Creating Digital Experiences That Drive Growth</h2>
+                    <p class="hero-description" data-en="I help businesses build professional Shopify stores with thoughtful design, optimized user experience, and strategic solutions that convert visitors into customers." data-am="Ես օգնում եմ բիզնեսներին կառուցել պրոֆեսիոնալ Shopify խանութներ՝ մտածված դիզայնով, օպտիմալացված օգտագործողի փորձառությամբ և ստրատեգիական լուծումներով, որոնք այցելուներին վերածում են հաճախորդների։" data-ru="Я помогаю бизнесу создавать профессиональные магазины Shopify с продуманным дизайном, оптимизированным пользовательским опытом и стратегическими решениями, которые превращают посетителей в клиентов." data-es="Ayudo a las empresas a crear tiendas Shopify profesionales con diseño reflexivo, experiencia de usuario optimizada y soluciones estratégicas que convierten visitantes en clientes.">I help businesses build professional Shopify stores with thoughtful design, optimized user experience, and strategic solutions that convert visitors into customers.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary" data-en="Let's Discuss Your Project" data-am="Քննարկենք Ձեր նախագիծը" data-ru="Давайте обсудим ваш проект" data-es="Discutamos Su Proyecto">Let's Discuss Your Project</a>
+                        <a href="#services" class="btn btn-secondary" data-en="Explore My Services" data-am="Ուսումնասիրեք իմ ծառայությունները" data-ru="Изучите мои услуги" data-es="Explorar Mis Servicios">Explore My Services</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- ADD YOUR PROFILE PICTURE HERE: images/profile-photo.jpg -->
+                    <img src="images/profile-photo.jpg" alt="Syuzanna Sargsyan" class="profile-img">
+                </div>
             </div>
+        </div>
+    </section>
 
-            <h1>Economist, Entrepreneur &<br>UX/UI Designer</h1>
-            <p class="subtitle">Bridging the gap between business strategy and user-centric design.</p>
-            <p>With over a decade of experience in state property management, a proven track record of scaling an online marketplace (70% YoY growth), and certified expertise in modern UX/UI design, I bring a unique, analytical approach to digital product creation.</p>
+    <!-- Work/Portfolio Section -->
+    <section class="work" id="work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="My Work" data-am="Իմ աշխատանքները" data-ru="Мои работы" data-es="Mi Trabajo">My Work</h2>
+                <p class="section-subtitle" data-en="Selected projects showcasing Shopify development and UX/UI design" data-am="Ընտրված նախագծեր, որոնք ցույց են տալիս Shopify-ի զարգացումը և UX/UI դիզայնը" data-ru="Избранные проекты, демонстрирующие разработку Shopify и UX/UI дизайн" data-es="Proyectos seleccionados que muestran desarrollo Shopify y diseño UX/UI">Selected projects showcasing Shopify development and UX/UI design</p>
+            </div>
             
-            <div class="hero-badges">
-                <span class="badge"><i class="fas fa-award"></i> Red Diploma (Honors)</span>
-                <span class="badge"><i class="fas fa-chart-line"></i> 70% Business Growth</span>
-                <span class="badge"><i class="fas fa-certificate"></i> Certified UX/UI Designer</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work Experience -->
-    <section id="experience">
-        <h2 class="section-title">Work Experience</h2>
-        <div class="timeline-grid">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Founder & Manager</h3>
-                    <span class="period">2022 – Present</span>
+            <div class="portfolio-grid">
+                <!-- Portfolio Item 1 - ADD IMAGE: images/portfolio-1.jpg -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio-1.jpg" alt="Project 1">
+                        <div class="portfolio-overlay">
+                            <h3>Shopify Store Redesign</h3>
+                            <p>Complete store makeover with custom sections</p>
+                        </div>
+                    </div>
                 </div>
-                <span class="institution">Online Marketplace Business</span>
-                <ul>
-                    <li>Founded and scaled a profitable online marketplace from the ground up.</li>
-                    <li>Achieved remarkable business growth: <strong>~41% in Year 1</strong> and <strong>~70% in Year 2</strong>.</li>
-                    <li>Managed end-to-end operations, including product presentation, online sales strategies, and marketplace administration.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3>Chief Specialist</h3>
-                    <span class="period">2009 – 2021</span>
+                
+                <!-- Portfolio Item 2 - ADD IMAGE: images/portfolio-2.jpg -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio-2.jpg" alt="Project 2">
+                        <div class="portfolio-overlay">
+                            <h3>Landing Page Design</h3>
+                            <p>Conversion-focused product launch page</p>
+                        </div>
+                    </div>
                 </div>
-                <span class="institution">State Property Management Department of Armenia</span>
-                <ul>
-                    <li>Promoted from Specialist to Chief Specialist over a 12-year tenure.</li>
-                    <li>Managed the state property database and administered property leases, privatization, and free-use arrangements.</li>
-                    <li>Prepared and processed complex official documentation with high accuracy.</li>
-                    <li>Participated in and coordinated <strong>more than 50 major projects</strong>.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificates Section -->
-    <section id="certificates" style="background-color: var(--white);">
-        <h2 class="section-title">Certificates & Credentials</h2>
-        <div class="cert-grid">
-            <!-- Certificate 1 -->
-            <div class="cert-card">
-                <i class="fas fa-certificate cert-icon"></i>
-                <h4>Graphic, Visual UX & Web UX/UI Design</h4>
-                <p class="cert-issuer">Tevi Art Design Educational Centre | Mar 2025</p>
-                <!-- Replace href with your actual certificate link (e.g., LinkedIn badge or PDF link) -->
-                <a href="YOUR_CERTIFICATE_1_LINK_HERE" target="_blank" class="cert-link">View Credential <i class="fas fa-external-link-alt"></i></a>
-            </div>
-            <!-- Certificate 2 -->
-            <div class="cert-card">
-                <i class="fas fa-robot cert-icon"></i>
-                <h4>AI & Freelancing</h4>
-                <p class="cert-issuer">Anush Apikyan Academy | Mar 2025</p>
-                <!-- Replace href with your actual certificate link -->
-                <a href="YOUR_CERTIFICATE_2_LINK_HERE" target="_blank" class="cert-link">View Credential <i class="fas fa-external-link-alt"></i></a>
-            </div>
-            <!-- Certificate 3 (Example for Master's/Red Diploma) -->
-            <div class="cert-card">
-                <i class="fas fa-graduation-cap cert-icon"></i>
-                <h4>Master’s Degree in Economics (Red Diploma)</h4>
-                <p class="cert-issuer">Armenian State University of Economics (ASUE)</p>
-                <!-- Replace href with your actual diploma link or leave as # -->
-                <a href="YOUR_DIPLOMA_LINK_HERE" target="_blank" class="cert-link">View Credential <i class="fas fa-external-link-alt"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
-        <h2 class="section-title">Core Competencies</h2>
-        <div class="skills-container">
-            <div class="skill-category">
-                <h3><i class="fas fa-pen-nib"></i> Design & Tech</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Web UX/UI Design</span>
-                    <span class="skill-tag">Visual UX Design</span>
-                    <span class="skill-tag">Graphic Design</span>
-                    <span class="skill-tag">Website Layout</span>
-                    <span class="skill-tag">AI Tools Integration</span>
+                
+                <!-- Portfolio Item 3 - ADD IMAGE: images/portfolio-3.jpg -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio-3.jpg" alt="Project 3">
+                        <div class="portfolio-overlay">
+                            <h3>Custom Liquid Sections</h3>
+                            <p>Unique reusable components</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="skill-category">
-                <h3><i class="fas fa-briefcase"></i> Business & Economics</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Economic Analysis</span>
-                    <span class="skill-tag">Business Analysis</span>
-                    <span class="skill-tag">Online Marketplace Management</span>
-                    <span class="skill-tag">Product Presentation</span>
-                    <span class="skill-tag">Online Sales Strategy</span>
+                
+                <!-- Portfolio Item 4 - ADD IMAGE: images/portfolio-4.jpg -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio-4.jpg" alt="Project 4">
+                        <div class="portfolio-overlay">
+                            <h3>eCommerce UX Optimization</h3>
+                            <p>Improved conversion rates by 45%</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="skill-category">
-                <h3><i class="fas fa-tasks"></i> Management & Operations</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Database Management</span>
-                    <span class="skill-tag">Project Coordination (50+ Projects)</span>
-                    <span class="skill-tag">Official Documentation</span>
-                    <span class="skill-tag">Privatization & Lease Administration</span>
+                
+                <!-- Portfolio Item 5 - ADD IMAGE: images/portfolio-5.jpg -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio-5.jpg" alt="Project 5">
+                        <div class="portfolio-overlay">
+                            <h3>Brand Identity & Web Design</h3>
+                            <p>Complete digital presence</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 - ADD IMAGE: images/portfolio-6.jpg -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio-6.jpg" alt="Project 6">
+                        <div class="portfolio-overlay">
+                            <h3>Mobile Optimization</h3>
+                            <p>Responsive design excellence</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Languages -->
-    <section id="languages" style="background-color: var(--white);">
-        <h2 class="section-title">Languages</h2>
-        <div class="lang-grid">
-            <div class="lang-card"><i class="fas fa-flag"></i><h4>Armenian</h4><p>Native</p></div>
-            <div class="lang-card"><i class="fas fa-globe"></i><h4>Russian</h4><p>Professional Working</p></div>
-            <div class="lang-card"><i class="fas fa-language"></i><h4>English</h4><p>Professional Working</p></div>
-            <div class="lang-card"><i class="fas fa-comment-dots"></i><h4>Spanish</h4><p>Beginner</p></div>
+    <!-- Problems I Solve Section -->
+    <section class="problems" id="problems">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="Problems I Solve" data-am="Խնդիրներ, որոնք ես լուծում եմ" data-ru="Проблемы, которые я решаю" data-es="Problemas Que Resuelvo">Problems I Solve</h2>
+                <p class="section-subtitle" data-en="Common challenges faced by eCommerce businesses and how I address them" data-am="Էլեկտրոնային առևտրի բիզնեսների կողմից բախվող ընդհանուր մարտահրավերներ և թե ինչպես եմ ես լուծում դրանք" data-ru="Общие проблемы, с которыми сталкиваются предприятия электронной коммерции, и как я их решаю" data-es="Desafíos comunes enfrentados por negocios de comercio electrónico y cómo los abordo">Common challenges faced by eCommerce businesses and how I address them</p>
+            </div>
+            
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-store"></i></div>
+                    <h3 data-en="Store Launch Issues" data-am="Խանութի մեկնարկի խնդիրներ" data-ru="Проблемы запуска магазина" data-es="Problemas de Lanzamiento de Tienda">Store Launch Issues</h3>
+                    <p data-en="Struggling to set up your first Shopify store? I build professional stores from scratch with proper structure and optimization." data-am="Դժվարանում եք սկսել Ձեր առաջին Shopify խանութը։ Ես կառուցում եմ պրոֆեսիոնալ խանութներ զրոյից՝ ճիշտ կառուցվածքով և օպտիմալացմամբ։" data-ru="Трудности с настройкой вашего первого магазина Shopify? Я создаю профессиональные магазины с нуля с правильной структурой и оптимизацией." data-es="¿Tiene dificultades para configurar su primera tienda Shopify? Construyo tiendas profesionales desde cero con estructura y optimización adecuadas.">Struggling to set up your first Shopify store? I build professional stores from scratch with proper structure and optimization.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3 data-en="Poor Design & UX" data-am="Վատ դիզայն և UX" data-ru="Плохой дизайн и UX" data-es="Mal Diseño y UX">Poor Design & UX</h3>
+                    <p data-en="Is your website not converting visitors? I redesign pages with focus on user experience and conversion optimization." data-am="Ձեր կայքը չի վերածում այցելուներին հաճախորդների։ Ես վերադիզայն եմ անում էջերը՝ կենտրոնանալով օգտագործողի փորձառության և կոնվերսիայի օպտիմալացման վրա։" data-ru="Ваш сайт не конвертирует посетителей? Я перерабатываю страницы с акцентом на пользовательский опыт и оптимизацию конверсии." data-es="¿Su sitio web no convierte visitantes? Rediseño páginas con enfoque en experiencia de usuario y optimización de conversión.">Is your website not converting visitors? I redesign pages with focus on user experience and conversion optimization.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-code"></i></div>
+                    <h3 data-en="Limited Customization" data-am="Սահմանափակ հարմարեցում" data-ru="Ограниченная кастомизация" data-es="Personalización Limitada">Limited Customization</h3>
+                    <p data-en="Need unique features beyond theme capabilities? I create custom Liquid sections tailored to your specific needs." data-am="Պետք են յուրահատուկ ֆունկցիաներ՝ թեմայի հնարավորություններից դուրս։ Ես ստեղծում եմ հատուկ Liquid բաժիններ՝ հարմարեցված Ձեր կոնկրետ կարիքներին։" data-ru="Нужны уникальные функции за пределами возможностей темы? Я создаю пользовательские секции Liquid, адаптированные к вашим конкретным потребностям." data-es="¿Necesita funciones únicas más allá de las capacidades del tema? Creo secciones Liquid personalizadas adaptadas a sus necesidades específicas.">Need unique features beyond theme capabilities? I create custom Liquid sections tailored to your specific needs.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-bug"></i></div>
+                    <h3 data-en="Website Bugs & Errors" data-am="Կայքի սխալներ և խնդիրներ" data-ru="Ошибки и баги сайта" data-es="Errores y Bugs del Sitio Web">Website Bugs & Errors</h3>
+                    <p data-en="Experiencing technical issues? I troubleshoot coding problems, broken layouts, mobile issues, and theme errors." data-am="Տեխնիկական խնդիրներ ունեք։ Ես լուծում եմ կոդավորման խնդիրները, կոտրված դասավորությունները, բջջային խնդիրները և թեմայի սխալները։" data-ru="Испытываете технические проблемы? Я устраняю проблемы с кодом, сломанные макеты, мобильные проблемы и ошибки тем." data-es="¿Experimenta problemas técnicos? Soluciono problemas de codificación, diseños rotos, problemas móviles y errores de temas.">Experiencing technical issues? I troubleshoot coding problems, broken layouts, mobile issues, and theme errors.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h3 data-en="Slow Performance" data-am="Դանդաղ աշխատանք" data-ru="Медленная производительность" data-es="Rendimiento Lento">Slow Performance</h3>
+                    <p data-en="Is your site loading slowly? I optimize speed, mobile responsiveness, and overall performance for better user experience." data-am="Ձեր կայքը դանդաղ է բեռնվում։ Ես օպտիմալացնում եմ արագությունը, բջջային հարմարվողականությունը և ընդհանուր աշխատանքը՝ ավելի լավ օգտագործողի փորձառության համար։" data-ru="Ваш сайт загружается медленно? Я оптимизирую скорость, мобильную адаптивность и общую производительность для лучшего пользовательского опыта." data-es="¿Su sitio carga lentamente? Optimizo la velocidad, la capacidad de respuesta móvil y el rendimiento general para una mejor experiencia de usuario.">Is your site loading slowly? I optimize speed, mobile responsiveness, and overall performance for better user experience.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 data-en="Low Conversion Rates" data-am="Ցածր կոնվերսիայի մակարդակ" data-ru="Низкий уровень конверсии" data-es="Bajas Tasas de Conversión">Low Conversion Rates</h3>
+                    <p data-en="Not getting enough sales? I improve usability, product pages, and customer journeys to reduce friction and boost conversions." data-am="Բավականաչափ վաճառքներ չունեք։ Ես բարելավում եմ օգտագործելիությունը, ապրանքի էջերը և հաճախորդի ճանապարհը՝ նվազեցնելով խոչընդոտները և բարձրացնելով կոնվերսիաները։" data-ru="Не получаете достаточно продаж? Я улучшаю удобство использования, страницы продуктов и пути клиентов, чтобы уменьшить трение и увеличить конверсию." data-es="¿No obtiene suficientes ventas? Mejoro la usabilidad, las páginas de productos y los recorridos del cliente para reducir la fricción y aumentar las conversiones.">Not getting enough sales? I improve usability, product pages, and customer journeys to reduce friction and boost conversions.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Professional Profiles (Portfolio, LinkedIn, Upwork) -->
-    <section id="profiles" class="profiles-section">
-        <h2 class="section-title">Where to Find My Work</h2>
-        <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto 40px;">Check out my design portfolio, professional background, and freelance availability on these platforms.</p>
-        
-        <div class="profiles-grid">
-            <!-- PORTFOLIO LINK -->
-            <a href="YOUR_PORTFOLIO_LINK_HERE" target="_blank" class="profile-card">
-                <i class="fas fa-laptop-code"></i>
-                <h4>Design Portfolio</h4>
-                <p>View my UX/UI and Graphic Design projects.</p>
-            </a>
-            <!-- LINKEDIN LINK -->
-            <a href="YOUR_LINKEDIN_LINK_HERE" target="_blank" class="profile-card">
-                <i class="fab fa-linkedin"></i>
-                <h4>LinkedIn</h4>
-                <p>Connect with me professionally.</p>
-            </a>
-            <!-- UPWORK LINK -->
-            <a href="YOUR_UPWORK_LINK_HERE" target="_blank" class="profile-card">
-                <i class="fab fa-upwork"></i>
-                <h4>Upwork</h4>
-                <p>Hire me for freelance design & analysis.</p>
-            </a>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="My Services" data-am="Իմ ծառայությունները" data-ru="Мои услуги" data-es="Mis Servicios">My Services</h2>
+                <p class="section-subtitle" data-en="Comprehensive Shopify and eCommerce solutions tailored to your business needs" data-am="Համապարփակ Shopify և էլեկտրոնային առևտրի լուծումներ՝ հարմարեցված Ձեր բիզնեսի կարիքներին" data-ru="Комплексные решения Shopify и электронной коммерции, адаптированные к потребностям вашего бизнеса" data-es="Soluciones integrales de Shopify y comercio electrónico adaptadas a las necesidades de su negocio">Comprehensive Shopify and eCommerce solutions tailored to your business needs</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3 data-en="Shopify Store Development" data-am="Shopify խանութի մշակում" data-ru="Разработка магазина Shopify" data-es="Desarrollo de Tienda Shopify">Shopify Store Development</h3>
+                    <p data-en="Build professional, responsive Shopify stores from scratch tailored to your brand and business goals." data-am="Կառուցեք պրոֆեսիոնալ, հարմարվողական Shopify խանութներ զրոյից՝ հարմարեցված Ձեր բրենդին և բիզնեսի նպատակներին։" data-ru="Создавайте профессиональные, адаптивные магазины Shopify с нуля, адаптированные к вашему бренду и бизнес-целям." data-es="Construya tiendas Shopify profesionales y responsivas desde cero adaptadas a su marca y objetivos comerciales.">Build professional, responsive Shopify stores from scratch tailored to your brand and business goals.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3 data-en="Custom Liquid Sections" data-am="Հատուկ Liquid բաժիններ" data-ru="Пользовательские секции Liquid" data-es="Secciones Liquid Personalizadas">Custom Liquid Sections</h3>
+                    <p data-en="Develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript for enhanced functionality." data-am="Մշակեք յուրահատուկ, վերաօգտագործվող Shopify բաժիններ՝ օգտագործելով Liquid, HTML, CSS և JavaScript՝ բարելավված ֆունկցիոնալության համար։" data-ru="Разрабатывайте уникальные, многоразовые секции Shopify с использованием Liquid, HTML, CSS и JavaScript для расширенной функциональности." data-es="Desarrolle secciones Shopify únicas y reutilizables usando Liquid, HTML, CSS y JavaScript para funcionalidad mejorada.">Develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript for enhanced functionality.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3 data-en="Landing Page Design" data-am="Լենդինգ էջի դիզայն" data-ru="Дизайн посадочных страниц" data-es="Diseño de Páginas de Aterrizaje">Landing Page Design</h3>
+                    <p data-en="Create modern, conversion-focused landing pages for products, services, and marketing campaigns." data-am="Ստեղծեք ժամանակակից, կոնվերսիայի վրա կենտրոնացած լենդինգ էջեր՝ ապրանքների, ծառայությունների և մարքեթինգային արշավների համար։" data-ru="Создавайте современные посадочные страницы, ориентированные на конверсию, для продуктов, услуг и маркетинговых кампаний." data-es="Cree páginas de aterrizaje modernas enfocadas en conversión para productos, servicios y campañas de marketing.">Create modern, conversion-focused landing pages for products, services, and marketing campaigns.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-desktop"></i></div>
+                    <h3 data-en="UX/UI Design" data-am="UX/UI դիզայն" data-ru="UX/UI дизайн" data-es="Diseño UX/UI">UX/UI Design</h3>
+                    <p data-en="Design intuitive, visually appealing interfaces that enhance user experience and drive conversions." data-am="Դիզայնեք ինտուիտիվ, գրավիչ ինտերֆեյսներ, որոնք բարելավում են օգտագործողի փորձառությունը և նպաստում կոնվերսիաներին։" data-ru="Проектируйте интуитивно понятные, визуально привлекательные интерфейсы, которые улучшают пользовательский опыт и стимулируют конверсию." data-es="Diseñe interfaces intuitivas y visualmente atractivas que mejoren la experiencia del usuario e impulsen las conversiones.">Design intuitive, visually appealing interfaces that enhance user experience and drive conversions.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-wrench"></i></div>
+                    <h3 data-en="Website Customization" data-am="Կայքի հարմարեցում" data-ru="Кастомизация сайта" data-es="Personalización del Sitio Web">Website Customization</h3>
+                    <p data-en="Redesign pages, add custom features, improve layouts, and enhance functionality of existing websites." data-am="Վերադիզայն արեք էջերը, ավելացրեք հատուկ ֆունկցիաներ, բարելավեք դասավորությունները և բարձրացրեք գոյություն ունեցող կայքերի ֆունկցիոնալությունը։" data-ru="Перерабатывайте страницы, добавляйте пользовательские функции, улучшайте макеты и расширяйте функциональность существующих сайтов." data-es="Rediseñe páginas, agregue funciones personalizadas, mejore los diseños y mejore la funcionalidad de los sitios web existentes.">Redesign pages, add custom features, improve layouts, and enhance functionality of existing websites.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3 data-en="Bug Fixing & Optimization" data-am="Սխալների ուղղում և օպտիմալացում" data-ru="Исправление ошибок и оптимизация" data-es="Corrección de Errores y Optimización">Bug Fixing & Optimization</h3>
+                    <p data-en="Troubleshoot coding issues, fix broken layouts, resolve mobile problems, and optimize website performance." data-am="Լուծեք կոդավորման խնդիրները, ուղղեք կոտրված դասավորությունները, լուծեք բջջային խնդիրները և օպտիմալացրեք կայքի աշխատանքը։" data-ru="Устраняйте проблемы с кодом, исправляйте сломанные макеты, решайте мобильные проблемы и оптимизируйте производительность сайта." data-es="Solucione problemas de codificación, arregle diseños rotos, resuelva problemas móviles y optimice el rendimiento del sitio web.">Troubleshoot coding issues, fix broken layouts, resolve mobile problems, and optimize website performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="About Me" data-am="Իմ մասին" data-ru="Обо мне" data-es="Sobre Mí">About Me</h2>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-tagline" data-en="Shopify Specialist | eCommerce UX/UI Designer | Digital Commerce Expert" data-am="Shopify մասնագետ | Էլեկտրոնային առևտրի UX/UI դիզայներ | Թվային առևտրի փորձագետ" data-ru="Специалист по Shopify | UX/UI дизайнер электронной коммерции | Эксперт по цифровому коммерции" data-es="Especialista en Shopify | Diseñador UX/UI de Comercio Electrónico | Experto en Comercio Digital">Shopify Specialist | eCommerce UX/UI Designer | Digital Commerce Expert</p>
+                    
+                    <p data-en="Hi, I'm Syuzanna, and I help businesses create, manage, and improve their Shopify stores with thoughtful design, organized product management, and practical eCommerce solutions." data-am="Ողջույն, ես Սյուզաննան եմ, և ես օգնում եմ բիզնեսներին ստեղծել, կառավարել և բարելավել իրենց Shopify խանութները՝ մտածված դիզայնով, կազմակերպված ապրանքի կառավարմամբ և գործնական էլեկտրոնային առևտրի լուծումներով։" data-ru="Привет, я Сюзанна, и я помогаю предприятиям создавать, управлять и улучшать свои магазины Shopify с продуманным дизайном, организованной управлением продуктами и практичными решениями электронной коммерции." data-es="Hola, soy Syuzanna, y ayudo a las empresas a crear, gestionar y mejorar sus tiendas Shopify con diseño reflexivo, gestión organizada de productos y soluciones prácticas de comercio electrónico.">Hi, I'm Syuzanna, and I help businesses create, manage, and improve their Shopify stores with thoughtful design, organized product management, and practical eCommerce solutions.</p>
+                    
+                    <p data-en="Whether you're launching a new online store, struggling with product organization, or looking to improve your website's design and customer experience, I can help you turn those challenges into effective solutions." data-am="Անկախ նրանից, թե դուք մեկնարկում եք նոր առցանց խանութ, դժվարանում եք ապրանքի կազմակերպման հարցում, թե ցանկանում եք բարելավել Ձեր կայքի դիզայնը և հաճախորդի փորձառությունը, ես կարող եմ օգնել Ձեզ վերածել այդ մարտահրավերները արդյունավետ լուծումների։" data-ru="Независимо от того, запускаете ли вы новый интернет-магазин, испытываете трудности с организацией продуктов или хотите улучшить дизайн вашего сайта и опыт клиентов, я могу помочь вам превратить эти вызовы в эффективные решения." data-es="Ya sea que esté lanzando una nueva tienda en línea, tenga dificultades con la organización de productos o busque mejorar el diseño de su sitio web y la experiencia del cliente, puedo ayudarle a convertir esos desafíos en soluciones efectivas.">Whether you're launching a new online store, struggling with product organization, or looking to improve your website's design and customer experience, I can help you turn those challenges into effective solutions.</p>
+                    
+                    <p data-en="I specialize in Shopify customization, custom Liquid sections, landing pages, eCommerce UX/UI design, product management, and store optimization. My goal is to make your online store not only visually appealing but also easy to navigate, manage, and shop from." data-am="Ես մասնագիտացած եմ Shopify-ի հարմարեցման, հատուկ Liquid բաժինների, լենդինգ էջերի, էլեկտրոնային առևտրի UX/UI դիզայնի, ապրանքի կառավարման և խանութի օպտիմալացման մեջ։ Իմ նպատակն է Ձեր առցանց խանութը դարձնել ոչ միայն տեսողականորեն գրավիչ, այլև հեշտ նավիգացիայի, կառավարման և գնումների համար։" data-ru="Я специализируюсь на кастомизации Shopify, пользовательских секциях Liquid, посадочных страницах, UX/UI дизайне электронной коммерции, управлении продуктами и оптимизации магазинов. Моя цель - сделать ваш интернет-магазин не только визуально привлекательным, но и легким для навигации, управления и покупок." data-es="Me especializo en personalización de Shopify, secciones Liquid personalizadas, páginas de aterrizaje, diseño UX/UI de comercio electrónico, gestión de productos y optimización de tiendas. Mi objetivo es hacer que su tienda en línea no solo sea visualmente atractiva, sino también fácil de navegar, gestionar y comprar.">I specialize in Shopify customization, custom Liquid sections, landing pages, eCommerce UX/UI design, product management, and store optimization. My goal is to make your online store not only visually appealing but also easy to navigate, manage, and shop from.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item"><h3>12+</h3><p data-en="Years Experience" data-am="Տարիների փորձ" data-ru="Лет опыта" data-es="Años de Experiencia">Years Experience</p></div>
+                        <div class="stat-item"><h3>41%</h3><p data-en="Year 1 Growth" data-am="1-ին տարվա աճ" data-ru="Рост 1-го года" data-es="Crecimiento Año 1">Year 1 Growth</p></div>
+                        <div class="stat-item"><h3>70%</h3><p data-en="Year 2 Growth" data-am="2-րդ տարվա աճ" data-ru="Рост 2-го года" data-es="Crecimiento Año 2">Year 2 Growth</p></div>
+                        <div class="stat-item"><h3>MSc</h3><p data-en="Economics" data-am="Տնտեսագիտություն" data-ru="Экономика" data-es="Economía">Economics</p></div>
+                    </div>
+                    
+                    <div class="about-cta">
+                        <h3 data-en="Ready to Improve Your Online Store?" data-am="Պատրա՞ստ եք բարելավել Ձեր առցանց խանութը" data-ru="Готовы улучшить свой интернет-магазин?" data-es="¿Listo para Mejorar Su Tienda en Línea?">Ready to Improve Your Online Store?</h3>
+                        <p data-en="Your Shopify store deserves more than a beautiful design — it deserves solutions that work for your business." data-am="Ձեր Shopify խանութը արժանի է ավելին, քան գեղեցիկ դիզայնը՝ այն արժանի է լուծումների, որոնք աշխատում են Ձեր բիզնեսի համար։" data-ru="Ваш магазин Shopify заслуживает больше, чем красивый дизайн - он заслуживает решений, которые работают для вашего бизнеса." data-es="Su tienda Shopify merece más que un diseño hermoso: merece soluciones que funcionen para su negocio.">Your Shopify store deserves more than a beautiful design — it deserves solutions that work for your business.</p>
+                        <div class="about-buttons">
+                            <a href="#contact" class="btn btn-primary" data-en="Let's Discuss Your Project" data-am="Քննարկենք Ձեր նախագիծը" data-ru="Давайте обсудим ваш проект" data-es="Discutamos Su Proyecto">Let's Discuss Your Project</a>
+                            <a href="#services" class="btn btn-secondary" data-en="Explore My Services" data-am="Ուսումնասիրեք իմ ծառայությունները" data-ru="Изучите мои услуги" data-es="Explorar Mis Servicios">Explore My Services</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Section -->
+    <section class="article" id="article">
+        <div class="container">
+            <div class="article-header">
+                <span class="article-category" data-en="Shopify Insights & eCommerce Strategy" data-am="Shopify-ի պատկերացումներ և էլեկտրոնային առևտրի ստրատեգիա" data-ru="Инсайты Shopify и стратегия электронной коммерции" data-es="Información de Shopify y Estrategia de Comercio Electrónico">Shopify Insights & eCommerce Strategy</span>
+                <h2 class="article-title" data-en="Beyond Store Design: What Really Makes a Shopify Store Successful?" data-am="Խանութի դիզայնից դուրս. ինչն է իսկապես դարձնում Shopify խանութը հաջողակ" data-ru="За пределами дизайна магазина: что действительно делает магазин Shopify успешным?" data-es="Más Allá del Diseño de la Tienda: ¿Qué Realmente Hace Exitosa una Tienda Shopify?">Beyond Store Design: What Really Makes a Shopify Store Successful?</h2>
+                <p class="article-subtitle" data-en="Why successful eCommerce requires more than an attractive website — and how product management, UX/UI design, customer trust, and operational efficiency work together." data-am="Ինչու հաջողակ էլեկտրոնային առևտրը պահանջում է ավելին, քան գրավիչ կայքը՝ և թե ինչպես են ապրանքի կառավարումը, UX/UI դիզայնը, հաճախորդի վստահությունը և գործառնական արդյունավետությունը աշխատում միասին։" data-ru="Почему успешная электронная коммерция требует большего, чем привлекательный веб-сайт - и как управление продуктами, UX/UI дизайн, доверие клиентов и операционная эффективность работают вместе." data-es="Por qué el comercio electrónico exitoso requiere más que un sitio web atractivo: y cómo la gestión de productos, el diseño UX/UI, la confianza del cliente y la eficiencia operativa trabajan juntas.">Why successful eCommerce requires more than an attractive website — and how product management, UX/UI design, customer trust, and operational efficiency work together.</p>
+                <p class="article-meta">By Syuzanna | Reading time: 10–12 minutes</p>
+            </div>
+            
+            <div class="article-content">
+                <h3 data-en="Introduction: A Beautiful Store Is Only the Beginning" data-am="Ներածություն. գեղեցիկ խանութը միայն սկիզբն է" data-ru="Введение: красивый магазин - это только начало" data-es="Introducción: Una Tienda Hermosa Es Solo el Comienzo">Introduction: A Beautiful Store Is Only the Beginning</h3>
+                <p data-en="Launching an online store has become more accessible than ever. Platforms like Shopify allow businesses to create professional storefronts, organize products, accept payments, and manage orders without building an entire eCommerce system from scratch." data-am="Առցանց խանութի մեկնարկը դարձել է ավելի հասանելի, քան երբևէ։ Shopify-ի նման հարթակները թույլ են տալիս բիզնեսներին ստեղծել պրոֆեսիոնալ խանութներ, կազմակերպել ապրանքները, ընդունել վճարումներ և կառավարել պատվերները՝ առանց ամբողջական էլեկտրոնային առևտրի համակարգ ստեղծելու։" data-ru="Запуск интернет-магазина стал более доступным, чем когда-либо. Платформы, такие как Shopify, позволяют предприятиям создавать профессиональные витрины, организовывать продукты, принимать платежи и управлять заказами без создания всей системы электронной коммерции с нуля." data-es="Lanzar una tienda en línea se ha vuelto más accesible que nunca. Plataformas como Shopify permiten a las empresas crear escaparates profesionales, organizar productos, aceptar pagos y gestionar pedidos sin construir un sistema completo de comercio electrónico desde cero.">Launching an online store has become more accessible than ever. Platforms like Shopify allow businesses to create professional storefronts, organize products, accept payments, and manage orders without building an entire eCommerce system from scratch.</p>
+                
+                <blockquote>
+                    <p data-en="A successful Shopify store is not simply a collection of products displayed on attractive pages. It is a connected system in which every element supports the customer's decision-making process and the business's operational goals." data-am="Հաջողակ Shopify խանութը պարզապես գրավիչ էջերում ցուցադրված ապրանքների հավաքածու չէ։ Այն կապակցված համակարգ է, որտեղ յուրաքանչյուր տարր աջակցում է հաճախորդի որոշումների կայացման գործընթացին և բիզնեսի գործառնական նպատակներին։" data-ru="Успешный магазин Shopify - это не просто коллекция продуктов, отображаемых на привлекательных страницах. Это связанная система, в которой каждый элемент поддерживает процесс принятия решений клиентом и операционные цели бизнеса." data-es="Una tienda Shopify exitosa no es simplemente una colección de productos mostrados en páginas atractivas. Es un sistema conectado en el que cada elemento apoya el proceso de toma de decisiones del cliente y los objetivos operativos del negocio.">A successful Shopify store is not simply a collection of products displayed on attractive pages. It is a connected system in which every element supports the customer's decision-making process and the business's operational goals.</p>
+                </blockquote>
+                
+                <div class="article-cta">
+                    <h3 data-en="Is Your Shopify Store Working as Well as It Could?" data-am="Արդյոք Ձեր Shopify խանութը աշխատում է այնքան լավ, որքան կարող է" data-ru="Работает ли ваш магазин Shopify так хорошо, как мог бы?" data-es="¿Su Tienda Shopify Está Funcionando Tan Bien Como Podría?">Is Your Shopify Store Working as Well as It Could?</h3>
+                    <p data-en="Your store may already have a professional design, but there could be opportunities to improve its product organization, customer experience, page structure, or day-to-day management." data-am="Ձեր խանութը կարող է արդեն ունենալ պրոֆեսիոնալ դիզայն, բայց կարող են լինել հնարավորություններ բարելավելու ապրանքի կազմակերպումը, հաճախորդի փորձառությունը, էջի կառուցվածքը կամ օրական կառավարումը։" data-ru="Ваш магазин может уже иметь профессиональный дизайн, но могут быть возможности улучшить организацию продуктов, опыт клиентов, структуру страниц или повседневное управление." data-es="Su tienda ya puede tener un diseño profesional, pero podría haber oportunidades para mejorar su organización de productos, experiencia del cliente, estructura de página o gestión diaria.">Your store may already have a professional design, but there could be opportunities to improve its product organization, customer experience, page structure, or day-to-day management.</p>
+                    <a href="#contact" class="btn btn-primary" data-en="Let's Discuss Your Shopify Project" data-am="Քննարկենք Ձեր Shopify նախագիծը" data-ru="Давайте обсудим ваш проект Shopify" data-es="Discutamos Su Proyecto Shopify">Let's Discuss Your Shopify Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="Frequently Asked Questions" data-am="Հաճախակի տրվող հարցեր" data-ru="Часто задаваемые вопросы" data-es="Preguntas Frecuentes">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-en="What services do you offer?" data-am="Ինչ ծառայություններ եք առաջարկում" data-ru="Какие услуги вы предлагаете?" data-es="¿Qué servicios ofrece?">What services do you offer?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>I specialize in Shopify development, custom Liquid sections, landing pages, web design, UX/UI design, and website optimization.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you build a Shopify store from scratch?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes! I create professional, responsive Shopify stores tailored to your brand and business goals.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you customize my existing website?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Absolutely! I can redesign pages, add custom features, improve layouts, and enhance functionality.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you create custom Shopify Liquid sections?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes! I develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you fix website bugs and errors?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes! I troubleshoot coding issues, broken layouts, mobile problems, and Shopify theme errors.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you improve my website's performance?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes! I optimize website speed, mobile responsiveness, navigation, and user experience.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do you design landing pages?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes! I create modern, conversion-focused landing pages for products, services, and marketing campaigns.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you help increase my online sales?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>I improve website usability, product pages, and customer journeys to help reduce friction and support conversions.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How much do your services cost?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Pricing depends on your project's requirements. Contact me for a personalized quote.</p></div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How can I contact you?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Simply fill out the contact form on my website and share your project details. I'll get back to you to discuss the next steps.</p></div>
+                </div>
+            </div>
+            
+            <div class="faq-cta">
+                <h3>Have a project in mind?</h3>
+                <p>Let's turn your ideas into a professional digital experience.</p>
+                <a href="#contact" class="btn btn-primary">Let's Work Together</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Assistant Section -->
+    <section class="ai-chat" id="lets-talk">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Talk with AI Assistant</h2>
+                <p class="section-subtitle">Get instant answers and personalized suggestions for your Shopify project</p>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-window" id="chatWindow">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                            <div class="message-content">
+                                <p>Hello! I'm Syuzanna's AI assistant. How can I help you with your Shopify project today?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-options">
+                        <button class="quick-option" data-type="standard">Standard Shopify Store</button>
+                        <button class="quick-option" data-type="custom">Custom Design Needed</button>
+                        <button class="quick-option" data-type="fix">Fix Website Issues</button>
+                        <button class="quick-option" data-type="performance">Improve Performance</button>
+                    </div>
+                    
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" placeholder="Type your message...">
+                        <button id="sendBtn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2>Let's Work Together</h2>
-        <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto;">Whether you need a data-driven UX/UI designer, a business analyst, or a strategic consultant, I am ready to bring value to your project.</p>
-        <div class="contact-links">
-            <a href="mailto:YOUR_EMAIL_HERE" class="contact-btn"><i class="fas fa-envelope"></i> Email Me</a>
-            <a href="tel:+37400000000" class="contact-btn"><i class="fas fa-phone"></i> Call Me</a>
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Ready to start your project? Let's discuss how I can help your business grow</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <a href="mailto:your-email@example.com">your-email@example.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fab fa-telegram-plane"></i>
+                        <div>
+                            <h4>Telegram</h4>
+                            <a href="#">@yourusername</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin-in"></i>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <a href="#">linkedin.com/in/syuzanna-sargsyan</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <h4>Follow Me</h4>
+                        <div class="social-links">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" target="_blank"><i class="fas fa-briefcase"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-behance"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 [Your Name]. All Rights Reserved.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>Sargsyan Syuzanna</h3>
+                    <p>Shopify Specialist & eCommerce UX/UI Designer</p>
+                </div>
+                
+                <div class="footer-center">
+                    <div class="footer-links">
+                        <a href="#work">Work</a>
+                        <a href="#services">Services</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-social">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" target="_blank"><i class="fas fa-briefcase"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-behance"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sargsyan Syuzanna. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
+    <!-- JavaScript Functionality -->
+    <script>
+        // Language Switcher
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentLangSpan = document.getElementById('currentLang');
+        let currentLang = 'en';
+
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('active');
+        });
+
+        const langOptions = document.querySelectorAll('.lang-option');
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                switchLanguage(lang);
+                langDropdown.classList.remove('active');
+            });
+        });
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const langNames = { 'en': 'EN', 'am': 'AM', 'ru': 'RU', 'es': 'ES' };
+            currentLangSpan.textContent = langNames[lang];
+            
+            const elements = document.querySelectorAll('[data-en]');
+            elements.forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.textContent = text;
+            });
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // AI Chat Logic
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        const aiResponses = {
+            standard: "For a **Standard Shopify Store**, I recommend starting with a professional theme customization. This includes setting up your brand colors, organizing your product catalog, and creating essential pages. Would you like to discuss your specific requirements?",
+            custom: "For **Custom Design**, I can create unique Liquid sections tailored to your brand! This includes custom homepage layouts, unique product page designs, and interactive elements. What specific design elements do you have in mind?",
+            fix: "I can help **Fix Website Issues** quickly! Common problems I solve include broken layouts, mobile responsiveness issues, checkout errors, and theme conflicts. Please describe the specific issue you're experiencing.",
+            performance: "To **Improve Performance**, I focus on image optimization, reducing unnecessary apps, improving Core Web Vitals scores, and mobile speed optimization. Faster sites lead to better conversion rates!",
+            default: "Thank you for your message! I'd be happy to help with your Shopify project. Could you tell me more about your current challenges or goals?"
+        };
+
+        function addMessage(text, isUser = false) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            if (!isUser) msgDiv.innerHTML = `<div class="message-avatar"><i class="fas fa-robot"></i></div>`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = `<p>${text}</p>`;
+            
+            msgDiv.appendChild(contentDiv);
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleUserMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            addMessage(message, true);
+            chatInput.value = '';
+            
+            setTimeout(() => {
+                const lowerMsg = message.toLowerCase();
+                let response = aiResponses.default;
+                
+                if (lowerMsg.includes('standard') || lowerMsg.includes('basic')) response = aiResponses.standard;
+                else if (lowerMsg.includes('custom') || lowerMsg.includes('unique')) response = aiResponses.custom;
+                else if (lowerMsg.includes('fix') || lowerMsg.includes('error') || lowerMsg.includes('bug')) response = aiResponses.fix;
+                else if (lowerMsg.includes('performance') || lowerMsg.includes('speed')) response = aiResponses.performance;
+                
+                addMessage(response);
+            }, 1000);
+        }
+
+        sendBtn.addEventListener('click', handleUserMessage);
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+
+        document.querySelectorAll('.quick-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const type = btn.getAttribute('data-type');
+                addMessage(btn.textContent, true);
+                setTimeout(() => addMessage(aiResponses[type] || aiResponses.default), 800);
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        });
+    </script>
 </body>
 </html>
