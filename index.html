@@ -34,17 +34,23 @@
         h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', sans-serif; font-weight: 700; color: var(--primary); }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HEADER & GLASS EFFECT */
+        /* HEADER & 4K GLASS EFFECT */
         .header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(247, 246, 242, 0.85); 
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            /* High-end Glassmorphism */
+            background: rgba(247, 246, 242, 0.7); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000; padding: 15px 0; transition: var(--transition);
-            border-bottom: 1px solid rgba(40, 61, 50, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .header.scrolled { background: rgba(247, 246, 242, 0.98); box-shadow: 0 4px 30px rgba(40, 61, 50, 0.05); padding: 10px 0; }
+        .header.scrolled { 
+            background: rgba(247, 246, 242, 0.9); 
+            box-shadow: 0 10px 40px rgba(40, 61, 50, 0.1); 
+            padding: 10px 0; 
+        }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo h1 { font-size: 24px; color: var(--primary); font-weight: 800; }
+        .logo h1 { font-size: 24px; color: var(--primary); font-weight: 800; letter-spacing: -0.5px; }
         
         .nav-list { display: flex; list-style: none; gap: 30px; align-items: center; }
         .nav-list a { text-decoration: none; color: var(--text); font-weight: 500; transition: var(--transition); }
@@ -53,6 +59,7 @@
         .btn-primary-nav {
             background: var(--primary); color: var(--white) !important;
             padding: 10px 24px; border-radius: 50px; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(40, 61, 50, 0.2);
         }
         .btn-primary-nav:hover { background: var(--accent); transform: translateY(-2px); }
 
@@ -61,13 +68,14 @@
         /* Language Selector */
         .language-selector { position: relative; }
         .lang-btn {
-            background: rgba(255,255,255,0.6); border: 1px solid rgba(40, 61, 50, 0.1);
+            background: rgba(255,255,255,0.5); border: 1px solid rgba(40, 61, 50, 0.1);
             padding: 8px 16px; border-radius: 50px; cursor: pointer;
             display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--primary);
+            backdrop-filter: blur(5px);
         }
         .lang-dropdown {
             position: absolute; top: 100%; right: 0;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px);
             border-radius: 12px; box-shadow: 0 10px 30px rgba(40, 61, 50, 0.1);
             margin-top: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px);
             transition: var(--transition); min-width: 150px; overflow: hidden;
@@ -92,8 +100,8 @@
         }
         .hero::before {
             content: ''; position: absolute; top: -10%; right: -10%; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(102, 123, 104, 0.15) 0%, transparent 70%);
-            border-radius: 50%; filter: blur(60px); animation: float 10s infinite ease-in-out; z-index: 0;
+            background: radial-gradient(circle, rgba(102, 123, 104, 0.2) 0%, transparent 70%);
+            border-radius: 50%; filter: blur(80px); animation: float 10s infinite ease-in-out; z-index: 0;
         }
         @keyframes float { 0% { transform: translate(0, 0); } 50% { transform: translate(-30px, 40px); } 100% { transform: translate(0, 0); } }
         
@@ -111,14 +119,14 @@
         
         .hero-image { position: relative; perspective: 1000px; }
         
-        /* VIDEO STYLES */
-        .profile-video {
+        /* PROFILE IMAGE STYLES */
+        .profile-img {
             width: 100%; max-width: 500px; border-radius: 30px;
-            box-shadow: 20px 20px 60px rgba(40, 61, 50, 0.1), -10px -10px 40px rgba(255,255,255, 0.8);
+            box-shadow: 20px 20px 60px rgba(40, 61, 50, 0.15), -10px -10px 40px rgba(255,255,255, 0.8);
             transform: rotateY(-5deg); transition: transform 0.5s ease;
             object-fit: cover; aspect-ratio: 4/5;
         }
-        .hero-image:hover .profile-video { transform: rotateY(0deg) scale(1.02); }
+        .hero-image:hover .profile-img { transform: rotateY(0deg) scale(1.02); }
 
         /* SECTIONS & REVEAL */
         section { padding: 100px 0; position: relative; }
@@ -163,7 +171,7 @@
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
         .portfolio-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 10px 30px rgba(40, 61, 50, 0.05); transition: var(--transition); }
         .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(40, 61, 50, 0.15); }
-        .portfolio-image { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+        .portfolio-image { position: relative; aspect-ratio: 4/3; overflow: hidden; background: #f0f0f0; }
         .portfolio-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
         .portfolio-item:hover .portfolio-image img { transform: scale(1.1); }
         .portfolio-overlay {
@@ -300,7 +308,7 @@
             .hero-title { font-size: 44px; }
             .hero-buttons { justify-content: center; }
             .hero-image { order: -1; margin-bottom: 40px; }
-            .profile-video { max-width: 400px; transform: none; }
+            .profile-img { max-width: 400px; transform: none; }
             .about-stats { grid-template-columns: repeat(2, 1fr); }
             .contact-content { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; text-align: center; }
@@ -333,7 +341,7 @@
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo"><h1>Sargsyan Syuzanna</h1></div>
+                <div class="logo"><h1>Syuzanna Sargsyan</h1></div>
                 <nav class="nav" id="nav">
                     <ul class="nav-list">
                         <li><a href="#work" data-key="nav_work">Work</a></li>
@@ -381,11 +389,8 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <!-- VIDEO CODE HERE -->
-                    <video autoplay muted loop playsinline class="profile-video">
-                        <source src="images/profile-video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <!-- PASTE YOUR PROFILE PHOTO LINK BELOW inside src="" -->
+                    <img src="https://via.placeholder.com/500x600" alt="Syuzanna Sargsyan" class="profile-img">
                 </div>
             </div>
         </div>
@@ -399,23 +404,29 @@
                 <p class="section-subtitle" data-key="work_sub">Selected projects showcasing Shopify development and UX/UI design</p>
             </div>
             <div class="portfolio-grid">
+                <!-- Portfolio Item 1 - PASTE LINK 1 BELOW -->
                 <div class="portfolio-item">
-                    <div class="portfolio-image"><img src="images/portfolio-1.jpg" alt="Project 1"><div class="portfolio-overlay"><h3>Shopify Store Redesign</h3><p>Complete store makeover</p></div></div>
+                    <div class="portfolio-image"><img src="https://via.placeholder.com/400x300" alt="Project 1"><div class="portfolio-overlay"><h3>Shopify Store Redesign</h3><p>Complete store makeover</p></div></div>
                 </div>
+                <!-- Portfolio Item 2 - PASTE LINK 2 BELOW -->
                 <div class="portfolio-item">
-                    <div class="portfolio-image"><img src="images/portfolio-2.jpg" alt="Project 2"><div class="portfolio-overlay"><h3>Landing Page Design</h3><p>Conversion-focused page</p></div></div>
+                    <div class="portfolio-image"><img src="https://via.placeholder.com/400x300" alt="Project 2"><div class="portfolio-overlay"><h3>Landing Page Design</h3><p>Conversion-focused page</p></div></div>
                 </div>
+                <!-- Portfolio Item 3 - PASTE LINK 3 BELOW -->
                 <div class="portfolio-item">
-                    <div class="portfolio-image"><img src="images/portfolio-3.jpg" alt="Project 3"><div class="portfolio-overlay"><h3>Custom Liquid Sections</h3><p>Unique reusable components</p></div></div>
+                    <div class="portfolio-image"><img src="https://via.placeholder.com/400x300" alt="Project 3"><div class="portfolio-overlay"><h3>Custom Liquid Sections</h3><p>Unique reusable components</p></div></div>
                 </div>
+                <!-- Portfolio Item 4 - PASTE LINK 4 BELOW -->
                 <div class="portfolio-item">
-                    <div class="portfolio-image"><img src="images/portfolio-4.jpg" alt="Project 4"><div class="portfolio-overlay"><h3>eCommerce UX Optimization</h3><p>Improved conversion rates</p></div></div>
+                    <div class="portfolio-image"><img src="https://via.placeholder.com/400x300" alt="Project 4"><div class="portfolio-overlay"><h3>eCommerce UX Optimization</h3><p>Improved conversion rates</p></div></div>
                 </div>
+                <!-- Portfolio Item 5 - PASTE LINK 5 BELOW -->
                 <div class="portfolio-item">
-                    <div class="portfolio-image"><img src="images/portfolio-5.jpg" alt="Project 5"><div class="portfolio-overlay"><h3>Brand Identity</h3><p>Complete digital presence</p></div></div>
+                    <div class="portfolio-image"><img src="https://via.placeholder.com/400x300" alt="Project 5"><div class="portfolio-overlay"><h3>Brand Identity</h3><p>Complete digital presence</p></div></div>
                 </div>
+                <!-- Portfolio Item 6 - PASTE LINK 6 BELOW -->
                 <div class="portfolio-item">
-                    <div class="portfolio-image"><img src="images/portfolio-6.jpg" alt="Project 6"><div class="portfolio-overlay"><h3>Mobile Optimization</h3><p>Responsive design excellence</p></div></div>
+                    <div class="portfolio-image"><img src="https://via.placeholder.com/400x300" alt="Project 6"><div class="portfolio-overlay"><h3>Mobile Optimization</h3><p>Responsive design excellence</p></div></div>
                 </div>
             </div>
         </div>
@@ -463,7 +474,7 @@
         </div>
     </section>
 
-    <!-- RUNWAY SECTION -->
+    <!-- RUNWAY SECTION (Running Line) -->
     <div class="runway-section">
         <div class="runway-track">
             <span class="runway-item">Shopify Development</span>
@@ -727,7 +738,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-left">
-                    <h3>Sargsyan Syuzanna</h3>
+                    <h3>Syuzanna Sargsyan</h3>
                     <p>Shopify Specialist & eCommerce UX/UI Designer</p>
                 </div>
                 <div class="footer-center">
@@ -749,7 +760,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Sargsyan Syuzanna. <span data-key="footer_rights">All rights reserved.</span></p>
+                <p>&copy; 2026 Syuzanna Sargsyan. <span data-key="footer_rights">All rights reserved.</span></p>
             </div>
         </div>
     </footer>
