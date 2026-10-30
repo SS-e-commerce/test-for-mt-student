@@ -208,6 +208,84 @@
         .stat-item h3 { font-size: 42px; color: var(--primary); margin-bottom: 8px; font-weight: 800; }
         .stat-item p { font-size: 14px; color: var(--secondary); margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         
+        /* FAQ STYLES WITH PLUS/MINUS SYMBOL */
+        .faq { background: var(--background); }
+        .faq-list { max-width: 900px; margin: 0 auto 50px; }
+        
+        .faq-item { 
+            background: var(--white); 
+            margin-bottom: 16px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid rgba(121, 125, 98, 0.1); 
+        }
+
+        .faq-question { 
+            width: 100%; 
+            padding: 24px 30px; 
+            background: transparent; 
+            border: none; 
+            text-align: left; 
+            font-size: 18px; 
+            font-weight: 600; 
+            color: var(--primary); 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            transition: var(--transition); 
+        }
+
+        .faq-question:hover { color: var(--accent); }
+
+        /* The Plus/Minus Icon */
+        .faq-icon {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            transition: var(--transition);
+        }
+
+        .faq-icon::before, .faq-icon::after {
+            content: '';
+            position: absolute;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        /* Horizontal line of the plus */
+        .faq-icon::before {
+            top: 9px;
+            left: 0;
+            width: 20px;
+            height: 2px;
+        }
+
+        /* Vertical line of the plus */
+        .faq-icon::after {
+            top: 0;
+            left: 9px;
+            width: 2px;
+            height: 20px;
+        }
+
+        /* When active, rotate the vertical line to make it a minus */
+        .faq-item.active .faq-icon::after {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+        
+        .faq-item.active .faq-question { color: var(--accent); }
+
+        .faq-answer { 
+            padding: 0 30px 24px; 
+            display: none; 
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-answer { display: block; }
+
         /* AI CHAT */
         .ai-chat { background: var(--white); }
         .chat-container { max-width: 800px; margin: 0 auto; }
@@ -548,61 +626,91 @@
                 
                 <!-- Q1 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q1">What services do you offer?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q1">What services do you offer?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a1">I specialize in Shopify development, custom Liquid sections, landing pages, web design, UX/UI design, and website optimization.</p></div>
                 </div>
 
                 <!-- Q2 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q2">Can you build a Shopify store from scratch?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q2">Can you build a Shopify store from scratch?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a2">Yes! I create professional, responsive Shopify stores tailored to your brand and business goals.</p></div>
                 </div>
 
                 <!-- Q3 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q3">Can you customize my existing website?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q3">Can you customize my existing website?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a3">Absolutely! I can redesign pages, add custom features, improve layouts, and enhance functionality.</p></div>
                 </div>
 
                 <!-- Q4 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q4">Can you create custom Shopify Liquid sections?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q4">Can you create custom Shopify Liquid sections?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a4">Yes! I develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript.</p></div>
                 </div>
 
                 <!-- Q5 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q5">Can you fix website bugs and errors?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q5">Can you fix website bugs and errors?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a5">Yes! I troubleshoot coding issues, broken layouts, mobile problems, and Shopify theme errors.</p></div>
                 </div>
 
                 <!-- Q6 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q6">Can you improve my website's performance?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q6">Can you improve my website's performance?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a6">Yes! I optimize website speed, mobile responsiveness, navigation, and user experience.</p></div>
                 </div>
 
                 <!-- Q7 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q7">Do you design landing pages?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q7">Do you design landing pages?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a7">Yes! I create modern, conversion-focused landing pages for products, services, and marketing campaigns.</p></div>
                 </div>
 
                 <!-- Q8 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q8">Can you help increase my online sales?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q8">Can you help increase my online sales?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a8">I improve website usability, product pages, and customer journeys to help reduce friction and support conversions.</p></div>
                 </div>
 
                 <!-- Q9 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q9">How much do your services cost?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q9">How much do your services cost?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a9">Pricing depends on your project's requirements. Contact me for a personalized quote.</p></div>
                 </div>
 
                 <!-- Q10 -->
                 <div class="faq-item">
-                    <button class="faq-question"><span data-key="faq_q10">How can I contact you?</span><i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">
+                        <span data-key="faq_q10">How can I contact you?</span>
+                        <div class="faq-icon"></div>
+                    </button>
                     <div class="faq-answer"><p data-key="faq_a10">Simply fill out the contact form on my website and share your project details. I'll get back to you to discuss the next steps.</p></div>
                 </div>
 
@@ -889,6 +997,22 @@
                 }
             });
         }
+
+        // --- FAQ ACCORDION LOGIC ---
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // If it wasn't active, open it
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
 
         // --- AI CHAT LOGIC WITH CONNECT ME FEATURE ---
         const chatMessages = document.getElementById('chatMessages');
