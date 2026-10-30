@@ -538,6 +538,83 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section class="faq reveal" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-key="faq_title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                
+                <!-- Q1 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q1">What services do you offer?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a1">I specialize in Shopify development, custom Liquid sections, landing pages, web design, UX/UI design, and website optimization.</p></div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q2">Can you build a Shopify store from scratch?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a2">Yes! I create professional, responsive Shopify stores tailored to your brand and business goals.</p></div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q3">Can you customize my existing website?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a3">Absolutely! I can redesign pages, add custom features, improve layouts, and enhance functionality.</p></div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q4">Can you create custom Shopify Liquid sections?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a4">Yes! I develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript.</p></div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q5">Can you fix website bugs and errors?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a5">Yes! I troubleshoot coding issues, broken layouts, mobile problems, and Shopify theme errors.</p></div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q6">Can you improve my website's performance?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a6">Yes! I optimize website speed, mobile responsiveness, navigation, and user experience.</p></div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q7">Do you design landing pages?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a7">Yes! I create modern, conversion-focused landing pages for products, services, and marketing campaigns.</p></div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q8">Can you help increase my online sales?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a8">I improve website usability, product pages, and customer journeys to help reduce friction and support conversions.</p></div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q9">How much do your services cost?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a9">Pricing depends on your project's requirements. Contact me for a personalized quote.</p></div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="faq-item">
+                    <button class="faq-question"><span data-key="faq_q10">How can I contact you?</span><i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p data-key="faq_a10">Simply fill out the contact form on my website and share your project details. I'll get back to you to discuss the next steps.</p></div>
+                </div>
+
+            </div>
+            <div class="faq-cta">
+                <h3 data-key="faq_cta_title">Have a project in mind?</h3>
+                <p data-key="faq_cta_desc">Let's turn your ideas into a professional digital experience.</p>
+                <a href="#contact" class="btn btn-primary" data-key="btn_work">Let's Work Together</a>
+            </div>
+        </div>
+    </section>
+
     <!-- AI Chat Section -->
     <section class="ai-chat reveal" id="lets-talk">
         <div class="container">
@@ -670,11 +747,118 @@
             });
         };
 
-        // --- LANGUAGE SWITCHER ---
+        // --- LANGUAGE SWITCHER & TRANSLATIONS ---
         const langBtn = document.getElementById('langBtn');
         const langDropdown = document.getElementById('langDropdown');
         const currentLangSpan = document.getElementById('currentLang');
         let currentLang = 'en';
+
+        const translations = {
+            en: {
+                faq_title: "Frequently Asked Questions",
+                faq_q1: "What services do you offer?",
+                faq_a1: "I specialize in Shopify development, custom Liquid sections, landing pages, web design, UX/UI design, and website optimization.",
+                faq_q2: "Can you build a Shopify store from scratch?",
+                faq_a2: "Yes! I create professional, responsive Shopify stores tailored to your brand and business goals.",
+                faq_q3: "Can you customize my existing website?",
+                faq_a3: "Absolutely! I can redesign pages, add custom features, improve layouts, and enhance functionality.",
+                faq_q4: "Can you create custom Shopify Liquid sections?",
+                faq_a4: "Yes! I develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript.",
+                faq_q5: "Can you fix website bugs and errors?",
+                faq_a5: "Yes! I troubleshoot coding issues, broken layouts, mobile problems, and Shopify theme errors.",
+                faq_q6: "Can you improve my website's performance?",
+                faq_a6: "Yes! I optimize website speed, mobile responsiveness, navigation, and user experience.",
+                faq_q7: "Do you design landing pages?",
+                faq_a7: "Yes! I create modern, conversion-focused landing pages for products, services, and marketing campaigns.",
+                faq_q8: "Can you help increase my online sales?",
+                faq_a8: "I improve website usability, product pages, and customer journeys to help reduce friction and support conversions.",
+                faq_q9: "How much do your services cost?",
+                faq_a9: "Pricing depends on your project's requirements. Contact me for a personalized quote.",
+                faq_q10: "How can I contact you?",
+                faq_a10: "Simply fill out the contact form on my website and share your project details. I'll get back to you to discuss the next steps.",
+                faq_cta_title: "Have a project in mind?",
+                faq_cta_desc: "Let's turn your ideas into a professional digital experience.",
+                btn_work: "Let's Work Together"
+            },
+            am: {
+                faq_title: "Հաճախակի տրվող հարցեր",
+                faq_q1: "Ինչ ծառայություններ եք առաջարկում",
+                faq_a1: "Ես մասնագիտացած եմ Shopify-ի մշակման, հատուկ Liquid բաժինների, լենդինգ էջերի, վեբ դիզայնի, UX/UI դիզայնի և կայքի օպտիմալացման մեջ։",
+                faq_q2: "Կարո՞ղ եք Shopify խանութ կառուցել զրոյից",
+                faq_a2: "Այո։ Ես ստեղծում եմ պրոֆեսիոնալ, հարմարվողական Shopify խանութներ՝ հարմարեցված Ձեր բրենդին և բիզնեսի նպատակներին։",
+                faq_q3: "Կարո՞ղ եք հարմարեցնել իմ գոյություն ունեցող կայքը",
+                faq_a3: "Անպայման։ Ես կարող եմ վերադիզայն անել էջերը, ավելացնել հատուկ ֆունկցիաներ, բարելավել դասավորությունները և բարձրացնել ֆունկցիոնալությունը։",
+                faq_q4: "Կարո՞ղ եք ստեղծել հատուկ Shopify Liquid բաժիններ",
+                faq_a4: "Այո։ Ես մշակում եմ յուրահատուկ, վերաօգտագործվող Shopify բաժիններ՝ օգտագործելով Liquid, HTML, CSS և JavaScript։",
+                faq_q5: "Կարո՞ղ եք ուղղել կայքի սխալները",
+                faq_a5: "Այո։ Ես լուծում եմ կոդավորման խնդիրները, կոտրված դասավորությունները, բջջային խնդիրները և Shopify թեմայի սխալները։",
+                faq_q6: "Կարո՞ղ եք բարելավել իմ կայքի աշխատանքը",
+                faq_a6: "Այո։ Ես օպտիմալացնում եմ կայքի արագությունը, բջջային հարմարվողականությունը, նավիգացիան և օգտագործողի փորձառությունը։",
+                faq_q7: "Դուք դիզայն եք անում լենդինգ էջեր",
+                faq_a7: "Այո։ Ես ստեղծում եմ ժամանակակից, կոնվերսիայի վրա կենտրոնացած լենդինգ էջեր՝ ապրանքների, ծառայությունների և մարքեթինգային արշավների համար։",
+                faq_q8: "Կարո՞ղ եք օգնել բարձրացնել իմ առցանց վաճառքները",
+                faq_a8: "Ես բարելավում եմ կայքի օգտագործելիությունը, ապրանքի էջերը և հաճախորդի ճանապարհը՝ նվազեցնելով խոչընդոտները և աջակցելով կոնվերսիաներին։",
+                faq_q9: "Որքան են արժում Ձեր ծառայությունները",
+                faq_a9: "Գինը կախված է Ձեր նախագծի պահանջներից։ Կապվեք ինձ հետ՝ անհատական գնահատականի համար։",
+                faq_q10: "Ինչպե՞ս կարող եմ կապվել Ձեզ հետ",
+                faq_a10: "Պարզապես լրացրեք կապի ձևաթուղթը իմ կայքում և կիսվեք Ձեր նախագծի մանրամասներով։ Ես կվերադառնամ Ձեզ՝ քննարկելու հաջորդ քայլերը։",
+                faq_cta_title: "Նախագիծ ունե՞ք մտքում",
+                faq_cta_desc: "Եկեք վերածենք Ձեր գաղափարները պրոֆեսիոնալ թվային փորձառության։",
+                btn_work: "Աշխատենք միասին"
+            },
+            ru: {
+                faq_title: "Часто задаваемые вопросы",
+                faq_q1: "Какие услуги вы предлагаете?",
+                faq_a1: "Я специализируюсь на разработке Shopify, пользовательских секциях Liquid, посадочных страницах, веб-дизайне, UX/UI дизайне и оптимизации сайтов.",
+                faq_q2: "Можете ли вы создать магазин Shopify с нуля?",
+                faq_a2: "Да! Я создаю профессиональные, адаптивные магазины Shopify, адаптированные к вашему бренду и бизнес-целям.",
+                faq_q3: "Можете ли вы настроить мой существующий сайт?",
+                faq_a3: "Абсолютно! Я могу переработать страницы, добавить пользовательские функции, улучшить макеты и расширить функциональность.",
+                faq_q4: "Можете ли вы создать пользовательские секции Shopify Liquid?",
+                faq_a4: "Да! Я разрабатываю уникальные, многоразовые секции Shopify с использованием Liquid, HTML, CSS и JavaScript.",
+                faq_q5: "Можете ли вы исправить ошибки сайта?",
+                faq_a5: "Да! Я устраняю проблемы с кодом, сломанные макеты, мобильные проблемы и ошибки тем Shopify.",
+                faq_q6: "Можете ли вы улучшить производительность моего сайта?",
+                faq_a6: "Да! Я оптимизирую скорость сайта, мобильную адаптивность, навигацию и пользовательский опыт.",
+                faq_q7: "Вы проектируете посадочные страницы?",
+                faq_a7: "Да! Я создаю современные посадочные страницы, ориентированные на конверсию, для продуктов, услуг и маркетинговых кампаний.",
+                faq_q8: "Можете ли вы помочь увеличить мои онлайн-продажи?",
+                faq_a8: "Я улучшаю удобство использования сайта, страницы продуктов и пути клиентов, чтобы уменьшить трение и поддержать конверсию.",
+                faq_q9: "Сколько стоят ваши услуги?",
+                faq_a9: "Цены зависят от требований вашего проекта. Свяжитесь со мной для персонализированной оценки.",
+                faq_q10: "Как я могу связаться с вами?",
+                faq_a10: "Просто заполните контактную форму на моем сайте и поделитесь деталями вашего проекта. Я свяжусь с вами, чтобы обсудить следующие шаги.",
+                faq_cta_title: "Есть проект на уме?",
+                faq_cta_desc: "Давайте превратим ваши идеи в профессиональный цифровой опыт.",
+                btn_work: "Давайте работать вместе"
+            },
+            es: {
+                faq_title: "Preguntas Frecuentes",
+                faq_q1: "¿Qué servicios ofrece?",
+                faq_a1: "Me especializo en desarrollo Shopify, secciones Liquid personalizadas, páginas de aterrizaje, diseño web, diseño UX/UI y optimización de sitios web.",
+                faq_q2: "¿Puede construir una tienda Shopify desde cero?",
+                faq_a2: "¡Sí! Creo tiendas Shopify profesionales y responsivas adaptadas a su marca y objetivos comerciales.",
+                faq_q3: "¿Puede personalizar mi sitio web existente?",
+                faq_a3: "¡Absolutamente! Puedo rediseñar páginas, agregar funciones personalizadas, mejorar diseños y mejorar la funcionalidad.",
+                faq_q4: "¿Puede crear secciones Shopify Liquid personalizadas?",
+                faq_a4: "¡Sí! Desarrollo secciones Shopify únicas y reutilizables usando Liquid, HTML, CSS y JavaScript.",
+                faq_q5: "¿Puede corregir errores y bugs del sitio web?",
+                faq_a5: "¡Sí! Soluciono problemas de codificación, diseños rotos, problemas móviles y errores de temas Shopify.",
+                faq_q6: "¿Puede mejorar el rendimiento de mi sitio web?",
+                faq_a6: "¡Sí! Optimizo la velocidad del sitio web, la capacidad de respuesta móvil, la navegación y la experiencia del usuario.",
+                faq_q7: "¿Diseña páginas de aterrizaje?",
+                faq_a7: "¡Sí! Creo páginas de aterrizaje modernas enfocadas en conversión para productos, servicios y campañas de marketing.",
+                faq_q8: "¿Puede ayudar a aumentar mis ventas en línea?",
+                faq_a8: "Mejoro la usabilidad del sitio web, las páginas de productos y los recorridos del cliente para ayudar a reducir la fricción y apoyar las conversiones.",
+                faq_q9: "¿Cuánto cuestan sus servicios?",
+                faq_a9: "Los precios dependen de los requisitos de su proyecto. Contácteme para una cotización personalizada.",
+                faq_q10: "¿Cómo puedo contactarle?",
+                faq_a10: "Simplemente complete el formulario de contacto en mi sitio web y comparta los detalles de su proyecto. Me pondré en contacto con usted para discutir los próximos pasos.",
+                faq_cta_title: "¿Tiene un proyecto en mente?",
+                faq_cta_desc: "Convirtamos sus ideas en una experiencia digital profesional.",
+                btn_work: "Trabajemos Juntos"
+            }
+        };
 
         langBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -697,6 +881,13 @@
             currentLang = lang;
             const langNames = { 'en': 'EN', 'am': 'AM', 'ru': 'RU', 'es': 'ES' };
             currentLangSpan.textContent = langNames[lang];
+            
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
         }
 
         // --- AI CHAT LOGIC WITH CONNECT ME FEATURE ---
