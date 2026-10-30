@@ -1,884 +1,1095 @@
-import os
-
-# Define the project structure and content
-files = {
-    "package.json": """{
-  "name": "syuzanna-portfolio",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.0",
-    "lucide-react": "^0.294.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@vitejs/plugin-react": "^4.2.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0"
-  }
-}""",
-
-    "vite.config.ts": """import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-export default defineConfig({ plugins: [react()], server: { port: 3000, open: true } });""",
-
-    "tsconfig.json": """{
-  "compilerOptions": {
-    "target": "ES2020", "useDefineForClassFields": true, "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext", "skipLibCheck": true, "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true, "resolveJsonModule": true, "isolatedModules": true,
-    "noEmit": true, "jsx": "react-jsx", "strict": true, "noUnusedLocals": true, "noUnusedParameters": true
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
-}""",
-
-    "tsconfig.node.json": """{
-  "compilerOptions": { "composite": true, "skipLibCheck": true, "module": "ESNext", "moduleResolution": "bundler", "allowSyntheticDefaultImports": true },
-  "include": ["vite.config.ts"]
-}""",
-
-    "index.html": """<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Syuzanna Sargsyan - Shopify Designer & E-commerce Growth Specialist." />
-    <title>Syuzanna Sargsyan | Shopify Designer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>""",
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syuzanna Sargsyan | Shopify Specialist</title>
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
-    "public/favicon.svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" fill="#171715"/>
-  <text x="50" y="68" font-family="Playfair Display, serif" font-size="48" font-weight="600" fill="#F7F4EE" text-anchor="middle" letter-spacing="-2">SS</text>
-</svg>""",
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    "src/index.css": """:root {
-  --color-warm-cream: #F7F4EE;
-  --color-soft-ivory: #FFFEFB;
-  --color-deep-black: #171715;
-  --color-warm-beige: #D8C8B5;
-  --color-muted-taupe: #8B8177;
-  --color-subtle-border: #E5DED4;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --spacing-sm: 1rem; --spacing-md: 2rem; --spacing-lg: 4rem; --spacing-xl: 8rem;
-  --radius-sm: 4px; --radius-md: 8px; --transition: 0.3s ease;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-sans); background-color: var(--color-soft-ivory); color: var(--color-deep-black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 500; line-height: 1.2; }
-a { color: inherit; text-decoration: none; transition: color var(--transition); }
-a:hover { color: var(--color-muted-taupe); }
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); }
-.section { padding: var(--spacing-xl) 0; }
-.btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 1.5rem; font-family: var(--font-sans); font-weight: 500; font-size: 0.95rem; border-radius: var(--radius-sm); cursor: pointer; transition: all var(--transition); border: 1px solid transparent; }
-.btn-primary { background-color: var(--color-deep-black); color: var(--color-soft-ivory); }
-.btn-primary:hover { background-color: var(--color-muted-taupe); color: var(--color-deep-black); }
-.btn-outline { background-color: transparent; border-color: var(--color-deep-black); color: var(--color-deep-black); }
-.btn-outline:hover { background-color: var(--color-deep-black); color: var(--color-soft-ivory); }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md); }
-.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--spacing-md); }
-@media (max-width: 768px) {
-  :root { --spacing-lg: 3rem; --spacing-xl: 5rem; }
-  .desktop-nav { display: none !important; }
-  .mobile-menu-btn { display: block !important; }
-}
-.mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--color-deep-black); }
-.img-placeholder { background-color: var(--color-muted-taupe); display: flex; align-items: center; justify-content: center; color: var(--color-soft-ivory); font-size: 0.9rem; border-radius: var(--radius-md); }""",
+    <style>
+        /* YOUR CUSTOM COLOR PALETTE */
+        :root {
+            --primary: #797d62;       /* Sage Green */
+            --secondary: #9b9b7a;     /* Olive Grey */
+            --accent: #d9ae94;        /* Soft Peach */
+            --highlight: #f1dca7;     /* Pale Gold */
+            --bg-warm: #baa587;       /* Warm Beige */
+            --background: #FDFBF7;    /* Very Light Beige for readability */
+            --white: #FFFFFF;
+            --text: #4A4A4A;          /* Dark Grey for text */
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-    "src/data.ts": """export const socialLinks = {
-  linkedin: "https://linkedin.com/in/syuzannasargsyan",
-  behance: "https://behance.net/syuzisargsyan2",
-  email: "YOUR_EMAIL_HERE", // CONFIGURE: Replace with verified email
-  upwork: "", instagram: "", github: "", telegram: ""
-};
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-export const projects = [
-  { 
-    id: "skincare", 
-    title: "Skincare Brand E-commerce", 
-    category: "shopify", 
-    description: "A design and e-commerce project conceptualizing a refined online store experience. Product brands considered include Beauty of Joseon, SKIN1004, Anua, and COSRX.", 
-    brief: "Create a refined, conversion-focused e-commerce experience.", 
-    brandDirection: "Minimal, clean, and trustworthy.", 
-    designApproach: "Generous whitespace, clear typography hierarchy, and intuitive product filtering.", 
-    tools: ["Figma", "Shopify", "HTML/CSS"], 
-    liveUrl: "", 
-    sourceUrl: "" 
-  },
-  { 
-    id: "sonax", 
-    title: "Sonax Winter Care Landing Page", 
-    category: "landing", 
-    description: "A winter car-care landing page concept designed to organize product information and guide customers. (Promotional 15% offer is project content, not a current brand offer).", 
-    brief: "Design a promotional landing page for winter car care products.", 
-    brandDirection: "Bold, seasonal, and action-oriented.", 
-    designApproach: "Structured with promotional strip, hero, problem-focused areas, benefits, video, FAQ, reviews, and CTA.", 
-    tools: ["Figma", "Webflow", "CSS"], 
-    liveUrl: "", 
-    sourceUrl: "" 
-  },
-  { 
-    id: "gh1", 
-    title: "GitHub Website Project 01", 
-    category: "frontend", 
-    description: "A frontend web design project developed and hosted via GitHub. (Replace with verified repository details).", 
-    brief: "Develop a responsive, accessible frontend website.", 
-    brandDirection: "Professional, clean, and developer-focused.", 
-    designApproach: "Component-based architecture with responsive layouts and semantic HTML.", 
-    tools: ["React", "TypeScript", "Vite"], 
-    liveUrl: "https://github.com", 
-    sourceUrl: "https://github.com" 
-  }
-];
+        h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', sans-serif; font-weight: 700; color: var(--primary); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-type Lang = 'en' | 'hy' | 'ru' | 'es';
+        /* HEADER & 4K BOTTLE EFFECT */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            /* Glassmorphism / Bottle Effect */
+            background: rgba(253, 251, 247, 0.7); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000; padding: 15px 0; transition: var(--transition);
+            border-bottom: 1px solid rgba(121, 125, 98, 0.1);
+        }
+        .header.scrolled { 
+            background: rgba(253, 251, 247, 0.95); 
+            box-shadow: 0 10px 40px rgba(121, 125, 98, 0.1); 
+            padding: 10px 0; 
+        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { font-size: 24px; color: var(--primary); font-weight: 800; letter-spacing: -0.5px; }
+        
+        .nav-list { display: flex; list-style: none; gap: 30px; align-items: center; }
+        .nav-list a { text-decoration: none; color: var(--text); font-weight: 500; transition: var(--transition); position: relative; }
+        .nav-list a:hover, .nav-list a.active { color: var(--accent); }
+        
+        .btn-primary-nav {
+            background: var(--primary); color: var(--white) !important;
+            padding: 10px 24px; border-radius: 50px; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(121, 125, 98, 0.2);
+        }
+        .btn-primary-nav:hover { background: var(--accent); transform: translateY(-2px); }
 
-export const dict: Record<Lang, any> = {
-  en: {
-    nav: { home: "Home", about: "About", portfolio: "Portfolio", contact: "Contact" },
-    hero: { 
-      title: "Shopify Design & E-commerce Growth", 
-      subtitle: "Independent digital designer crafting refined, conversion-focused online stores and web experiences for international brands.", 
-      cta: "View My Work" 
-    },
-    services: { 
-      title: "Core Expertise", 
-      shopify: { title: "Shopify Design", desc: "Custom, high-converting Shopify store designs that reflect your brand and drive sales." }, 
-      ecommerce: { title: "E-commerce Growth", desc: "Strategic design decisions focused on user experience, clarity, and commercial results." }, 
-      webdesign: { title: "Web Design", desc: "Thoughtful, responsive landing pages and websites built for modern businesses." } 
-    },
-    process: { 
-      title: "Work Process", 
-      steps: [
-        { title: "Discover", desc: "Understand the brand, business goals, audience, and project requirements." }, 
-        { title: "Define", desc: "Establish priorities, structure, visual direction, and scope." }, 
-        { title: "Design", desc: "Develop the visual experience, page layouts, and responsive behavior." }, 
-        { title: "Refine & Deliver", desc: "Review the work, implement agreed refinements, and prepare the deliverables." }
-      ] 
-    },
-    faq: {
-      title: "Frequently Asked Questions",
-      items: [
-        { q: "Do you work with existing Shopify stores?", a: "Yes. I specialize in both building stores from scratch and optimizing existing ones for better performance and conversion." },
-        { q: "What is your typical timeline?", a: "Most projects take between 2–4 weeks depending on complexity. We will define a clear timeline during our initial consultation." },
-        { q: "Do you provide ongoing support?", a: "I offer post-launch support packages to ensure your store runs smoothly and stays updated." },
-        { q: "How do we start a project?", a: "Simply fill out the contact form or email me directly. We’ll schedule a brief call to discuss your goals." }
-      ]
-    },
-    about: { 
-      title: "About Me", 
-      bio: "I’m Syuzanna Sargsyan, an independent digital designer focused on Shopify stores, e-commerce experiences, and web design. My background combines business and economics with practical experience in digital projects. I approach design with attention to visual clarity, customer experience, and the goals behind every website. I enjoy creating thoughtful digital experiences that help brands present their products with confidence.", 
-      bgTitle: "Professional Background", 
-      bg: [
-        "Master’s-level education in Economics from the Armenian State University of Economics.", 
-        "Previous professional experience in Armenia’s state property management sector.", 
-        "Experience operating an online marketplace store.", 
-        "Training in graphic design, web design, and IT sales and freelancing.", 
-        "Practical portfolio projects involving Shopify, landing pages, and frontend websites."
-      ], 
-      bgNote: "This business background informs my design approach: structured thinking, organization, and commercial awareness." 
-    },
-    portfolio: { 
-      title: "Selected Projects", 
-      subtitle: "A curation of design and e-commerce projects. Click to explore case studies.", 
-      view: "View Case Study", 
-      live: "Live Site", 
-      code: "Source Code" 
-    },
-    details: { 
-      brief: "Brief & Objectives", 
-      brand: "Brand Direction", 
-      approach: "Design Approach", 
-      tools: "Tools & Technologies", 
-      next: "Next Project", 
-      cta: "Discuss a Similar Project" 
-    },
-    contact: { 
-      title: "Have a project in mind?", 
-      subtitle: "Tell me about your brand, your goals, and the experience you want to create.", 
-      name: "Name", 
-      email: "Email", 
-      type: "Project Type", 
-      message: "Message", 
-      submit: "Send Message", 
-      sending: "Sending...", 
-      success: "Thank you! Your message is prepared. (Note: Configure a form backend like Formspree to enable actual delivery).", 
-      error: "Something went wrong. Please try again.", 
-      req: "This field is required.", 
-      invalid: "Please enter a valid email address." 
-    },
-    footer: { rights: "All rights reserved.", top: "Back to top" },
-    types: { shopify: "Shopify Design", landing: "Landing Page", frontend: "Frontend / Web Design" }
-  },
-  hy: {
-    nav: { home: "Գլխավոր", about: "Իմ մասին", portfolio: "Պորտֆոլիո", contact: "Կապ" },
-    hero: { 
-      title: "Shopify Դիզայն և E-commerce Աճ", 
-      subtitle: "Անկախ թվային դիզայներ, որը ստեղծում է նրբագեղ, կոնվերսիայի վրա կենտրոնացած առցանց խանութներ և վեբ փորձառություններ միջազգային բրենդների համար:", 
-      cta: "Դիտել աշխատանքներս" 
-    },
-    services: { 
-      title: "Հիմնական Փորձառություն", 
-      shopify: { title: "Shopify Դիզայն", desc: "Ձեր բրենդն արտացոլող և վաճառքները խթանող՝ պատվերով մշակված Shopify խանութների դիզայն:" }, 
-      ecommerce: { title: "E-commerce Աճ", desc: "Ռազմավարական դիզայն որոշումներ՝ կենտրոնացած օգտագործողի փորձառության, հստակության և առևտրային արդյունքների վրա:" }, 
-      webdesign: { title: "Վեբ Դիզայն", desc: "Ժամանակակից բիզնեսների համար նախատեսված մտածված, ադապտիվ լենդինգներ և կայքեր:" } 
-    },
-    process: { 
-      title: "Աշխատանքային Գործընթաց", 
-      steps: [
-        { title: "Ուսումնասիրություն", desc: "Բրենդի, բիզնես նպատակների, լսարանի և նախագծի պահանջների ըմբռնում:" }, 
-        { title: "Սահմանում", desc: "Առաջնահերթությունների, կառուցվածքի, տեսողական ուղղության և շրջանակի հստակեցում:" }, 
-        { title: "Դիզայն", desc: "Տեսողական փորձառության, էջերի դասավորության և ադապտիվ վարքագծի մշակում:" }, 
-        { title: "Հղկում և Հանձնում", desc: "Աշխատանքի վերանայում, համաձայնեցված ճշգրտումների կիրառում և արդյունքների հանձնում:" }
-      ] 
-    },
-    faq: {
-      title: "Հաճախակի Տրվող Հարցեր",
-      items: [
-        { q: "Աշխատո՞ւմ եք արդեն գործող Shopify խանութների հետ:", a: "Այո: Ես մասնագիտացած եմ ինչպես զրոյից խանութներ ստեղծելու, այնպես էլ գոյություն ունեցողները օպտիմալացնելու գործում:" },
-        { q: "Որքա՞ն է տևում նախագիծը:", a: "Նախագծերի մեծ մասը տևում է 2-4 շաբաթ՝ կախված բարդությունից: Մենք կհստակեցնենք ժամանակացույցը առաջին խորհրդատվության ժամանակ:" },
-        { q: "Ապահովո՞ւմ եք հետագա աջակցություն:", a: "Այո, ես առաջարկում եմ թողարկումից հետո աջակցության փաթեթներ՝ ձեր խանութի անխափան աշխատանքը ապահովելու համար:" },
-        { q: "Ինչպե՞ս սկսել նախագիծը:", a: "Պարզապես լրացրեք կապի ձևաթուղթը կամ գրեք ինձ էլ. հասցեով: Մենք կկազմակերպենք կարճ զանգ՝ ձեր նպատակները քննարկելու համար:" }
-      ]
-    },
-    about: { 
-      title: "Իմ Մասին", 
-      bio: "Ես Սյուզաննա Սարգսյանն եմ, անկախ թվային դիզայներ, որը կենտրոնացած է Shopify խանութների, e-commerce փորձառությունների և վեբ դիզայնի վրա: Իմ նախապատմությունը համատեղում է բիզնեսի և տնտեսագիտության գիտելիքները թվային նախագծերի գործնական փորձի հետ: Ես մոտենում եմ դիզայնին՝ ուշադրություն դարձնելով տեսողական հստակությանը, հաճախորդի փորձառությանը և յուրաքանչյուր կայքի հետևում կանգնած նպատակներին:", 
-      bgTitle: "Մասնագիտական Նախապատմություն", 
-      bg: [
-        "Տնտեսագիտության մագիստրոսի կրթություն Հայաստանի Պետական Տնտեսագիտական Համալսարանում:", 
-        "Նախկին մասնագիտական փորձ Հայաստանի պետական գույքի կառավարման ոլորտում:", 
-        "Առցանց մարկետփլեյսի խանութի կառավարման փորձ:", 
-        "Գրաֆիկական դիզայնի, վեբ դիզայնի և IT վաճառքների ուսուցում:", 
-        "Shopify-ի, լենդինգների և ֆրոնտենդ կայքերի ներգրավվածությամբ գործնական նախագծեր:"
-      ], 
-      bgNote: "Այս բիզնես նախապատմությունը ձևավորում է իմ դիզայնի մոտեցումը՝ կառուցվածքային մտածողություն, կազմակերպվածություն և առևտրային իրազեկվածություն:" 
-    },
-    portfolio: { 
-      title: "Ընտրված Նախագծեր", 
-      subtitle: "Դիզայնի և e-commerce նախագծերի հավաքածու: Սեղմեք՝ ուսումնասիրելու համար:", 
-      view: "Դիտել դեպքի ուսումնասիրությունը", 
-      live: "Կենդանի կայք", 
-      code: "Կոդի աղբյուր" 
-    },
-    details: { 
-      brief: "Խնդիր և նպատակներ", 
-      brand: "Բրենդի ուղղություն", 
-      approach: "Դիզայնի մոտեցում", 
-      tools: "Գործիքներ և տեխնոլոգիաներ", 
-      next: "Հաջորդ նախագիծ", 
-      cta: "Քննարկել նմանատիպ նախագիծ" 
-    },
-    contact: { 
-      title: "Ունե՞ք նախագիծ մտքում:", 
-      subtitle: "Պատմեք ձեր բրենդի, ձեր նպատակների և այն փորձառության մասին, որը ցանկանում եք ստեղծել:", 
-      name: "Անուն", 
-      email: "Էլ. հասցե", 
-      type: "Նախագծի տեսակը", 
-      message: "Հաղորդագրություն", 
-      submit: "Ուղարկել", 
-      sending: "Ուղարկվում է...", 
-      success: "Շնորհակալություն: Ձեր հաղորդագրությունը պատրաստ է: (Նշում. Իրական առաքման համար անհրաժեշտ է կարգավորել ֆորմայի բեքենդ):", 
-      error: "Ինչ-որ բան սխալ գնաց: Խնդրում ենք փորձել կրկին:", 
-      req: "Այս դաշտը պարտադիր է:", 
-      invalid: "Խնդրում ենք մուտքագրել վավեր էլ. հասցե:" 
-    },
-    footer: { rights: "Բոլոր իրավունքները պաշտպանված են:", top: "Վերև" },
-    types: { shopify: "Shopify Դիզայն", landing: "Լենդինգ էջ", frontend: "Ֆրոնտենդ / Վեբ դիզայն" }
-  },
-  ru: {
-    nav: { home: "Главная", about: "Обо мне", portfolio: "Портфолио", contact: "Контакты" },
-    hero: { 
-      title: "Shopify Дизайн и Рост E-commerce", 
-      subtitle: "Независимый цифровой дизайнер, создающий изысканные, ориентированные на конверсию интернет-магазины и веб-ресурсы для международных брендов.", 
-      cta: "Смотреть работы" 
-    },
-    services: { 
-      title: "Ключевые Компетенции", 
-      shopify: { title: "Shopify Дизайн", desc: "Индивидуальный, высококонверсионный дизайн магазинов Shopify, отражающий ваш бренд и увеличивающий продажи." }, 
-      ecommerce: { title: "Рост E-commerce", desc: "Стратегические дизайн-решения, ориентированные на пользовательский опыт, ясность и коммерческие результаты." }, 
-      webdesign: { title: "Веб-дизайн", desc: "Продуманные, адаптивные лендинги и сайты, созданные для современного бизнеса." } 
-    },
-    process: { 
-      title: "Рабочий Процесс", 
-      steps: [
-        { title: "Исследование", desc: "Понимание бренда, бизнес-целей, аудитории и требований проекта." }, 
-        { title: "Определение", desc: "Установление приоритетов, структуры, визуального направления и масштаба." }, 
-        { title: "Дизайн", desc: "Разработка визуального опыта, макетов страниц и адаптивного поведения." }, 
-        { title: "Доработка и Завершение", desc: "Обзор работы, внедрение согласованных правок и подготовка результатов." }
-      ] 
-    },
-    faq: {
-      title: "Часто Задаваемые Вопросы",
-      items: [
-        { q: "Работаете ли вы с существующими магазинами Shopify?", a: "Да. Я специализируюсь как на создании магазинов с нуля, так и на оптимизации существующих для повышения конверсии." },
-        { q: "Каковы ваши сроки?", a: "Большинство проектов занимают от 2 до 4 недель в зависимости от сложности. Мы определим четкий график на начальной консультации." },
-        { q: "Предоставляете ли вы поддержку после запуска?", a: "Да, я предлагаю пакеты поддержки после запуска, чтобы ваш магазин работал бесперебойно." },
-        { q: "Как начать проект?", a: "Просто заполните контактную форму или напишите мне на почту. Мы запланируем короткий звонок для обсуждения ваших целей." }
-      ]
-    },
-    about: { 
-      title: "Обо мне", 
-      bio: "Я Сюзанна Саргсян, независимый цифровой дизайнер, специализирующийся на Shopify-магазинах, e-commerce решениях и веб-дизайне. Мое образование в сфере бизнеса и экономики сочетается с практическим опытом в цифровых проектах. Я подхожу к дизайну с вниманием к визуальной ясности, пользовательскому опыту и целям каждого сайта.", 
-      bgTitle: "Профессиональный Опыт", 
-      bg: [
-        "Магистратура по экономике в Армянском государственном экономическом университете.", 
-        "Предыдущий профессиональный опыт в секторе управления государственным имуществом Армении.", 
-        "Опыт управления магазином на онлайн-маркетплейсе.", 
-        "Обучение графическому дизайну, веб-дизайну, IT-продажам и фрилансу.", 
-        "Практические портфолио-проекты, включающие Shopify, лендинги и фронтенд-разработку."
-      ], 
-      bgNote: "Этот бизнес-опыт формирует мой подход к дизайну: структурированное мышление, организация и коммерческая осведомленность." 
-    },
-    portfolio: { 
-      title: "Избранные Проекты", 
-      subtitle: "Подборка дизайн и e-commerce проектов. Нажмите, чтобы изучить кейсы.", 
-      view: "Смотреть кейс", 
-      live: "Живой сайт", 
-      code: "Исходный код" 
-    },
-    details: { 
-      brief: "Задача и цели", 
-      brand: "Направление бренда", 
-      approach: "Дизайн-подход", 
-      tools: "Инструменты и технологии", 
-      next: "Следующий проект", 
-      cta: "Обсудить похожий проект" 
-    },
-    contact: { 
-      title: "Есть идея для проекта?", 
-      subtitle: "Расскажите о вашем бренде, целях и опыте, который вы хотите создать.", 
-      name: "Имя", 
-      email: "Email", 
-      type: "Тип проекта", 
-      message: "Сообщение", 
-      submit: "Отправить", 
-      sending: "Отправка...", 
-      success: "Спасибо! Ваше сообщение подготовлено. (Примечание: Для реальной отправки необходимо настроить бэкенд формы, например, Formspree).", 
-      error: "Что-то пошло не так. Пожалуйста, попробуйте снова.", 
-      req: "Это поле обязательно.", 
-      invalid: "Пожалуйста, введите корректный email адрес." 
-    },
-    footer: { rights: "Все права защищены.", top: "Наверх" },
-    types: { shopify: "Shopify Дизайн", landing: "Лендинг", frontend: "Фронтенд / Веб-дизайн" }
-  },
-  es: {
-    nav: { home: "Inicio", about: "Sobre mí", portfolio: "Portafolio", contact: "Contacto" },
-    hero: { 
-      title: "Diseño Shopify y Crecimiento E-commerce", 
-      subtitle: "Diseñadora digital independiente que crea tiendas en línea y experiencias web refinadas y orientadas a la conversión para marcas internacionales.", 
-      cta: "Ver mi trabajo" 
-    },
-    services: { 
-      title: "Experiencia Principal", 
-      shopify: { title: "Diseño Shopify", desc: "Diseños de tiendas Shopify personalizados y de alta conversión que reflejan tu marca e impulsan las ventas." }, 
-      ecommerce: { title: "Crecimiento E-commerce", desc: "Decisiones de diseño estratégicas centradas en la experiencia del usuario, la claridad y los resultados comerciales." }, 
-      webdesign: { title: "Diseño Web", desc: "Landing pages y sitios web reflexivos y adaptables, construidos para negocios modernos." } 
-    },
-    process: { 
-      title: "Proceso de Trabajo", 
-      steps: [
-        { title: "Descubrir", desc: "Comprender la marca, los objetivos comerciales, la audiencia y los requisitos del proyecto." }, 
-        { title: "Definir", desc: "Establecer prioridades, estructura, dirección visual y alcance." }, 
-        { title: "Diseñar", desc: "Desarrollar la experiencia visual, los diseños de página y el comportamiento responsivo." }, 
-        { title: "Refinar y Entregar", desc: "Revisar el trabajo, implementar refinamientos acordados y preparar los entregables." }
-      ] 
-    },
-    faq: {
-      title: "Preguntas Frecuentes",
-      items: [
-        { q: "¿Trabajas con tiendas Shopify existentes?", a: "Sí. Me especializo tanto en crear tiendas desde cero como en optimizar las existentes para mejorar el rendimiento y la conversión." },
-        { q: "¿Cuál es tu plazo típico?", a: "La mayoría de los proyectos tardan entre 2 y 4 semanas dependiendo de la complejidad. Definiremos un cronograma claro durante nuestra consulta inicial." },
-        { q: "¿Ofreces soporte continuo?", a: "Sí, ofrezco paquetes de soporte post-lanzamiento para asegurar que tu tienda funcione sin problemas." },
-        { q: "¿Cómo empezamos un proyecto?", a: "Simplemente completa el formulario de contacto o envíame un correo electrónico. Programaremos una breve llamada para discutir tus objetivos." }
-      ]
-    },
-    about: { 
-      title: "Sobre mí", 
-      bio: "Soy Syuzanna Sargsyan, una diseñadora digital independiente enfocada en tiendas Shopify, experiencias de comercio electrónico y diseño web. Mi formación combina negocios y economía con experiencia práctica en proyectos digitales. Abordo el diseño prestando atención a la claridad visual, la experiencia del cliente y los objetivos detrás de cada sitio web.", 
-      bgTitle: "Antecedentes Profesionales", 
-      bg: [
-        "Educación a nivel de maestría en Economía de la Universidad Estatal de Economía de Armenia.", 
-        "Experiencia profesional previa en el sector de gestión de propiedades estatales de Armenia.", 
-        "Experiencia operando una tienda en un mercado en línea.", 
-        "Formación en diseño gráfico, diseño web, ventas de TI y trabajo independiente.", 
-        "Proyectos prácticos de portafolio que involucran Shopify, landing pages y desarrollo frontend."
-      ], 
-      bgNote: "Estos antecedentes comerciales informan mi enfoque de diseño: pensamiento estructurado, organización y conciencia comercial." 
-    },
-    portfolio: { 
-      title: "Proyectos Seleccionados", 
-      subtitle: "Una selección de proyectos de diseño y comercio electrónico. Haz clic para explorar los estudios de caso.", 
-      view: "Ver estudio de caso", 
-      live: "Sitio en vivo", 
-      code: "Código fuente" 
-    },
-    details: { 
-      brief: "Breve y objetivos", 
-      brand: "Dirección de la marca", 
-      approach: "Enfoque de diseño", 
-      tools: "Herramientas y tecnologías", 
-      next: "Próximo proyecto", 
-      cta: "Discutir un proyecto similar" 
-    },
-    contact: { 
-      title: "¿Tienes un proyecto en mente?", 
-      subtitle: "Cuéntame sobre tu marca, tus objetivos y la experiencia que deseas crear.", 
-      name: "Nombre", 
-      email: "Correo electrónico", 
-      type: "Tipo de proyecto", 
-      message: "Mensaje", 
-      submit: "Enviar mensaje", 
-      sending: "Enviando...", 
-      success: "¡Gracias! Tu mensaje ha sido preparado. (Nota: Configura un backend de formularios como Formspree para habilitar la entrega real).", 
-      error: "Algo salió mal. Por favor, inténtalo de nuevo.", 
-      req: "Este campo es obligatorio.", 
-      invalid: "Por favor, introduce una dirección de correo electrónico válida." 
-    },
-    footer: { rights: "Todos los derechos reservados.", top: "Volver arriba" },
-    types: { shopify: "Diseño Shopify", landing: "Landing Page", frontend: "Frontend / Diseño Web" }
-  }
-};""",
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        
+        /* Language Selector */
+        .language-selector { position: relative; }
+        .lang-btn {
+            background: rgba(255,255,255,0.6); border: 1px solid var(--secondary);
+            padding: 8px 16px; border-radius: 50px; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--primary);
+        }
+        .lang-dropdown {
+            position: absolute; top: 100%; right: 0;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px);
+            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: var(--transition); min-width: 150px; overflow: hidden;
+        }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: block; width: 100%; padding: 12px 16px; background: transparent;
+            border: none; text-align: left; cursor: pointer; font-size: 14px; color: var(--text);
+        }
+        .lang-option:hover { background: var(--highlight); color: var(--primary); }
 
-    "src/components.tsx": """import React, { useState, useContext, createContext, ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, ShoppingBag, TrendingUp, Monitor, ArrowUpRight, ArrowLeft, ExternalLink, Github, Mail, Linkedin, ArrowUp } from 'lucide-react';
-import { dict, socialLinks, projects } from './data';
+        .social-icons { display: flex; gap: 15px; }
+        .social-icons a { color: var(--primary); font-size: 18px; transition: var(--transition); }
+        .social-icons a:hover { color: var(--accent); transform: translateY(-3px); }
+        .mobile-menu-btn { display: none; background: transparent; border: none; font-size: 24px; cursor: pointer; color: var(--primary); }
 
-// --- Context ---
-const LangContext = createContext<{ lang: string; setLang: (l: string) => void; t: any }>({ lang: 'en', setLang: () => {}, t: dict.en });
-export const LangProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'en');
-  React.useEffect(() => { localStorage.setItem('lang', lang); document.documentElement.lang = lang; }, [lang]);
-  return <LangContext.Provider value={{ lang, setLang, t: dict[lang as keyof typeof dict] }}>{children}</LangContext.Provider>;
-};
-export const useLang = () => useContext(LangContext);
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px;
+            background: radial-gradient(circle at top right, var(--bg-warm) 0%, var(--background) 60%);
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -10%; right: -10%; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(217, 174, 148, 0.2) 0%, transparent 70%);
+            border-radius: 50%; filter: blur(80px); animation: float 10s infinite ease-in-out; z-index: 0;
+        }
+        @keyframes float { 0% { transform: translate(0, 0); } 50% { transform: translate(-30px, 40px); } 100% { transform: translate(0, 0); } }
+        
+        .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        .hero-subtitle { font-size: 16px; color: var(--accent); font-weight: 700; margin-bottom: 16px; letter-spacing: 2px; text-transform: uppercase; }
+        .hero-title { font-size: 64px; color: var(--primary); margin-bottom: 24px; line-height: 1.1; letter-spacing: -1px; }
+        .hero-description { font-size: 18px; color: var(--text); margin-bottom: 32px; line-height: 1.8; max-width: 90%; }
+        .hero-buttons { display: flex; gap: 16px; }
+        
+        .btn { padding: 16px 36px; border-radius: 50px; font-weight: 600; font-size: 16px; text-decoration: none; transition: var(--transition); display: inline-block; cursor: pointer; border: none; }
+        .btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 10px 25px rgba(121, 125, 98, 0.2); }
+        .btn-primary:hover { background: var(--accent); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(217, 174, 148, 0.4); }
+        .btn-secondary { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-secondary:hover { background: var(--primary); color: var(--white); transform: translateY(-3px); }
+        
+        .hero-image { position: relative; perspective: 1000px; }
+        
+        /* PROFILE IMAGE STYLES */
+        .profile-img {
+            width: 100%; max-width: 500px; border-radius: 30px;
+            box-shadow: 20px 20px 60px rgba(121, 125, 98, 0.15), -10px -10px 40px rgba(255,255,255, 0.8);
+            transform: rotateY(-5deg); transition: transform 0.5s ease;
+            object-fit: cover; aspect-ratio: 4/5;
+        }
+        .hero-image:hover .profile-img { transform: rotateY(0deg) scale(1.02); }
 
-// --- UI Components ---
-export const LangSwitcher = () => {
-  const { lang, setLang } = useLang();
-  const [open, setOpen] = useState(false);
-  return (
-    <div style={{ position: 'relative' }}>
-      <button onClick={() => setOpen(!open)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'var(--font-sans)', fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-deep-black)' }}>
-        <Globe size={18} /> {lang.toUpperCase()}
-      </button>
-      {open && (
-        <div style={{ position: 'absolute', top: '100%', right: 0, backgroundColor: 'var(--color-soft-ivory)', border: '1px solid var(--color-subtle-border)', borderRadius: 'var(--radius-sm)', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', zIndex: 100, minWidth: '100px' }}>
-          {['en', 'hy', 'ru', 'es'].map((l) => (
-            <button key={l} onClick={() => { setLang(l); setOpen(false); }} style={{ display: 'block', width: '100%', padding: '0.5rem 1rem', textAlign: 'left', background: lang === l ? 'var(--color-warm-beige)' : 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '0.9rem', color: 'var(--color-deep-black)' }}>{l.toUpperCase()}</button>
-          ))}
+        /* SECTIONS & REVEAL */
+        section { padding: 100px 0; position: relative; }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-title { font-size: 48px; color: var(--primary); margin-bottom: 16px; letter-spacing: -1px; }
+        .section-subtitle { font-size: 18px; color: var(--secondary); max-width: 700px; margin: 0 auto; }
+        
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* RUNWAY / MARQUEE */
+        .runway-section {
+            background: var(--primary);
+            padding: 25px 0;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .runway-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+        .runway-item {
+            font-family: 'Manrope', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--background);
+            padding: 0 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+        .runway-item:hover { color: var(--highlight); opacity: 1; transform: scale(1.05); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* PORTFOLIO (AUTOPLAY VIDEO & IMAGE MIX) */
+        .work { background: var(--white); }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .portfolio-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); transition: var(--transition); background: #000; }
+        .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(121, 125, 98, 0.2); }
+        
+        .portfolio-media { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+        .portfolio-media img, .portfolio-media video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .portfolio-item:hover .portfolio-media img { transform: scale(1.05); }
+        
+        .portfolio-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(121, 125, 98, 0.95), transparent);
+            padding: 40px 30px 30px; color: var(--white); transform: translateY(100%); transition: var(--transition);
+        }
+        .portfolio-item:hover .portfolio-overlay { transform: translateY(0); }
+        .portfolio-overlay h3 { font-size: 24px; margin-bottom: 8px; color: var(--highlight); }
+        .portfolio-overlay p { font-size: 15px; opacity: 0.9; color: #FDFBF7; }
+
+        /* SERVICES */
+        .services { background: var(--bg-warm); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .service-card { background: var(--white); padding: 40px 30px; border-radius: 20px; transition: var(--transition); border: 1px solid transparent; }
+        .service-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(217, 174, 148, 0.2); }
+        .service-icon { width: 60px; height: 60px; background: var(--background); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 24px; color: var(--primary); }
+        .service-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--primary); }
+        .service-card p { color: var(--text); line-height: 1.7; }
+
+        /* ABOUT */
+        .about { background: var(--background); }
+        .about-content { max-width: 900px; margin: 0 auto; }
+        .about-tagline { font-size: 18px; color: var(--accent); font-weight: 700; margin-bottom: 24px; }
+        .about-text p { font-size: 17px; color: var(--text); margin-bottom: 20px; line-height: 1.8; }
+        .about-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin: 50px 0; padding: 40px; background: var(--white); border-radius: 20px; box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); }
+        .stat-item { text-align: center; }
+        .stat-item h3 { font-size: 42px; color: var(--primary); margin-bottom: 8px; font-weight: 800; }
+        .stat-item p { font-size: 14px; color: var(--secondary); margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* FAQ STYLES WITH PLUS/MINUS SYMBOL */
+        .faq { background: var(--background); }
+        .faq-list { max-width: 900px; margin: 0 auto 50px; }
+        
+        .faq-item { 
+            background: var(--white); 
+            margin-bottom: 16px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid rgba(121, 125, 98, 0.1); 
+        }
+
+        .faq-question { 
+            width: 100%; 
+            padding: 24px 30px; 
+            background: transparent; 
+            border: none; 
+            text-align: left; 
+            font-size: 18px; 
+            font-weight: 600; 
+            color: var(--primary); 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            transition: var(--transition); 
+        }
+
+        .faq-question:hover { color: var(--accent); }
+
+        /* The Plus/Minus Icon */
+        .faq-icon {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            transition: var(--transition);
+        }
+
+        .faq-icon::before, .faq-icon::after {
+            content: '';
+            position: absolute;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        /* Horizontal line of the plus */
+        .faq-icon::before {
+            top: 9px;
+            left: 0;
+            width: 20px;
+            height: 2px;
+        }
+
+        /* Vertical line of the plus */
+        .faq-icon::after {
+            top: 0;
+            left: 9px;
+            width: 2px;
+            height: 20px;
+        }
+
+        /* When active, rotate the vertical line to make it a minus */
+        .faq-item.active .faq-icon::after {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+        
+        .faq-item.active .faq-question { color: var(--accent); }
+
+        .faq-answer { 
+            padding: 0 30px 24px; 
+            display: none; 
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-answer { display: block; }
+
+        /* AI CHAT */
+        .ai-chat { background: var(--white); }
+        .chat-container { max-width: 800px; margin: 0 auto; }
+        .chat-window { background: var(--background); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(121, 125, 98, 0.1); border: 1px solid rgba(121, 125, 98, 0.1); }
+        .chat-messages { height: 400px; overflow-y: auto; padding: 30px; }
+        .message { display: flex; gap: 12px; margin-bottom: 20px; }
+        .bot-message { justify-content: flex-start; }
+        .user-message { justify-content: flex-end; }
+        .message-avatar { width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 18px; }
+        .message-content { max-width: 70%; background: var(--white); padding: 16px 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(121, 125, 98, 0.1); }
+        .user-message .message-content { background: var(--accent); color: var(--white); }
+        .message-content p { margin: 0; font-size: 15px; line-height: 1.6; }
+        .quick-options { display: flex; gap: 12px; padding: 20px 30px; flex-wrap: wrap; border-top: 1px solid rgba(121, 125, 98, 0.1); }
+        .quick-option { padding: 10px 20px; background: var(--white); border: 1px solid var(--accent); border-radius: 50px; font-size: 14px; color: var(--primary); cursor: pointer; transition: var(--transition); }
+        .quick-option:hover { background: var(--accent); color: var(--white); }
+        .chat-input-area { display: flex; gap: 12px; padding: 20px 30px; border-top: 1px solid rgba(121, 125, 98, 0.1); }
+        #chatInput { flex: 1; padding: 14px 20px; border: 1px solid var(--secondary); border-radius: 50px; font-size: 15px; background: var(--white); transition: var(--transition); }
+        #chatInput:focus { outline: none; border-color: var(--accent); }
+        .send-btn { width: 50px; height: 50px; background: var(--primary); border: none; border-radius: 50%; color: var(--white); font-size: 18px; cursor: pointer; transition: var(--transition); }
+        .send-btn:hover { background: var(--accent); }
+
+        /* CONTACT */
+        .contact { background: var(--bg-warm); }
+        .contact-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
+        .contact-info h3 { font-size: 28px; margin-bottom: 30px; color: var(--primary); }
+        .contact-item { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .contact-item i { width: 40px; height: 40px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 18px; }
+        .contact-item h4 { font-size: 16px; margin-bottom: 4px; color: var(--primary); }
+        .contact-item a { color: var(--text); text-decoration: none; transition: var(--transition); }
+        .contact-item a:hover { color: var(--accent); }
+        .contact-social h4 { font-size: 18px; margin: 30px 0 16px; color: var(--primary); }
+        .social-links { display: flex; gap: 12px; }
+        .social-links a { width: 40px; height: 40px; background: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 18px; transition: var(--transition); }
+        .social-links a:hover { background: var(--accent); color: var(--white); transform: translateY(-3px); }
+        .contact-form-wrapper { background: var(--white); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary); font-size: 15px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 14px 18px; border: 1px solid var(--secondary); border-radius: 8px; font-size: 15px; font-family: 'Inter', sans-serif; transition: var(--transition); background: var(--background); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); background: var(--white); }
+        .form-group textarea { resize: vertical; }
+
+        /* FOOTER */
+        .footer { background: var(--primary); color: var(--white); padding: 60px 0 30px; }
+        .footer-content { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-left h3 { font-size: 24px; margin-bottom: 12px; color: var(--white); }
+        .footer-left p { color: rgba(255, 255, 255, 0.7); font-size: 15px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: var(--highlight); }
+        .footer-social { display: flex; gap: 12px; }
+        .footer-social a { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 18px; transition: var(--transition); }
+        .footer-social a:hover { background: var(--accent); transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-bottom p { color: rgba(255, 255, 255, 0.6); font-size: 14px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-title { font-size: 44px; }
+            .hero-buttons { justify-content: center; }
+            .hero-image { order: -1; margin-bottom: 40px; }
+            .profile-img { max-width: 400px; transform: none; }
+            .about-stats { grid-template-columns: repeat(2, 1fr); }
+            .contact-content { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-links { justify-content: center; }
+            .footer-social { justify-content: center; }
+        }
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .mobile-menu-btn { display: block; }
+            .social-icons { display: none; }
+            .hero-title { font-size: 36px; }
+            .section-title { font-size: 32px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr; }
+            .quick-options { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><h1>Syuzanna Sargsyan</h1></div>
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#work" class="nav-link">Work</a></li>
+                        <li><a href="#services" class="nav-link">Services</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                        <li><a href="#lets-talk" class="btn-primary-nav">Let's Talk</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right">
+                    <div class="language-selector">
+                        <button class="lang-btn" id="langBtn"><i class="fas fa-globe"></i><span id="currentLang">EN</span></button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <button class="lang-option" data-lang="en">English</button>
+                            <button class="lang-option" data-lang="am">Հայերեն</button>
+                            <button class="lang-option" data-lang="ru">Русский</button>
+                            <button class="lang-option" data-lang="es">Español</button>
+                        </div>
+                    </div>
+                    
+                    <!-- SOCIAL MEDIA LINKS HERE -->
+                    <div class="social-icons">
+                        <a href="PASTE_LINKEDIN_URL_HERE" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="PASTE_UPWORK_URL_HERE" target="_blank"><i class="fas fa-briefcase"></i></a>
+                        <a href="PASTE_BEHANCE_URL_HERE" target="_blank"><i class="fab fa-behance"></i></a>
+                        <a href="PASTE_INSTAGRAM_URL_HERE" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="PASTE_TELEGRAM_URL_HERE" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="mailto:PASTE_EMAIL_HERE"><i class="fas fa-envelope"></i></a>
+                    </div>
+                    
+                    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
         </div>
-      )}
-    </div>
-  );
-};
-
-export const Header = () => {
-  const { t } = useLang();
-  const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const links = [{ path: '/', label: t.nav.home }, { path: '/about', label: t.nav.about }, { path: '/portfolio', label: t.nav.portfolio }, { path: '/contact', label: t.nav.contact }];
-  return (
-    <header style={{ position: 'sticky', top: 0, zIndex: 50, backgroundColor: 'rgba(255, 254, 251, 0.95)', backdropFilter: 'blur(8px)', borderBottom: '1px solid var(--color-subtle-border)' }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '80px' }}>
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', color: 'var(--color-deep-black)' }}>
-          <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 600, letterSpacing: '-0.05em' }}>SS</span>
-          <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.85rem', fontWeight: 500, letterSpacing: '0.05em', textTransform: 'uppercase' }}>Syuzanna Sargsyan</span>
-        </Link>
-        <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          {links.map(l => <Link key={l.path} to={l.path} style={{ fontSize: '0.95rem', fontWeight: 500, color: location.pathname === l.path ? 'var(--color-deep-black)' : 'var(--color-muted-taupe)', borderBottom: location.pathname === l.path ? '2px solid var(--color-deep-black)' : '2px solid transparent', paddingBottom: '4px' }}>{l.label}</Link>)}
-          <LangSwitcher />
-        </nav>
-        <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-deep-black)' }}><Menu size={24} /></button>
-      </div>
-      {menuOpen && (
-        <div style={{ padding: '1rem 0', borderTop: '1px solid var(--color-subtle-border)', backgroundColor: 'var(--color-soft-ivory)' }}>
-          <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {links.map(l => <Link key={l.path} to={l.path} onClick={() => setMenuOpen(false)} style={{ fontSize: '1.1rem', fontWeight: 500 }}>{l.label}</Link>)}
-            <LangSwitcher />
-          </div>
-        </div>
-      )}
     </header>
-  );
-};
 
-export const Footer = () => {
-  const { t } = useLang();
-  return (
-    <footer style={{ backgroundColor: 'var(--color-deep-black)', color: 'var(--color-soft-ivory)', padding: '4rem 0 2rem' }}>
-      <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
-          <div>
-            <span style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', fontWeight: 600, letterSpacing: '-0.05em', display: 'block', marginBottom: '0.5rem' }}>SS</span>
-            <p style={{ fontSize: '0.9rem', color: 'var(--color-warm-beige)', maxWidth: '250px' }}>Shopify Designer | E-commerce Growth | Web Design</p>
-          </div>
-          <div>
-            <h4 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--color-warm-beige)' }}>Navigation</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <Link to="/">{t.nav.home}</Link><Link to="/about">{t.nav.about}</Link><Link to="/portfolio">{t.nav.portfolio}</Link><Link to="/contact">{t.nav.contact}</Link>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="hero-subtitle">Shopify Specialist & eCommerce UX/UI Designer</p>
+                    <h2 class="hero-title">Creating Digital Experiences That Drive Growth</h2>
+                    <p class="hero-description">I help businesses build professional Shopify stores with thoughtful design, optimized user experience, and strategic solutions that convert visitors into customers.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">Let's Discuss Your Project</a>
+                        <a href="#services" class="btn btn-secondary">Explore My Services</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- PASTE YOUR PROFILE PHOTO LINK BELOW inside src="" -->
+                    <img src="https://via.placeholder.com/500x600" alt="Syuzanna Sargsyan" class="profile-img">
+                </div>
             </div>
-          </div>
-          <div>
-            <h4 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--color-warm-beige)' }}>Connect</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {socialLinks.linkedin && <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}><Linkedin size={16} /> LinkedIn</a>}
-              {socialLinks.behance && <a href={socialLinks.behance} target="_blank" rel="noopener noreferrer" style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}><Globe size={16} /> Behance</a>}
-              {socialLinks.email && socialLinks.email !== 'YOUR_EMAIL_HERE' && <a href={`mailto:${socialLinks.email}`} style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}><Mail size={16} /> {socialLinks.email}</a>}
+        </div>
+    </section>
+
+    <!-- Work Section (AUTOPLAY VIDEO & IMAGE MIX) -->
+    <section class="work reveal" id="work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Work</h2>
+                <p class="section-subtitle">Selected projects showcasing Shopify development and UX/UI design</p>
             </div>
-          </div>
+            <div class="portfolio-grid">
+                
+                <!-- 1. VIDEO: Shopify Store from Scratch (Autoplay) -->
+                <div class="portfolio-item">
+                    <div class="portfolio-media">
+                        <!-- Replace src with your .mp4 link -->
+                        <video autoplay muted loop playsinline src="PASTE_VIDEO_LINK_1_HERE.mp4"></video>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Shopify Store from Scratch</h3>
+                        <p>Full build and customization</p>
+                    </div>
+                </div>
+
+                <!-- 2. VIDEO: Custom Liquid Show (Autoplay) -->
+                <div class="portfolio-item">
+                    <div class="portfolio-media">
+                        <video autoplay muted loop playsinline src="PASTE_VIDEO_LINK_2_HERE.mp4"></video>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Custom Liquid Sections</h3>
+                        <p>Unique reusable components</p>
+                    </div>
+                </div>
+
+                <!-- 3. VIDEO: Landing Page (Autoplay) -->
+                <div class="portfolio-item">
+                    <div class="portfolio-media">
+                        <video autoplay muted loop playsinline src="PASTE_VIDEO_LINK_3_HERE.mp4"></video>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Landing Page Design</h3>
+                        <p>Conversion-focused page</p>
+                    </div>
+                </div>
+
+                <!-- 4. IMAGE: GitHub Pages Picture -->
+                <div class="portfolio-item">
+                    <div class="portfolio-media">
+                        <img src="PASTE_IMAGE_LINK_4_HERE.jpg" alt="GitHub Project">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>GitHub Project 1</h3>
+                        <p>See live project</p>
+                    </div>
+                </div>
+
+                <!-- 5. IMAGE: GitHub Pages Picture -->
+                <div class="portfolio-item">
+                    <div class="portfolio-media">
+                        <img src="PASTE_IMAGE_LINK_5_HERE.jpg" alt="GitHub Project">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>GitHub Project 2</h3>
+                        <p>See live project</p>
+                    </div>
+                </div>
+
+                <!-- 6. IMAGE: Behance Portfolio -->
+                <div class="portfolio-item">
+                    <div class="portfolio-media">
+                        <img src="PASTE_IMAGE_LINK_6_HERE.jpg" alt="Behance Project">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Behance Portfolio</h3>
+                        <p>UX/UI Case Studies</p>
+                    </div>
+                </div>
+
+                <!-- 7. IMAGE: Graphic Design -->
+                <div class="portfolio-item">
+                    <div class="portfolio-media">
+                        <img src="PASTE_IMAGE_LINK_7_HERE.jpg" alt="Graphic Design">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Graphic Design</h3>
+                        <p>Brand Identity & Visuals</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <p style={{ fontSize: '0.85rem', color: 'var(--color-muted-taupe)' }}>© {new Date().getFullYear()} Syuzanna Sargsyan. {t.footer.rights}</p>
-          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ background: 'none', border: '1px solid var(--color-muted-taupe)', color: 'var(--color-soft-ivory)', padding: '0.5rem 1rem', borderRadius: 'var(--radius-sm)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem' }}>
-            {t.footer.top} <ArrowUp size={14} />
-          </button>
+    </section>
+
+    <!-- RUNWAY SECTION -->
+    <div class="runway-section">
+        <div class="runway-track">
+            <span class="runway-item">Shopify Development</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Custom Liquid Sections</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">UX/UI Design</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Landing Pages</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Website Optimization</span>
+            <span class="runway-item">•</span>
+            
+            <!-- REPEAT FOR LOOP -->
+            <span class="runway-item">Shopify Development</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Custom Liquid Sections</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">UX/UI Design</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Landing Pages</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Website Optimization</span>
+            <span class="runway-item">•</span>
         </div>
-      </div>
-    </footer>
-  );
-};
-
-export const ProjectCard = ({ project }: { project: any }) => {
-  const { t } = useLang();
-  return (
-    <Link to={`/project/${project.id}`} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-      <div style={{ backgroundColor: 'var(--color-warm-cream)', borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid var(--color-subtle-border)', transition: 'transform 0.3s ease, box-shadow 0.3s ease' }} className="project-card-hover">
-        <div className="img-placeholder" style={{ height: '240px' }}>[Project Image Placeholder]</div>
-        <div style={{ padding: '1.5rem' }}>
-          <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-muted-taupe)', fontWeight: 600 }}>{t.types[project.category] || project.category}</span>
-          <h3 style={{ margin: '0.5rem 0', fontSize: '1.25rem' }}>{project.title}</h3>
-          <p style={{ fontSize: '0.95rem', color: 'var(--color-muted-taupe)', marginBottom: '1rem' }}>{project.description}</p>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-deep-black)' }}>{t.portfolio.view} <ArrowUpRight size={16} /></span>
-        </div>
-      </div>
-    </Link>
-  );
-};
-
-export const ContactForm = () => {
-  const { t } = useLang();
-  const [form, setForm] = useState({ name: '', email: '', projectType: 'shopify', message: '' });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-
-  const validate = () => {
-    const e: Record<string, string> = {};
-    if (!form.name.trim()) e.name = t.contact.req;
-    if (!form.email.trim()) e.email = t.contact.req;
-    else if (!/^\\S+@\\S+\\.\\S+$/.test(form.email)) e.email = t.contact.invalid;
-    if (!form.message.trim()) e.message = t.contact.req;
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
-
-  const handleSubmit = (ev: React.FormEvent) => {
-    ev.preventDefault();
-    if (!validate()) return;
-    setStatus('submitting');
-    // MOCK: Replace with Formspree/EmailJS fetch call
-    setTimeout(() => { setStatus('success'); setForm({ name: '', email: '', projectType: 'shopify', message: '' }); }, 1500);
-  };
-
-  if (status === 'success') return <div style={{ padding: '2rem', backgroundColor: 'var(--color-warm-cream)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>{t.contact.success}</div>;
-
-  const inputStyle = (err: string) => ({ width: '100%', padding: '0.75rem', border: `1px solid ${err ? '#ef4444' : 'var(--color-subtle-border)'}`, borderRadius: 'var(--radius-sm)', fontFamily: 'var(--font-sans)', backgroundColor: 'var(--color-soft-ivory)' });
-  
-  return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '600px' }}>
-      <div><label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 500, marginBottom: '0.5rem' }}>{t.contact.name} *</label>
-        <input value={form.name} onChange={e => setForm({...form, name: e.target.value})} style={inputStyle(errors.name)} />
-        {errors.name && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '0.25rem', display: 'block' }}>{errors.name}</span>}
-      </div>
-      <div><label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 500, marginBottom: '0.5rem' }}>{t.contact.email} *</label>
-        <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} style={inputStyle(errors.email)} />
-        {errors.email && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '0.25rem', display: 'block' }}>{errors.email}</span>}
-      </div>
-      <div><label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 500, marginBottom: '0.5rem' }}>{t.contact.type}</label>
-        <select value={form.projectType} onChange={e => setForm({...form, projectType: e.target.value})} style={inputStyle('')}>
-          <option value="shopify">Shopify Design</option><option value="ecommerce">E-commerce Growth</option><option value="webdesign">Web Design / Landing Page</option><option value="other">Other</option>
-        </select>
-      </div>
-      <div><label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 500, marginBottom: '0.5rem' }}>{t.contact.message} *</label>
-        <textarea rows={5} value={form.message} onChange={e => setForm({...form, message: e.target.value})} style={{...inputStyle(errors.message), resize: 'vertical'}} />
-        {errors.message && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '0.25rem', display: 'block' }}>{errors.message}</span>}
-      </div>
-      <button type="submit" className="btn btn-primary" disabled={status === 'submitting'} style={{ alignSelf: 'flex-start' }}>{status === 'submitting' ? t.contact.sending : t.contact.submit}</button>
-    </form>
-  );
-};""",
-
-    "src/pages.tsx": """import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useLang } from './components';
-import { projects, socialLinks } from './data';
-import { ProjectCard, ContactForm } from './components';
-import { ShoppingBag, TrendingUp, Monitor, ArrowLeft, ExternalLink, Github, Mail, ChevronDown, ChevronUp } from 'lucide-react';
-
-// --- FAQ Component ---
-const FAQItem = ({ q, a }: { q: string; a: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div style={{ borderBottom: '1px solid var(--color-subtle-border)', padding: '1.5rem 0' }}>
-      <button 
-        onClick={() => setIsOpen(!isOpen)} 
-        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontFamily: 'var(--font-sans)', fontSize: '1.1rem', fontWeight: 500, color: 'var(--color-deep-black)' }}
-      >
-        {q}
-        {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-      </button>
-      {isOpen && <p style={{ marginTop: '1rem', color: 'var(--color-muted-taupe)', lineHeight: 1.6 }}>{a}</p>}
     </div>
-  );
-};
 
-export const Home = () => {
-  const { t } = useLang();
-  return (
-    <>
-      <section className="section" style={{ backgroundColor: 'var(--color-warm-cream)', borderBottom: '1px solid var(--color-subtle-border)' }}>
-        <div className="container" style={{ textAlign: 'center', maxWidth: '800px' }}>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', color: 'var(--color-deep-black)' }}>{t.hero.title}</h1>
-          <p style={{ fontSize: '1.1rem', color: 'var(--color-muted-taupe)', marginBottom: '2.5rem', lineHeight: 1.7 }}>{t.hero.subtitle}</p>
-          <Link to="/portfolio" className="btn btn-primary">{t.hero.cta}</Link>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '3rem' }}>{t.services.title}</h2>
-          <div className="grid-3">
-            <div style={{ padding: '2rem', backgroundColor: 'var(--color-warm-cream)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-subtle-border)' }}>
-              <div style={{ marginBottom: '1rem', color: 'var(--color-muted-taupe)' }}><ShoppingBag size={32} /></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>{t.services.shopify.title}</h3>
-              <p style={{ fontSize: '0.95rem', color: 'var(--color-muted-taupe)' }}>{t.services.shopify.desc}</p>
+    <!-- Services Section -->
+    <section class="services reveal" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Services</h2>
+                <p class="section-subtitle">Comprehensive Shopify and eCommerce solutions</p>
             </div>
-            <div style={{ padding: '2rem', backgroundColor: 'var(--color-warm-cream)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-subtle-border)' }}>
-              <div style={{ marginBottom: '1rem', color: 'var(--color-muted-taupe)' }}><TrendingUp size={32} /></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>{t.services.ecommerce.title}</h3>
-              <p style={{ fontSize: '0.95rem', color: 'var(--color-muted-taupe)' }}>{t.services.ecommerce.desc}</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>Shopify Store Development</h3>
+                    <p>Build professional, responsive Shopify stores from scratch.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3>Custom Liquid Sections</h3>
+                    <p>Develop unique, reusable Shopify sections using Liquid, HTML, CSS.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>Landing Page Design</h3>
+                    <p>Create modern, conversion-focused landing pages.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-desktop"></i></div>
+                    <h3>UX/UI Design</h3>
+                    <p>Design intuitive interfaces that enhance user experience.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-wrench"></i></div>
+                    <h3>Website Customization</h3>
+                    <p>Redesign pages, add custom features, and improve layouts.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Bug Fixing & Optimization</h3>
+                    <p>Troubleshoot issues and optimize website performance.</p>
+                </div>
             </div>
-            <div style={{ padding: '2rem', backgroundColor: 'var(--color-warm-cream)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-subtle-border)' }}>
-              <div style={{ marginBottom: '1rem', color: 'var(--color-muted-taupe)' }}><Monitor size={32} /></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>{t.services.webdesign.title}</h3>
-              <p style={{ fontSize: '0.95rem', color: 'var(--color-muted-taupe)' }}>{t.services.webdesign.desc}</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about reveal" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ SECTION ADDED HERE */}
-      <section className="section" style={{ backgroundColor: 'var(--color-soft-ivory)' }}>
-        <div className="container" style={{ maxWidth: '800px' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '3rem' }}>{t.faq.title}</h2>
-          <div>
-            {t.faq.items.map((item: any, idx: number) => (
-              <FAQItem key={idx} q={item.q} a={item.a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section" style={{ backgroundColor: 'var(--color-warm-cream)' }}>
-        <div className="container">
-          <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '3rem' }}>{t.portfolio.title}</h2>
-          <div className="grid-2" style={{ marginBottom: '3rem' }}>{projects.slice(0, 2).map(p => <ProjectCard key={p.id} project={p} />)}</div>
-          <div style={{ textAlign: 'center' }}><Link to="/portfolio" className="btn btn-outline">{t.portfolio.title}</Link></div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{t.contact.title}</h2>
-          <p style={{ color: 'var(--color-muted-taupe)', marginBottom: '2rem' }}>{t.contact.subtitle}</p>
-          <Link to="/contact" className="btn btn-primary">{t.nav.contact}</Link>
-        </div>
-      </section>
-    </>
-  );
-};
-
-export const About = () => {
-  const { t } = useLang();
-  return (
-    <section className="section">
-      <div className="container" style={{ maxWidth: '800px' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>{t.about.title}</h1>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '3rem', alignItems: 'start', marginBottom: '4rem' }}>
-          <div className="img-placeholder" style={{ aspectRatio: '1' }}>[Portrait Placeholder]</div>
-          <div><p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-deep-black)' }}>{t.about.bio}</p></div>
-        </div>
-        <div style={{ backgroundColor: 'var(--color-warm-cream)', padding: '2.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-subtle-border)' }}>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>{t.about.bgTitle}</h2>
-          <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {t.about.bg.map((item: string, idx: number) => <li key={idx} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}><span style={{ color: 'var(--color-muted-taupe)', marginTop: '0.25rem' }}>•</span><span>{item}</span></li>)}
-          </ul>
-          <p style={{ marginTop: '1.5rem', fontStyle: 'italic', color: 'var(--color-muted-taupe)' }}>{t.about.bgNote}</p>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export const Portfolio = () => {
-  const { t } = useLang();
-  return (
-    <section className="section">
-      <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 4rem' }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{t.portfolio.title}</h1>
-          <p style={{ color: 'var(--color-muted-taupe)' }}>{t.portfolio.subtitle}</p>
-        </div>
-        <div className="grid-2">{projects.map(p => <ProjectCard key={p.id} project={p} />)}</div>
-      </div>
-    </section>
-  );
-};
-
-export const ProjectDetails = () => {
-  const { id } = useParams();
-  const { t } = useLang();
-  const project = projects.find(p => p.id === id);
-  if (!project) return <div className="container section">Project not found.</div>;
-  const nextIdx = (projects.findIndex(p => p.id === id) + 1) % projects.length;
-  const nextProject = projects[nextIdx];
-
-  return (
-    <section className="section">
-      <div className="container" style={{ maxWidth: '900px' }}>
-        <Link to="/portfolio" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem', color: 'var(--color-muted-taupe)' }}><ArrowLeft size={16} /> {t.nav.portfolio}</Link>
-        <div className="img-placeholder" style={{ height: '400px', marginBottom: '3rem' }}>[Cover Image Placeholder: {project.title}]</div>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{project.title}</h1>
-        <p style={{ fontSize: '1.1rem', color: 'var(--color-muted-taupe)', marginBottom: '3rem', maxWidth: '700px' }}>{project.description}</p>
-        <div className="grid-2" style={{ marginBottom: '4rem' }}>
-          <div><h3 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-taupe)', marginBottom: '0.5rem' }}>{t.details.brief}</h3><p>{project.brief}</p></div>
-          <div><h3 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-taupe)', marginBottom: '0.5rem' }}>{t.details.brand}</h3><p>{project.brandDirection}</p></div>
-          <div><h3 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-taupe)', marginBottom: '0.5rem' }}>{t.details.approach}</h3><p>{project.designApproach}</p></div>
-          <div><h3 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-taupe)', marginBottom: '0.5rem' }}>{t.details.tools}</h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>{project.tools.map((tool: string) => <span key={tool} style={{ padding: '0.25rem 0.75rem', backgroundColor: 'var(--color-warm-cream)', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', border: '1px solid var(--color-subtle-border)' }}>{tool}</span>)}</div>
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
-          {project.liveUrl && project.liveUrl !== 'https://github.com' && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{textDecoration: 'none'}}><ExternalLink size={16} style={{marginRight: '0.5rem'}} /> {t.portfolio.live}</a>}
-          {project.sourceUrl && <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{textDecoration: 'none'}}><Github size={16} style={{marginRight: '0.5rem'}} /> {t.portfolio.code}</a>}
-        </div>
-        <div style={{ borderTop: '1px solid var(--color-subtle-border)', paddingTop: '3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-          <div><span style={{ fontSize: '0.85rem', color: 'var(--color-muted-taupe)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t.details.next}</span><Link to={`/project/${nextProject.id}`} style={{ display: 'block', fontSize: '1.25rem', fontFamily: 'var(--font-serif)', marginTop: '0.5rem' }}>{nextProject.title} →</Link></div>
-          <Link to="/contact" className="btn btn-primary">{t.details.cta}</Link>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export const Contact = () => {
-  const { t } = useLang();
-  return (
-    <section className="section">
-      <div className="container" style={{ maxWidth: '800px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{t.contact.title}</h1>
-          <p style={{ color: 'var(--color-muted-taupe)', fontSize: '1.1rem' }}>{t.contact.subtitle}</p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
-          <div>
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '1.5rem' }}>Contact Information</h3>
-            {socialLinks.email && socialLinks.email !== 'YOUR_EMAIL_HERE' ? (
-              <a href={`mailto:${socialLinks.email}`} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.1rem', marginBottom: '2rem' }}><Mail size={20} /> {socialLinks.email}</a>
-            ) : (
-              <p style={{ color: 'var(--color-muted-taupe)', marginBottom: '2rem', fontStyle: 'italic' }}>Email configuration pending. Please update data.ts</p>
-            )}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {socialLinks.linkedin && <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>}
-              {socialLinks.behance && <a href={socialLinks.behance} target="_blank" rel="noopener noreferrer">Behance Portfolio</a>}
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-tagline">Shopify Specialist | eCommerce UX/UI Designer | Digital Commerce Expert</p>
+                    <p>Hi, I'm Syuzanna, and I help businesses create, manage, and improve their Shopify stores with thoughtful design and practical eCommerce solutions.</p>
+                    <p>Whether you're launching a new online store or looking to improve your website's design, I can help you turn those challenges into effective solutions.</p>
+                    <p>With a Master's degree in Economics and 12 years of experience, I bring real-world business knowledge to every project.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item"><h3>12+</h3><p>Years Experience</p></div>
+                        <div class="stat-item"><h3>41%</h3><p>Year 1 Growth</p></div>
+                        <div class="stat-item"><h3>70%</h3><p>Year 2 Growth</p></div>
+                        <div class="stat-item"><h3>MSc</h3><p>Economics</p></div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <ContactForm />
         </div>
-      </div>
     </section>
-  );
-};
 
-export const NotFound = () => (
-  <section className="section" style={{ textAlign: 'center', minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-    <h1 style={{ fontSize: '4rem', marginBottom: '1rem' }}>404</h1>
-    <p style={{ fontSize: '1.2rem', color: 'var(--color-muted-taupe)', marginBottom: '2rem' }}>The page you are looking for does not exist.</p>
-    <Link to="/" className="btn btn-primary">Return Home</Link>
-  </section>
-);""",
+    <!-- FAQ Section -->
+    <section class="faq reveal" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-key="faq_title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                
+                <!-- Q1 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q1">What services do you offer?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a1">I specialize in Shopify development, custom Liquid sections, landing pages, web design, UX/UI design, and website optimization.</p></div>
+                </div>
 
-    "src/main.tsx": """import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+                <!-- Q2 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q2">Can you build a Shopify store from scratch?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a2">Yes! I create professional, responsive Shopify stores tailored to your brand and business goals.</p></div>
+                </div>
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);""",
+                <!-- Q3 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q3">Can you customize my existing website?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a3">Absolutely! I can redesign pages, add custom features, improve layouts, and enhance functionality.</p></div>
+                </div>
 
-    "src/App.tsx": """import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { LangProvider, Header, Footer } from './components';
-import { Home, About, Portfolio, ProjectDetails, Contact, NotFound } from './pages';
+                <!-- Q4 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q4">Can you create custom Shopify Liquid sections?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a4">Yes! I develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript.</p></div>
+                </div>
 
-export default function App() {
-  return (
-    <LangProvider>
-      <BrowserRouter>
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Header />
-          <main style={{ flex: 1 }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/project/:id" element={<ProjectDetails />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
+                <!-- Q5 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q5">Can you fix website bugs and errors?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a5">Yes! I troubleshoot coding issues, broken layouts, mobile problems, and Shopify theme errors.</p></div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q6">Can you improve my website's performance?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a6">Yes! I optimize website speed, mobile responsiveness, navigation, and user experience.</p></div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q7">Do you design landing pages?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a7">Yes! I create modern, conversion-focused landing pages for products, services, and marketing campaigns.</p></div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q8">Can you help increase my online sales?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a8">I improve website usability, product pages, and customer journeys to help reduce friction and support conversions.</p></div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q9">How much do your services cost?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a9">Pricing depends on your project's requirements. Contact me for a personalized quote.</p></div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-key="faq_q10">How can I contact you?</span>
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-answer"><p data-key="faq_a10">Simply fill out the contact form on my website and share your project details. I'll get back to you to discuss the next steps.</p></div>
+                </div>
+
+            </div>
+            <div class="faq-cta">
+                <h3 data-key="faq_cta_title">Have a project in mind?</h3>
+                <p data-key="faq_cta_desc">Let's turn your ideas into a professional digital experience.</p>
+                <a href="#contact" class="btn btn-primary" data-key="btn_work">Let's Work Together</a>
+            </div>
         </div>
-      </BrowserRouter>
-    </LangProvider>
-  );
-}"""
-}
+    </section>
 
-# Create files
-for filepath, content in files.items():
-    os.makedirs(os.path.dirname(filepath) if os.path.dirname(filepath) else '.', exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        f.write(content.strip())
+    <!-- AI Chat Section -->
+    <section class="ai-chat reveal" id="lets-talk">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Talk with AI Assistant</h2>
+                <p class="section-subtitle">Get instant answers for your Shopify project</p>
+            </div>
+            <div class="chat-container">
+                <div class="chat-window" id="chatWindow">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                            <div class="message-content"><p>Hello! I'm Syuzanna's AI assistant. How can I help you today?</p></div>
+                        </div>
+                    </div>
+                    <div class="quick-options">
+                        <button class="quick-option" data-type="standard">Standard Shopify Store</button>
+                        <button class="quick-option" data-type="custom">Custom Design Needed</button>
+                        <button class="quick-option" data-type="fix">Fix Website Issues</button>
+                        <button class="quick-option" data-type="performance">Improve Performance</button>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" placeholder="Type your message...">
+                        <button id="sendBtn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-print("✅ SUCCESS! Your complete website has been generated.")
-print("👉 Next steps:")
-print("   1. Open your terminal in this folder.")
-print("   2. Run: npm install")
-print("   3. Run: npm run dev")
-print("   4. Open http://localhost:3000")
-print("\n⚠️  IMPORTANT: Before publishing, open 'src/data.ts' and replace 'YOUR_EMAIL_HERE' with your real email address.")
+    <!-- Contact Section -->
+    <section class="contact reveal" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Ready to start your project?</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div><h4>Email</h4><a href="mailto:PASTE_EMAIL_HERE">PASTE_EMAIL_HERE</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-telegram-plane"></i>
+                        <div><h4>Telegram</h4><a href="PASTE_TELEGRAM_URL_HERE">@yourusername</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin-in"></i>
+                        <div><h4>LinkedIn</h4><a href="PASTE_LINKEDIN_URL_HERE">linkedin.com/in/syuzanna-sargsyan</a></div>
+                    </div>
+                    <div class="contact-social">
+                        <h4>Follow Me</h4>
+                        <div class="social-links">
+                            <a href="PASTE_LINKEDIN_URL_HERE"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="PASTE_UPWORK_URL_HERE"><i class="fas fa-briefcase"></i></a>
+                            <a href="PASTE_BEHANCE_URL_HERE"><i class="fab fa-behance"></i></a>
+                            <a href="PASTE_INSTAGRAM_URL_HERE"><i class="fab fa-instagram"></i></a>
+                            <a href="PASTE_TELEGRAM_URL_HERE"><i class="fab fa-telegram-plane"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" required></div>
+                        <div class="form-group"><label for="email">Your Email</label><input type="email" id="email" name="email" required></div>
+                        <div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" required></div>
+                        <div class="form-group"><label for="message">Your Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>Syuzanna Sargsyan</h3>
+                    <p>Shopify Specialist & eCommerce UX/UI Designer</p>
+                </div>
+                <div class="footer-center">
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#work">Work</a>
+                        <a href="#services">Services</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-social">
+                        <a href="PASTE_LINKEDIN_URL_HERE"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="PASTE_UPWORK_URL_HERE"><i class="fas fa-briefcase"></i></a>
+                        <a href="PASTE_BEHANCE_URL_HERE"><i class="fab fa-behance"></i></a>
+                        <a href="PASTE_INSTAGRAM_URL_HERE"><i class="fab fa-instagram"></i></a>
+                        <a href="PASTE_TELEGRAM_URL_HERE"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Syuzanna Sargsyan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- MENU ACTIVE STATE ---
+        const sections = document.querySelectorAll("section");
+        const navLi = document.querySelectorAll(".nav-list li a");
+
+        window.onscroll = () => {
+            var current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLi.forEach((li) => {
+                li.classList.remove("active");
+                if (li.getAttribute("href").includes(current)) {
+                    li.classList.add("active");
+                }
+            });
+        };
+
+        // --- LANGUAGE SWITCHER & TRANSLATIONS ---
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentLangSpan = document.getElementById('currentLang');
+        let currentLang = 'en';
+
+        const translations = {
+            en: {
+                faq_title: "Frequently Asked Questions",
+                faq_q1: "What services do you offer?",
+                faq_a1: "I specialize in Shopify development, custom Liquid sections, landing pages, web design, UX/UI design, and website optimization.",
+                faq_q2: "Can you build a Shopify store from scratch?",
+                faq_a2: "Yes! I create professional, responsive Shopify stores tailored to your brand and business goals.",
+                faq_q3: "Can you customize my existing website?",
+                faq_a3: "Absolutely! I can redesign pages, add custom features, improve layouts, and enhance functionality.",
+                faq_q4: "Can you create custom Shopify Liquid sections?",
+                faq_a4: "Yes! I develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript.",
+                faq_q5: "Can you fix website bugs and errors?",
+                faq_a5: "Yes! I troubleshoot coding issues, broken layouts, mobile problems, and Shopify theme errors.",
+                faq_q6: "Can you improve my website's performance?",
+                faq_a6: "Yes! I optimize website speed, mobile responsiveness, navigation, and user experience.",
+                faq_q7: "Do you design landing pages?",
+                faq_a7: "Yes! I create modern, conversion-focused landing pages for products, services, and marketing campaigns.",
+                faq_q8: "Can you help increase my online sales?",
+                faq_a8: "I improve website usability, product pages, and customer journeys to help reduce friction and support conversions.",
+                faq_q9: "How much do your services cost?",
+                faq_a9: "Pricing depends on your project's requirements. Contact me for a personalized quote.",
+                faq_q10: "How can I contact you?",
+                faq_a10: "Simply fill out the contact form on my website and share your project details. I'll get back to you to discuss the next steps.",
+                faq_cta_title: "Have a project in mind?",
+                faq_cta_desc: "Let's turn your ideas into a professional digital experience.",
+                btn_work: "Let's Work Together"
+            },
+            am: {
+                faq_title: "Հաճախակի տրվող հարցեր",
+                faq_q1: "Ինչ ծառայություններ եք առաջարկում",
+                faq_a1: "Ես մասնագիտացած եմ Shopify-ի մշակման, հատուկ Liquid բաժինների, լենդինգ էջերի, վեբ դիզայնի, UX/UI դիզայնի և կայքի օպտիմալացման մեջ։",
+                faq_q2: "Կարո՞ղ եք Shopify խանութ կառուցել զրոյից",
+                faq_a2: "Այո։ Ես ստեղծում եմ պրոֆեսիոնալ, հարմարվողական Shopify խանութներ՝ հարմարեցված Ձեր բրենդին և բիզնեսի նպատակներին։",
+                faq_q3: "Կարո՞ղ եք հարմարեցնել իմ գոյություն ունեցող կայքը",
+                faq_a3: "Անպայման։ Ես կարող եմ վերադիզայն անել էջերը, ավելացնել հատուկ ֆունկցիաներ, բարելավել դասավորությունները և բարձրացնել ֆունկցիոնալությունը։",
+                faq_q4: "Կարո՞ղ եք ստեղծել հատուկ Shopify Liquid բաժիններ",
+                faq_a4: "Այո։ Ես մշակում եմ յուրահատուկ, վերաօգտագործվող Shopify բաժիններ՝ օգտագործելով Liquid, HTML, CSS և JavaScript։",
+                faq_q5: "Կարո՞ղ եք ուղղել կայքի սխալները",
+                faq_a5: "Այո։ Ես լուծում եմ կոդավորման խնդիրները, կոտրված դասավորությունները, բջջային խնդիրները և Shopify թեմայի սխալները։",
+                faq_q6: "Կարո՞ղ եք բարելավել իմ կայքի աշխատանքը",
+                faq_a6: "Այո։ Ես օպտիմալացնում եմ կայքի արագությունը, բջջային հարմարվողականությունը, նավիգացիան և օգտագործողի փորձառությունը։",
+                faq_q7: "Դուք դիզայն եք անում լենդինգ էջեր",
+                faq_a7: "Այո։ Ես ստեղծում եմ ժամանակակից, կոնվերսիայի վրա կենտրոնացած լենդինգ էջեր՝ ապրանքների, ծառայությունների և մարքեթինգային արշավների համար։",
+                faq_q8: "Կարո՞ղ եք օգնել բարձրացնել իմ առցանց վաճառքները",
+                faq_a8: "Ես բարելավում եմ կայքի օգտագործելիությունը, ապրանքի էջերը և հաճախորդի ճանապարհը՝ նվազեցնելով խոչընդոտները և աջակցելով կոնվերսիաներին։",
+                faq_q9: "Որքան են արժում Ձեր ծառայությունները",
+                faq_a9: "Գինը կախված է Ձեր նախագծի պահանջներից։ Կապվեք ինձ հետ՝ անհատական գնահատականի համար։",
+                faq_q10: "Ինչպե՞ս կարող եմ կապվել Ձեզ հետ",
+                faq_a10: "Պարզապես լրացրեք կապի ձևաթուղթը իմ կայքում և կիսվեք Ձեր նախագծի մանրամասներով։ Ես կվերադառնամ Ձեզ՝ քննարկելու հաջորդ քայլերը։",
+                faq_cta_title: "Նախագիծ ունե՞ք մտքում",
+                faq_cta_desc: "Եկեք վերածենք Ձեր գաղափարները պրոֆեսիոնալ թվային փորձառության։",
+                btn_work: "Աշխատենք միասին"
+            },
+            ru: {
+                faq_title: "Часто задаваемые вопросы",
+                faq_q1: "Какие услуги вы предлагаете?",
+                faq_a1: "Я специализируюсь на разработке Shopify, пользовательских секциях Liquid, посадочных страницах, веб-дизайне, UX/UI дизайне и оптимизации сайтов.",
+                faq_q2: "Можете ли вы создать магазин Shopify с нуля?",
+                faq_a2: "Да! Я создаю профессиональные, адаптивные магазины Shopify, адаптированные к вашему бренду и бизнес-целям.",
+                faq_q3: "Можете ли вы настроить мой существующий сайт?",
+                faq_a3: "Абсолютно! Я могу переработать страницы, добавить пользовательские функции, улучшить макеты и расширить функциональность.",
+                faq_q4: "Можете ли вы создать пользовательские секции Shopify Liquid?",
+                faq_a4: "Да! Я разрабатываю уникальные, многоразовые секции Shopify с использованием Liquid, HTML, CSS и JavaScript.",
+                faq_q5: "Можете ли вы исправить ошибки сайта?",
+                faq_a5: "Да! Я устраняю проблемы с кодом, сломанные макеты, мобильные проблемы и ошибки тем Shopify.",
+                faq_q6: "Можете ли вы улучшить производительность моего сайта?",
+                faq_a6: "Да! Я оптимизирую скорость сайта, мобильную адаптивность, навигацию и пользовательский опыт.",
+                faq_q7: "Вы проектируете посадочные страницы?",
+                faq_a7: "Да! Я создаю современные посадочные страницы, ориентированные на конверсию, для продуктов, услуг и маркетинговых кампаний.",
+                faq_q8: "Можете ли вы помочь увеличить мои онлайн-продажи?",
+                faq_a8: "Я улучшаю удобство использования сайта, страницы продуктов и пути клиентов, чтобы уменьшить трение и поддержать конверсию.",
+                faq_q9: "Сколько стоят ваши услуги?",
+                faq_a9: "Цены зависят от требований вашего проекта. Свяжитесь со мной для персонализированной оценки.",
+                faq_q10: "Как я могу связаться с вами?",
+                faq_a10: "Просто заполните контактную форму на моем сайте и поделитесь деталями вашего проекта. Я свяжусь с вами, чтобы обсудить следующие шаги.",
+                faq_cta_title: "Есть проект на уме?",
+                faq_cta_desc: "Давайте превратим ваши идеи в профессиональный цифровой опыт.",
+                btn_work: "Давайте работать вместе"
+            },
+            es: {
+                faq_title: "Preguntas Frecuentes",
+                faq_q1: "¿Qué servicios ofrece?",
+                faq_a1: "Me especializo en desarrollo Shopify, secciones Liquid personalizadas, páginas de aterrizaje, diseño web, diseño UX/UI y optimización de sitios web.",
+                faq_q2: "¿Puede construir una tienda Shopify desde cero?",
+                faq_a2: "¡Sí! Creo tiendas Shopify profesionales y responsivas adaptadas a su marca y objetivos comerciales.",
+                faq_q3: "¿Puede personalizar mi sitio web existente?",
+                faq_a3: "¡Absolutamente! Puedo rediseñar páginas, agregar funciones personalizadas, mejorar diseños y mejorar la funcionalidad.",
+                faq_q4: "¿Puede crear secciones Shopify Liquid personalizadas?",
+                faq_a4: "¡Sí! Desarrollo secciones Shopify únicas y reutilizables usando Liquid, HTML, CSS y JavaScript.",
+                faq_q5: "¿Puede corregir errores y bugs del sitio web?",
+                faq_a5: "¡Sí! Soluciono problemas de codificación, diseños rotos, problemas móviles y errores de temas Shopify.",
+                faq_q6: "¿Puede mejorar el rendimiento de mi sitio web?",
+                faq_a6: "¡Sí! Optimizo la velocidad del sitio web, la capacidad de respuesta móvil, la navegación y la experiencia del usuario.",
+                faq_q7: "¿Diseña páginas de aterrizaje?",
+                faq_a7: "¡Sí! Creo páginas de aterrizaje modernas enfocadas en conversión para productos, servicios y campañas de marketing.",
+                faq_q8: "¿Puede ayudar a aumentar mis ventas en línea?",
+                faq_a8: "Mejoro la usabilidad del sitio web, las páginas de productos y los recorridos del cliente para ayudar a reducir la fricción y apoyar las conversiones.",
+                faq_q9: "¿Cuánto cuestan sus servicios?",
+                faq_a9: "Los precios dependen de los requisitos de su proyecto. Contácteme para una cotización personalizada.",
+                faq_q10: "¿Cómo puedo contactarle?",
+                faq_a10: "Simplemente complete el formulario de contacto en mi sitio web y comparta los detalles de su proyecto. Me pondré en contacto con usted para discutir los próximos pasos.",
+                faq_cta_title: "¿Tiene un proyecto en mente?",
+                faq_cta_desc: "Convirtamos sus ideas en una experiencia digital profesional.",
+                btn_work: "Trabajemos Juntos"
+            }
+        };
+
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('active');
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                switchLanguage(lang);
+                langDropdown.classList.remove('active');
+            });
+        });
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const langNames = { 'en': 'EN', 'am': 'AM', 'ru': 'RU', 'es': 'ES' };
+            currentLangSpan.textContent = langNames[lang];
+            
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // --- FAQ ACCORDION LOGIC ---
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // If it wasn't active, open it
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // --- AI CHAT LOGIC WITH CONNECT ME FEATURE ---
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        const aiResponses = {
+            standard: "For a **Standard Shopify Store**, I recommend starting with a professional theme customization.",
+            custom: "For **Custom Design**, I can create unique Liquid sections tailored to your brand!",
+            fix: "I can help **Fix Website Issues** quickly! Please describe the error.",
+            performance: "To **Improve Performance**, I focus on image optimization and speed.",
+            default: "Thank you! Tell me more about your project."
+        };
+
+        function addMessage(text, isUser = false) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            if (!isUser) msgDiv.innerHTML = `<div class="message-avatar"><i class="fas fa-robot"></i></div>`;
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = `<p>${text}</p>`;
+            msgDiv.appendChild(contentDiv);
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleUserMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            addMessage(message, true);
+            chatInput.value = '';
+            
+            setTimeout(() => {
+                const lowerMsg = message.toLowerCase();
+                let responseKey = 'default';
+                if (lowerMsg.includes('standard')) responseKey = 'standard';
+                else if (lowerMsg.includes('custom')) responseKey = 'custom';
+                else if (lowerMsg.includes('fix')) responseKey = 'fix';
+                else if (lowerMsg.includes('performance')) responseKey = 'performance';
+                
+                // If the AI doesn't have a specific answer, it connects to Syuzanna
+                if (responseKey === 'default' || lowerMsg.length > 20) {
+                    addMessage("I'm not sure about that specific detail. Let me connect you with Syuzanna directly so she can answer you personally!");
+                    setTimeout(() => {
+                        addMessage('<a href="PASTE_TELEGRAM_URL_HERE" target="_blank" style="color:var(--accent); font-weight:bold;">Click here to message Syuzanna on Telegram</a>');
+                    }, 1000);
+                } else {
+                    addMessage(aiResponses[responseKey]);
+                }
+            }, 1000);
+        }
+
+        sendBtn.addEventListener('click', handleUserMessage);
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+
+        document.querySelectorAll('.quick-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const type = btn.getAttribute('data-type');
+                addMessage(btn.textContent, true);
+                setTimeout(() => addMessage(aiResponses[type]), 800);
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+    </script>
+</body>
+</html>
