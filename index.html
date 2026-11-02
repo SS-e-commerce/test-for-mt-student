@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Syuzanna Sargsyan | Shopify Specialist</title>
+    
+    <!-- SEO & META TAGS -->
+    <title>Syuzanna Sargsyan | Shopify Specialist | Liquid, Landing Pages & UX/UI Design</title>
+    <meta name="description" content="I build, customize, and improve Shopify stores for brands that sell online. Specializing in Liquid code, custom sections, landing pages, and UX/UI design.">
+    <meta name="keywords" content="Shopify Specialist, Liquid Developer, UX/UI Design, Landing Pages, Syuzanna Sargsyan, E-commerce Growth">
+    <meta name="author" content="Syuzanna Sargsyan">
     
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="images/favicon.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* YOUR CUSTOM COLOR PALETTE */
+        /* LUXURY COLOR PALETTE */
         :root {
-            --primary: #797d62;       /* Sage Green */
-            --secondary: #9b9b7a;     /* Olive Grey */
-            --accent: #d9ae94;        /* Soft Peach */
-            --highlight: #f1dca7;     /* Pale Gold */
-            --bg-warm: #baa587;       /* Warm Beige */
-            --background: #FDFBF7;    /* Very Light Beige for readability */
-            --white: #FFFFFF;
-            --text: #4A4A4A;          /* Dark Grey for text */
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --primary: #800020;       /* Burgundy */
+            --primary-dark: #5c0017;  /* Darker Burgundy */
+            --black: #0a0a0a;         /* Deep Black */
+            --silver: #e0e0e0;        /* Silver */
+            --white: #ffffff;         /* Pure White */
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,121 +35,123 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--background);
-            color: var(--text);
+            background-color: var(--black);
+            color: var(--silver);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', sans-serif; font-weight: 700; color: var(--primary); }
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Manrope', sans-serif; 
+            font-weight: 700; 
+            color: var(--white); 
+            letter-spacing: -0.02em;
+        }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HEADER & 4K BOTTLE EFFECT */
+        /* HEADER & GLASS EFFECT */
         .header {
             position: fixed; top: 0; left: 0; width: 100%;
-            /* Glassmorphism / Bottle Effect */
-            background: rgba(253, 251, 247, 0.7); 
+            background: rgba(10, 10, 10, 0.8); 
             backdrop-filter: blur(20px); 
             -webkit-backdrop-filter: blur(20px);
-            z-index: 1000; padding: 15px 0; transition: var(--transition);
-            border-bottom: 1px solid rgba(121, 125, 98, 0.1);
-        }
-        .header.scrolled { 
-            background: rgba(253, 251, 247, 0.95); 
-            box-shadow: 0 10px 40px rgba(121, 125, 98, 0.1); 
-            padding: 10px 0; 
+            z-index: 1000; padding: 20px 0; transition: var(--transition);
+            border-bottom: 1px solid var(--border);
         }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo h1 { font-size: 24px; color: var(--primary); font-weight: 800; letter-spacing: -0.5px; }
+        .logo h1 { font-size: 24px; color: var(--white); font-weight: 800; letter-spacing: -0.5px; }
         
-        .nav-list { display: flex; list-style: none; gap: 30px; align-items: center; }
-        .nav-list a { text-decoration: none; color: var(--text); font-weight: 500; transition: var(--transition); position: relative; }
-        .nav-list a:hover, .nav-list a.active { color: var(--accent); }
+        .nav-list { display: flex; list-style: none; gap: 40px; align-items: center; }
+        .nav-list a { text-decoration: none; color: var(--silver); font-weight: 500; transition: var(--transition); position: relative; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-list a:hover, .nav-list a.active { color: var(--primary); }
         
         .btn-primary-nav {
             background: var(--primary); color: var(--white) !important;
-            padding: 10px 24px; border-radius: 50px; font-weight: 600;
-            box-shadow: 0 4px 15px rgba(121, 125, 98, 0.2);
+            padding: 12px 28px; border-radius: 4px; font-weight: 600;
+            border: 1px solid var(--primary);
         }
-        .btn-primary-nav:hover { background: var(--accent); transform: translateY(-2px); }
+        .btn-primary-nav:hover { background: transparent; color: var(--primary) !important; }
 
         .header-right { display: flex; align-items: center; gap: 20px; }
         
         /* Language Selector */
         .language-selector { position: relative; }
         .lang-btn {
-            background: rgba(255,255,255,0.6); border: 1px solid var(--secondary);
-            padding: 8px 16px; border-radius: 50px; cursor: pointer;
-            display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--primary);
+            background: transparent; border: 1px solid var(--border);
+            padding: 8px 16px; border-radius: 4px; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--silver);
         }
         .lang-dropdown {
             position: absolute; top: 100%; right: 0;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px);
-            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-top: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px);
+            background: var(--black); border: 1px solid var(--border);
+            border-radius: 4px; margin-top: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px);
             transition: var(--transition); min-width: 150px; overflow: hidden;
         }
         .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
         .lang-option {
             display: block; width: 100%; padding: 12px 16px; background: transparent;
-            border: none; text-align: left; cursor: pointer; font-size: 14px; color: var(--text);
+            border: none; text-align: left; cursor: pointer; font-size: 14px; color: var(--silver);
         }
-        .lang-option:hover { background: var(--highlight); color: var(--primary); }
+        .lang-option:hover { background: var(--primary); color: var(--white); }
 
         .social-icons { display: flex; gap: 15px; }
-        .social-icons a { color: var(--primary); font-size: 18px; transition: var(--transition); }
-        .social-icons a:hover { color: var(--accent); transform: translateY(-3px); }
-        .mobile-menu-btn { display: none; background: transparent; border: none; font-size: 24px; cursor: pointer; color: var(--primary); }
+        .social-icons a { color: var(--silver); font-size: 18px; transition: var(--transition); }
+        .social-icons a:hover { color: var(--primary); transform: translateY(-3px); }
+        .mobile-menu-btn { display: none; background: transparent; border: none; font-size: 24px; cursor: pointer; color: var(--white); }
 
-        /* HERO SECTION */
+        /* HERO SECTION WITH PARALLAX */
         .hero {
             min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px;
-            background: radial-gradient(circle at top right, var(--bg-warm) 0%, var(--background) 60%);
+            background: radial-gradient(circle at top right, #1a0509 0%, var(--black) 60%);
             position: relative; overflow: hidden;
         }
-        .hero::before {
-            content: ''; position: absolute; top: -10%; right: -10%; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(217, 174, 148, 0.2) 0%, transparent 70%);
-            border-radius: 50%; filter: blur(80px); animation: float 10s infinite ease-in-out; z-index: 0;
+        .hero-bg-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 20vw; font-weight: 800; color: rgba(255,255,255,0.02);
+            white-space: nowrap; pointer-events: none; z-index: 0;
+            font-family: 'Manrope', sans-serif;
         }
-        @keyframes float { 0% { transform: translate(0, 0); } 50% { transform: translate(-30px, 40px); } 100% { transform: translate(0, 0); } }
         
         .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
-        .hero-subtitle { font-size: 16px; color: var(--accent); font-weight: 700; margin-bottom: 16px; letter-spacing: 2px; text-transform: uppercase; }
-        .hero-title { font-size: 64px; color: var(--primary); margin-bottom: 24px; line-height: 1.1; letter-spacing: -1px; }
-        .hero-description { font-size: 18px; color: var(--text); margin-bottom: 32px; line-height: 1.8; max-width: 90%; }
+        .hero-subtitle { font-size: 14px; color: var(--primary); font-weight: 700; margin-bottom: 16px; letter-spacing: 3px; text-transform: uppercase; }
+        .hero-title { font-size: 64px; color: var(--white); margin-bottom: 24px; line-height: 1.1; letter-spacing: -2px; }
+        .hero-description { font-size: 18px; color: var(--silver); margin-bottom: 32px; line-height: 1.8; max-width: 90%; opacity: 0.8; }
         .hero-buttons { display: flex; gap: 16px; }
         
-        .btn { padding: 16px 36px; border-radius: 50px; font-weight: 600; font-size: 16px; text-decoration: none; transition: var(--transition); display: inline-block; cursor: pointer; border: none; }
-        .btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 10px 25px rgba(121, 125, 98, 0.2); }
-        .btn-primary:hover { background: var(--accent); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(217, 174, 148, 0.4); }
-        .btn-secondary { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
-        .btn-secondary:hover { background: var(--primary); color: var(--white); transform: translateY(-3px); }
+        .btn { 
+            padding: 16px 36px; border-radius: 4px; font-weight: 600; font-size: 14px; 
+            text-decoration: none; transition: var(--transition); display: inline-block; 
+            cursor: pointer; border: 1px solid transparent; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-primary { background: var(--primary); color: var(--white); border-color: var(--primary); }
+        .btn-primary:hover { background: transparent; color: var(--primary); }
+        .btn-secondary { background: transparent; color: var(--white); border-color: var(--white); }
+        .btn-secondary:hover { background: var(--white); color: var(--black); }
         
         .hero-image { position: relative; perspective: 1000px; }
-        
-        /* PROFILE IMAGE STYLES */
         .profile-img {
-            width: 100%; max-width: 500px; border-radius: 30px;
-            box-shadow: 20px 20px 60px rgba(121, 125, 98, 0.15), -10px -10px 40px rgba(255,255,255, 0.8);
-            transform: rotateY(-5deg); transition: transform 0.5s ease;
+            width: 100%; max-width: 500px; border-radius: 4px;
+            filter: grayscale(100%) contrast(1.1);
+            transition: var(--transition);
             object-fit: cover; aspect-ratio: 4/5;
+            border: 1px solid var(--border);
         }
-        .hero-image:hover .profile-img { transform: rotateY(0deg) scale(1.02); }
+        .hero-image:hover .profile-img { filter: grayscale(0%); transform: scale(1.02); }
 
         /* SECTIONS & REVEAL */
-        section { padding: 100px 0; position: relative; }
-        .section-header { text-align: center; margin-bottom: 70px; }
-        .section-title { font-size: 48px; color: var(--primary); margin-bottom: 16px; letter-spacing: -1px; }
-        .section-subtitle { font-size: 18px; color: var(--secondary); max-width: 700px; margin: 0 auto; }
+        section { padding: 120px 0; position: relative; border-bottom: 1px solid var(--border); }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-title { font-size: 48px; color: var(--white); margin-bottom: 16px; letter-spacing: -1px; }
+        .section-subtitle { font-size: 16px; color: var(--primary); max-width: 600px; margin: 0 auto; text-transform: uppercase; letter-spacing: 2px; }
         
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* RUNWAY / MARQUEE */
         .runway-section {
             background: var(--primary);
-            padding: 25px 0;
+            padding: 20px 0;
             overflow: hidden;
             position: relative;
             white-space: nowrap;
@@ -154,70 +161,71 @@
         .runway-track {
             display: flex;
             width: max-content;
-            animation: scroll 30s linear infinite;
+            animation: scroll 20s linear infinite;
         }
         .runway-item {
             font-family: 'Manrope', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--background);
-            padding: 0 30px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            padding: 0 40px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.9;
-            transition: var(--transition);
+            letter-spacing: 2px;
         }
-        .runway-item:hover { color: var(--highlight); opacity: 1; transform: scale(1.05); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* PORTFOLIO (AUTOPLAY VIDEO & IMAGE MIX) */
-        .work { background: var(--white); }
+        /* PORTFOLIO */
+        .work { background: var(--black); }
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
-        .portfolio-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); transition: var(--transition); background: #000; }
-        .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(121, 125, 98, 0.2); }
+        .portfolio-item { position: relative; border-radius: 4px; overflow: hidden; cursor: pointer; transition: var(--transition); background: #111; border: 1px solid var(--border); }
+        .portfolio-item:hover { transform: translateY(-10px); border-color: var(--primary); }
         
         .portfolio-media { position: relative; aspect-ratio: 16/9; overflow: hidden; }
-        .portfolio-media img, .portfolio-media video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .portfolio-item:hover .portfolio-media img { transform: scale(1.05); }
+        .portfolio-media img, .portfolio-media video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; filter: grayscale(100%); }
+        .portfolio-item:hover .portfolio-media img, .portfolio-item:hover .portfolio-media video { transform: scale(1.1); filter: grayscale(0%); }
         
         .portfolio-overlay {
             position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(121, 125, 98, 0.95), transparent);
-            padding: 40px 30px 30px; color: var(--white); transform: translateY(100%); transition: var(--transition);
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 30px; color: var(--white); transform: translateY(100%); transition: var(--transition);
         }
         .portfolio-item:hover .portfolio-overlay { transform: translateY(0); }
-        .portfolio-overlay h3 { font-size: 24px; margin-bottom: 8px; color: var(--highlight); }
-        .portfolio-overlay p { font-size: 15px; opacity: 0.9; color: #FDFBF7; }
+        .portfolio-overlay h3 { font-size: 20px; margin-bottom: 8px; color: var(--white); }
+        .portfolio-overlay p { font-size: 14px; opacity: 0.8; color: var(--silver); }
 
         /* SERVICES */
-        .services { background: var(--bg-warm); }
+        .services { background: #0f0f0f; }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .service-card { background: var(--white); padding: 40px 30px; border-radius: 20px; transition: var(--transition); border: 1px solid transparent; }
-        .service-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(217, 174, 148, 0.2); }
-        .service-icon { width: 60px; height: 60px; background: var(--background); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 24px; color: var(--primary); }
-        .service-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--primary); }
-        .service-card p { color: var(--text); line-height: 1.7; }
+        .service-card { 
+            background: var(--glass); padding: 40px 30px; border-radius: 4px; 
+            transition: var(--transition); border: 1px solid var(--border); 
+            backdrop-filter: blur(10px);
+        }
+        .service-card:hover { border-color: var(--primary); background: rgba(128, 0, 32, 0.05); transform: translateY(-5px); }
+        .service-icon { width: 50px; height: 50px; background: var(--black); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 20px; color: var(--primary); }
+        .service-card h3 { font-size: 20px; margin-bottom: 12px; color: var(--white); }
+        .service-card p { color: var(--silver); line-height: 1.7; font-size: 15px; }
 
         /* ABOUT */
-        .about { background: var(--background); }
+        .about { background: var(--black); }
         .about-content { max-width: 900px; margin: 0 auto; }
-        .about-tagline { font-size: 18px; color: var(--accent); font-weight: 700; margin-bottom: 24px; }
-        .about-text p { font-size: 17px; color: var(--text); margin-bottom: 20px; line-height: 1.8; }
-        .about-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin: 50px 0; padding: 40px; background: var(--white); border-radius: 20px; box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); }
+        .about-tagline { font-size: 16px; color: var(--primary); font-weight: 700; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px; }
+        .about-text p { font-size: 17px; color: var(--silver); margin-bottom: 20px; line-height: 1.8; }
+        .about-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin: 50px 0; padding: 40px; background: var(--glass); border-radius: 4px; border: 1px solid var(--border); }
         .stat-item { text-align: center; }
-        .stat-item h3 { font-size: 42px; color: var(--primary); margin-bottom: 8px; font-weight: 800; }
-        .stat-item p { font-size: 14px; color: var(--secondary); margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-item h3 { font-size: 42px; color: var(--white); margin-bottom: 8px; font-weight: 800; }
+        .stat-item p { font-size: 12px; color: var(--primary); margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* FAQ STYLES WITH PLUS/MINUS SYMBOL */
-        .faq { background: var(--background); }
+        /* FAQ STYLES */
+        .faq { background: #0f0f0f; }
         .faq-list { max-width: 900px; margin: 0 auto 50px; }
         
         .faq-item { 
-            background: var(--white); 
+            background: var(--glass); 
             margin-bottom: 16px; 
-            border-radius: 12px; 
+            border-radius: 4px; 
             overflow: hidden; 
-            border: 1px solid rgba(121, 125, 98, 0.1); 
+            border: 1px solid var(--border); 
         }
 
         .faq-question { 
@@ -228,7 +236,7 @@
             text-align: left; 
             font-size: 18px; 
             font-weight: 600; 
-            color: var(--primary); 
+            color: var(--white); 
             cursor: pointer; 
             display: flex; 
             justify-content: space-between; 
@@ -236,9 +244,8 @@
             transition: var(--transition); 
         }
 
-        .faq-question:hover { color: var(--accent); }
+        .faq-question:hover { color: var(--primary); }
 
-        /* The Plus/Minus Icon */
         .faq-icon {
             position: relative;
             width: 20px;
@@ -249,97 +256,79 @@
         .faq-icon::before, .faq-icon::after {
             content: '';
             position: absolute;
-            background: var(--accent);
+            background: var(--primary);
             transition: var(--transition);
         }
 
-        /* Horizontal line of the plus */
-        .faq-icon::before {
-            top: 9px;
-            left: 0;
-            width: 20px;
-            height: 2px;
-        }
+        .faq-icon::before { top: 9px; left: 0; width: 20px; height: 2px; }
+        .faq-icon::after { top: 0; left: 9px; width: 2px; height: 20px; }
 
-        /* Vertical line of the plus */
-        .faq-icon::after {
-            top: 0;
-            left: 9px;
-            width: 2px;
-            height: 20px;
-        }
-
-        /* When active, rotate the vertical line to make it a minus */
-        .faq-item.active .faq-icon::after {
-            transform: rotate(90deg);
-            opacity: 0;
-        }
-        
-        .faq-item.active .faq-question { color: var(--accent); }
+        .faq-item.active .faq-icon::after { transform: rotate(90deg); opacity: 0; }
+        .faq-item.active .faq-question { color: var(--primary); }
 
         .faq-answer { 
             padding: 0 30px 24px; 
             display: none; 
-            color: var(--text);
+            color: var(--silver);
             line-height: 1.7;
         }
         
         .faq-item.active .faq-answer { display: block; }
 
         /* AI CHAT */
-        .ai-chat { background: var(--white); }
+        .ai-chat { background: var(--black); }
         .chat-container { max-width: 800px; margin: 0 auto; }
-        .chat-window { background: var(--background); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(121, 125, 98, 0.1); border: 1px solid rgba(121, 125, 98, 0.1); }
+        .chat-window { background: var(--glass); border-radius: 4px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border: 1px solid var(--border); backdrop-filter: blur(10px); }
         .chat-messages { height: 400px; overflow-y: auto; padding: 30px; }
         .message { display: flex; gap: 12px; margin-bottom: 20px; }
         .bot-message { justify-content: flex-start; }
         .user-message { justify-content: flex-end; }
-        .message-avatar { width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 18px; }
-        .message-content { max-width: 70%; background: var(--white); padding: 16px 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(121, 125, 98, 0.1); }
-        .user-message .message-content { background: var(--accent); color: var(--white); }
+        .message-avatar { width: 40px; height: 40px; background: var(--primary); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 18px; }
+        .message-content { max-width: 70%; background: #1a1a1a; padding: 16px 20px; border-radius: 4px; border: 1px solid var(--border); }
+        .user-message .message-content { background: var(--primary); color: var(--white); border: none; }
         .message-content p { margin: 0; font-size: 15px; line-height: 1.6; }
-        .quick-options { display: flex; gap: 12px; padding: 20px 30px; flex-wrap: wrap; border-top: 1px solid rgba(121, 125, 98, 0.1); }
-        .quick-option { padding: 10px 20px; background: var(--white); border: 1px solid var(--accent); border-radius: 50px; font-size: 14px; color: var(--primary); cursor: pointer; transition: var(--transition); }
-        .quick-option:hover { background: var(--accent); color: var(--white); }
-        .chat-input-area { display: flex; gap: 12px; padding: 20px 30px; border-top: 1px solid rgba(121, 125, 98, 0.1); }
-        #chatInput { flex: 1; padding: 14px 20px; border: 1px solid var(--secondary); border-radius: 50px; font-size: 15px; background: var(--white); transition: var(--transition); }
-        #chatInput:focus { outline: none; border-color: var(--accent); }
-        .send-btn { width: 50px; height: 50px; background: var(--primary); border: none; border-radius: 50%; color: var(--white); font-size: 18px; cursor: pointer; transition: var(--transition); }
-        .send-btn:hover { background: var(--accent); }
+        .quick-options { display: flex; gap: 12px; padding: 20px 30px; flex-wrap: wrap; border-top: 1px solid var(--border); }
+        .quick-option { padding: 10px 20px; background: transparent; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; color: var(--silver); cursor: pointer; transition: var(--transition); }
+        .quick-option:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+        .chat-input-area { display: flex; gap: 12px; padding: 20px 30px; border-top: 1px solid var(--border); }
+        #chatInput { flex: 1; padding: 14px 20px; border: 1px solid var(--border); border-radius: 4px; font-size: 15px; background: #1a1a1a; color: var(--white); transition: var(--transition); }
+        #chatInput:focus { outline: none; border-color: var(--primary); }
+        .send-btn { width: 50px; height: 50px; background: var(--primary); border: none; border-radius: 4px; color: var(--white); font-size: 18px; cursor: pointer; transition: var(--transition); }
+        .send-btn:hover { background: var(--primary-dark); }
 
         /* CONTACT */
-        .contact { background: var(--bg-warm); }
+        .contact { background: #0f0f0f; }
         .contact-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
-        .contact-info h3 { font-size: 28px; margin-bottom: 30px; color: var(--primary); }
+        .contact-info h3 { font-size: 28px; margin-bottom: 30px; color: var(--white); }
         .contact-item { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
-        .contact-item i { width: 40px; height: 40px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 18px; }
-        .contact-item h4 { font-size: 16px; margin-bottom: 4px; color: var(--primary); }
-        .contact-item a { color: var(--text); text-decoration: none; transition: var(--transition); }
-        .contact-item a:hover { color: var(--accent); }
-        .contact-social h4 { font-size: 18px; margin: 30px 0 16px; color: var(--primary); }
+        .contact-item i { width: 40px; height: 40px; background: var(--black); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 18px; }
+        .contact-item h4 { font-size: 16px; margin-bottom: 4px; color: var(--white); }
+        .contact-item a { color: var(--silver); text-decoration: none; transition: var(--transition); }
+        .contact-item a:hover { color: var(--primary); }
+        .contact-social h4 { font-size: 18px; margin: 30px 0 16px; color: var(--white); }
         .social-links { display: flex; gap: 12px; }
-        .social-links a { width: 40px; height: 40px; background: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 18px; transition: var(--transition); }
-        .social-links a:hover { background: var(--accent); color: var(--white); transform: translateY(-3px); }
-        .contact-form-wrapper { background: var(--white); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); }
+        .social-links a { width: 40px; height: 40px; background: var(--black); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--silver); font-size: 18px; transition: var(--transition); }
+        .social-links a:hover { background: var(--primary); color: var(--white); border-color: var(--primary); transform: translateY(-3px); }
+        .contact-form-wrapper { background: var(--glass); padding: 40px; border-radius: 4px; border: 1px solid var(--border); backdrop-filter: blur(10px); }
         .form-group { margin-bottom: 24px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary); font-size: 15px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 14px 18px; border: 1px solid var(--secondary); border-radius: 8px; font-size: 15px; font-family: 'Inter', sans-serif; transition: var(--transition); background: var(--background); }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); background: var(--white); }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--white); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 14px 18px; border: 1px solid var(--border); border-radius: 4px; font-size: 15px; font-family: 'Inter', sans-serif; transition: var(--transition); background: #1a1a1a; color: var(--white); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); background: #222; }
         .form-group textarea { resize: vertical; }
 
         /* FOOTER */
-        .footer { background: var(--primary); color: var(--white); padding: 60px 0 30px; }
+        .footer { background: var(--black); color: var(--silver); padding: 60px 0 30px; border-top: 1px solid var(--border); }
         .footer-content { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
         .footer-left h3 { font-size: 24px; margin-bottom: 12px; color: var(--white); }
-        .footer-left p { color: rgba(255, 255, 255, 0.7); font-size: 15px; }
+        .footer-left p { color: rgba(255, 255, 255, 0.5); font-size: 15px; }
         .footer-links { display: flex; gap: 24px; }
-        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
-        .footer-links a:hover { color: var(--highlight); }
+        .footer-links a { color: rgba(255, 255, 255, 0.5); text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: var(--primary); }
         .footer-social { display: flex; gap: 12px; }
-        .footer-social a { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 18px; transition: var(--transition); }
-        .footer-social a:hover { background: var(--accent); transform: translateY(-3px); }
-        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .footer-bottom p { color: rgba(255, 255, 255, 0.6); font-size: 14px; }
+        .footer-social a { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--silver); font-size: 18px; transition: var(--transition); }
+        .footer-social a:hover { background: var(--primary); color: var(--white); transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid var(--border); }
+        .footer-bottom p { color: rgba(255, 255, 255, 0.3); font-size: 14px; }
 
         /* RESPONSIVE */
         @media (max-width: 992px) {
@@ -412,15 +401,16 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-bg-text">SHOPIFY</div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <p class="hero-subtitle">Shopify Specialist & eCommerce UX/UI Designer</p>
-                    <h2 class="hero-title">Creating Digital Experiences That Drive Growth</h2>
-                    <p class="hero-description">I help businesses build professional Shopify stores with thoughtful design, optimized user experience, and strategic solutions that convert visitors into customers.</p>
+                    <p class="hero-subtitle">Shopify Specialist | Liquid, Landing Pages & UX/UI Design</p>
+                    <h2 class="hero-title">I build, customize, and improve Shopify stores for brands that sell online.</h2>
+                    <p class="hero-description">I work on stores from both sides: the technical part (Liquid code, custom sections) and the design part (UX/UI, landing pages, how a page feels to a customer).</p>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Let's Discuss Your Project</a>
-                        <a href="#services" class="btn btn-secondary">Explore My Services</a>
+                        <a href="#contact" class="btn btn-primary">Start Project</a>
+                        <a href="#work" class="btn btn-secondary">View Work</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -431,19 +421,46 @@
         </div>
     </section>
 
-    <!-- Work Section (AUTOPLAY VIDEO & IMAGE MIX) -->
+    <!-- Runway Section -->
+    <div class="runway-section">
+        <div class="runway-track">
+            <span class="runway-item">Shopify Development</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Custom Liquid Sections</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">UX/UI Design</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Landing Pages</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Website Optimization</span>
+            <span class="runway-item">•</span>
+            
+            <!-- REPEAT FOR LOOP -->
+            <span class="runway-item">Shopify Development</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Custom Liquid Sections</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">UX/UI Design</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Landing Pages</span>
+            <span class="runway-item">•</span>
+            <span class="runway-item">Website Optimization</span>
+            <span class="runway-item">•</span>
+        </div>
+    </div>
+
+    <!-- Work Section -->
     <section class="work reveal" id="work">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">My Work</h2>
-                <p class="section-subtitle">Selected projects showcasing Shopify development and UX/UI design</p>
+                <h2 class="section-title">Selected Work</h2>
+                <p class="section-subtitle">Projects showcasing Shopify development and UX/UI design</p>
             </div>
             <div class="portfolio-grid">
                 
                 <!-- 1. VIDEO: Shopify Store from Scratch (Autoplay) -->
                 <div class="portfolio-item">
                     <div class="portfolio-media">
-                        <!-- Replace src with your .mp4 link -->
                         <video autoplay muted loop playsinline src="PASTE_VIDEO_LINK_1_HERE.mp4"></video>
                     </div>
                     <div class="portfolio-overlay">
@@ -507,48 +524,9 @@
                     </div>
                 </div>
 
-                <!-- 7. IMAGE: Graphic Design -->
-                <div class="portfolio-item">
-                    <div class="portfolio-media">
-                        <img src="PASTE_IMAGE_LINK_7_HERE.jpg" alt="Graphic Design">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3>Graphic Design</h3>
-                        <p>Brand Identity & Visuals</p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
-
-    <!-- RUNWAY SECTION -->
-    <div class="runway-section">
-        <div class="runway-track">
-            <span class="runway-item">Shopify Development</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Custom Liquid Sections</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">UX/UI Design</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Landing Pages</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Website Optimization</span>
-            <span class="runway-item">•</span>
-            
-            <!-- REPEAT FOR LOOP -->
-            <span class="runway-item">Shopify Development</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Custom Liquid Sections</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">UX/UI Design</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Landing Pages</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Website Optimization</span>
-            <span class="runway-item">•</span>
-        </div>
-    </div>
 
     <!-- Services Section -->
     <section class="services reveal" id="services">
@@ -560,33 +538,33 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
-                    <h3>Shopify Store Development</h3>
-                    <p>Build professional, responsive Shopify stores from scratch.</p>
+                    <h3>Shopify Store Setup</h3>
+                    <p>Structure, collections, navigation, and settings that make sense for your customers.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
-                    <h3>Custom Liquid Sections</h3>
-                    <p>Develop unique, reusable Shopify sections using Liquid, HTML, CSS.</p>
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Custom Liquid & Theme Work</h3>
+                    <p>Custom sections and changes your theme can’t do on its own.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-file-alt"></i></div>
                     <h3>Landing Page Design</h3>
-                    <p>Create modern, conversion-focused landing pages.</p>
+                    <p>Pages built around one goal, like a product launch or campaign, on Shopify or GitHub.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-desktop"></i></div>
                     <h3>UX/UI Design</h3>
-                    <p>Design intuitive interfaces that enhance user experience.</p>
+                    <p>Better layouts, cleaner product pages, and a consistent look across the store.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-wrench"></i></div>
-                    <h3>Website Customization</h3>
-                    <p>Redesign pages, add custom features, and improve layouts.</p>
+                    <div class="service-icon"><i class="fas fa-tags"></i></div>
+                    <h3>Product Catalog Management</h3>
+                    <p>Uploads, variants, SKUs, prices, and well-written listings.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-tools"></i></div>
-                    <h3>Bug Fixing & Optimization</h3>
-                    <p>Troubleshoot issues and optimize website performance.</p>
+                    <div class="service-icon"><i class="fas fa-search-dollar"></i></div>
+                    <h3>E-commerce Research</h3>
+                    <p>Competitor and market research, put together in a clear document.</p>
                 </div>
             </div>
         </div>
@@ -600,10 +578,11 @@
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p class="about-tagline">Shopify Specialist | eCommerce UX/UI Designer | Digital Commerce Expert</p>
-                    <p>Hi, I'm Syuzanna, and I help businesses create, manage, and improve their Shopify stores with thoughtful design and practical eCommerce solutions.</p>
-                    <p>Whether you're launching a new online store or looking to improve your website's design, I can help you turn those challenges into effective solutions.</p>
-                    <p>With a Master's degree in Economics and 12 years of experience, I bring real-world business knowledge to every project.</p>
+                    <p class="about-tagline">Shopify Specialist based in Spain</p>
+                    <p>I’m Syuzanna, a Shopify specialist based in Spain. I work on stores from both sides: the technical part (Liquid code, custom sections) and the design part (UX/UI, landing pages, how a page feels to a customer).</p>
+                    <p>I have hands-on e-commerce and marketplace experience. Since 2022 I have worked in online sales, product presentation, catalog management, and daily marketplace operations. During that time, sales grew about 41% in the first year and 70% in the second. It taught me what makes people buy: clear product pages, accurate details, and a simple path to checkout.</p>
+                    <p>Today I write custom Liquid, build Shopify sections that fit a brand, and design landing pages for products and campaigns. I also build standalone web pages hosted on GitHub, and I do UX/UI design, so I think about layout and usability, not only code. You can see examples of my work on my GitHub.</p>
+                    <p>Before this, I worked for 12 years at Armenia’s State Property Management Department, where I went from Specialist to Chief Specialist and took part in more than 50 projects. I also have a Master’s degree in Economics. That background made me careful with details, data, and deadlines, and I bring the same habits to client work.</p>
                     
                     <div class="about-stats">
                         <div class="stat-item"><h3>12+</h3><p>Years Experience</p></div>
@@ -727,7 +706,7 @@
     <section class="ai-chat reveal" id="lets-talk">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Let's Talk with AI Assistant</h2>
+                <h2 class="section-title">AI Assistant</h2>
                 <p class="section-subtitle">Get instant answers for your Shopify project</p>
             </div>
             <div class="chat-container">
@@ -758,7 +737,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Ready to start your project?</p>
+                <p class="section-subtitle">Have a store you want to build or fix? Send me the link and tell me what you need.</p>
             </div>
             <div class="contact-content">
                 <div class="contact-info">
@@ -787,7 +766,8 @@
                     </div>
                 </div>
                 <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
+                    <!-- IMPORTANT: Replace action URL with your Formspree endpoint to receive emails -->
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_ID" method="POST">
                         <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" required></div>
                         <div class="form-group"><label for="email">Your Email</label><input type="email" id="email" name="email" required></div>
                         <div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" required></div>
@@ -1014,16 +994,16 @@
             });
         });
 
-        // --- AI CHAT LOGIC WITH CONNECT ME FEATURE ---
+        // --- AI CHAT LOGIC (CLEANED UP) ---
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const sendBtn = document.getElementById('sendBtn');
 
         const aiResponses = {
-            standard: "For a **Standard Shopify Store**, I recommend starting with a professional theme customization.",
-            custom: "For **Custom Design**, I can create unique Liquid sections tailored to your brand!",
-            fix: "I can help **Fix Website Issues** quickly! Please describe the error.",
-            performance: "To **Improve Performance**, I focus on image optimization and speed.",
+            standard: "For a Standard Shopify Store, I recommend starting with a professional theme customization.",
+            custom: "For Custom Design, I can create unique Liquid sections tailored to your brand!",
+            fix: "I can help Fix Website Issues quickly! Please describe the error.",
+            performance: "To Improve Performance, I focus on image optimization and speed.",
             default: "Thank you! Tell me more about your project."
         };
 
@@ -1033,7 +1013,9 @@
             if (!isUser) msgDiv.innerHTML = `<div class="message-avatar"><i class="fas fa-robot"></i></div>`;
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
-            contentDiv.innerHTML = `<p>${text}</p>`;
+            // Clean text of any markdown symbols like **
+            const cleanText = text.replace(/\*\*/g, '');
+            contentDiv.innerHTML = `<p>${cleanText}</p>`;
             msgDiv.appendChild(contentDiv);
             chatMessages.appendChild(msgDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -1057,7 +1039,7 @@
                 if (responseKey === 'default' || lowerMsg.length > 20) {
                     addMessage("I'm not sure about that specific detail. Let me connect you with Syuzanna directly so she can answer you personally!");
                     setTimeout(() => {
-                        addMessage('<a href="PASTE_TELEGRAM_URL_HERE" target="_blank" style="color:var(--accent); font-weight:bold;">Click here to message Syuzanna on Telegram</a>');
+                        addMessage('<a href="PASTE_TELEGRAM_URL_HERE" target="_blank" style="color:var(--primary); font-weight:bold;">Click here to message Syuzanna on Telegram</a>');
                     }, 1000);
                 } else {
                     addMessage(aiResponses[responseKey]);
