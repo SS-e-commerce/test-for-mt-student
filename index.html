@@ -42,7 +42,6 @@
         /* HEADER & 4K BOTTLE EFFECT */
         .header {
             position: fixed; top: 0; left: 0; width: 100%;
-            /* Glassmorphism / Bottle Effect */
             background: rgba(253, 251, 247, 0.7); 
             backdrop-filter: blur(20px); 
             -webkit-backdrop-filter: blur(20px);
@@ -139,14 +138,40 @@
         
         .hero-image { position: relative; perspective: 1000px; }
         
-        /* PROFILE IMAGE STYLES */
-        .profile-img {
-            width: 100%; max-width: 500px; border-radius: 30px;
-            box-shadow: 20px 20px 60px rgba(121, 125, 98, 0.15), -10px -10px 40px rgba(255,255,255, 0.8);
-            transform: rotateY(-5deg); transition: transform 0.5s ease;
-            object-fit: cover; aspect-ratio: 4/5;
+        /* HERO PICTURE GLASS EFFECT */
+        .profile-img-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 4/5;
+            border-radius: 30px;
+            /* Glass Bottle Effect */
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 50px rgba(121, 125, 98, 0.2);
+            padding: 10px;
+            transition: var(--transition);
         }
-        .hero-image:hover .profile-img { transform: rotateY(0deg) scale(1.02); }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+            opacity: 0.9; /* Initial Opacity */
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-image:hover .profile-img-container {
+            transform: rotateY(0deg) scale(1.02);
+            box-shadow: 0 30px 60px rgba(121, 125, 98, 0.3);
+        }
+
+        .hero-image:hover .profile-img {
+            opacity: 1; /* Full Opacity on Hover */
+        }
 
         /* SECTIONS & REVEAL */
         section { padding: 100px 0; position: relative; }
@@ -186,14 +211,39 @@
         .runway-item:hover { color: var(--highlight); opacity: 1; transform: scale(1.05); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* PORTFOLIO (AUTOPLAY VIDEO & IMAGE MIX) */
+        /* PORTFOLIO (SYMMETRIC GRID) */
         .work { background: var(--white); }
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
-        .portfolio-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); transition: var(--transition); background: #000; }
+        .portfolio-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 40px; 
+        }
+        .portfolio-item { 
+            position: relative; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); 
+            transition: var(--transition); 
+            background: #000; 
+            height: 100%; /* Ensure full height */
+            display: flex;
+            flex-direction: column;
+        }
         .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(121, 125, 98, 0.2); }
         
-        .portfolio-media { position: relative; aspect-ratio: 16/9; overflow: hidden; }
-        .portfolio-media img, .portfolio-media video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .portfolio-media { 
+            position: relative; 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            overflow: hidden; 
+        }
+        .portfolio-media img, .portfolio-media video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.6s ease; 
+        }
         .portfolio-item:hover .portfolio-media img { transform: scale(1.05); }
         
         .portfolio-overlay {
@@ -208,7 +258,16 @@
         /* SERVICES */
         .services { background: var(--bg-warm); }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .service-card { background: var(--white); padding: 40px 30px; border-radius: 20px; transition: var(--transition); border: 1px solid transparent; }
+        .service-card { 
+            background: var(--white); 
+            padding: 40px 30px; 
+            border-radius: 20px; 
+            transition: var(--transition); 
+            border: 1px solid transparent; 
+            height: 100%; /* Symmetric Height */
+            display: flex;
+            flex-direction: column;
+        }
         .service-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(217, 174, 148, 0.2); }
         .service-icon { width: 60px; height: 60px; background: var(--background); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 24px; color: var(--primary); }
         .service-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--primary); }
@@ -363,7 +422,7 @@
             .hero-title { font-size: 44px; }
             .hero-buttons { justify-content: center; }
             .hero-image { order: -1; margin-bottom: 40px; }
-            .profile-img { max-width: 400px; transform: none; }
+            .profile-img-container { max-width: 400px; margin: 0 auto; transform: none; }
             .about-stats { grid-template-columns: repeat(2, 1fr); }
             .contact-content { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; text-align: center; }
@@ -391,12 +450,12 @@
                 <div class="logo"><h1>Syuzanna Sargsyan</h1></div>
                 <nav class="nav" id="nav">
                     <ul class="nav-list">
-                        <li><a href="#home" class="nav-link active">Home</a></li>
-                        <li><a href="#work" class="nav-link">Work</a></li>
-                        <li><a href="#services" class="nav-link">Services</a></li>
-                        <li><a href="#about" class="nav-link">About</a></li>
-                        <li><a href="#contact" class="nav-link">Contact</a></li>
-                        <li><a href="#lets-talk" class="btn-primary-nav">Let's Talk</a></li>
+                        <li><a href="#home" class="nav-link active" data-key="nav_home">Home</a></li>
+                        <li><a href="#work" class="nav-link" data-key="nav_work">Work</a></li>
+                        <li><a href="#services" class="nav-link" data-key="nav_services">Services</a></li>
+                        <li><a href="#about" class="nav-link" data-key="nav_about">About</a></li>
+                        <li><a href="#contact" class="nav-link" data-key="nav_contact">Contact</a></li>
+                        <li><a href="#lets-talk" class="btn-primary-nav" data-key="nav_talk">Let's Talk</a></li>
                     </ul>
                 </nav>
                 <div class="header-right">
@@ -434,17 +493,20 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <p class="hero-subtitle">Shopify Specialist & eCommerce UX/UI Designer</p>
-                    <h2 class="hero-title">Creating Digital Experiences That Drive Growth</h2>
-                    <p class="hero-description">I help businesses build professional Shopify stores with thoughtful design, optimized user experience, and strategic solutions that convert visitors into customers.</p>
+                    <p class="hero-subtitle" data-key="hero_subtitle">Shopify Specialist & eCommerce UX/UI Designer</p>
+                    <h2 class="hero-title" data-key="hero_title">Creating Digital Experiences That Drive Growth</h2>
+                    <p class="hero-description" data-key="hero_desc">I help businesses build professional Shopify stores with thoughtful design, optimized user experience, and strategic solutions that convert visitors into customers.</p>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Let's Discuss Your Project</a>
-                        <a href="#services" class="btn btn-secondary">Explore My Services</a>
+                        <a href="#contact" class="btn btn-primary" data-key="btn_discuss">Let's Discuss Your Project</a>
+                        <a href="#services" class="btn btn-secondary" data-key="btn_explore">Explore My Services</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <!-- PASTE YOUR PROFILE PHOTO LINK BELOW inside src="" -->
-                    <img src="images/profile-photo.jpg" alt="Syuzanna Sargsyan" class="profile-img">
+                    <!-- GLASS EFFECT CONTAINER -->
+                    <div class="profile-img-container">
+                        <!-- PASTE YOUR PROFILE PHOTO LINK BELOW inside src="" -->
+                        <img src="images/profile-photo.jpg" alt="Syuzanna Sargsyan" class="profile-img">
+                    </div>
                 </div>
             </div>
         </div>
@@ -454,20 +516,19 @@
     <section class="work reveal" id="work">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">My Work</h2>
-                <p class="section-subtitle">Selected projects showcasing Shopify development and UX/UI design</p>
+                <h2 class="section-title" data-key="work_title">My Work</h2>
+                <p class="section-subtitle" data-key="work_sub">Selected projects showcasing Shopify development and UX/UI design</p>
             </div>
             <div class="portfolio-grid">
                 
                 <!-- 1. VIDEO: Shopify Store from Scratch (Autoplay) -->
                 <div class="portfolio-item">
                     <div class="portfolio-media">
-                        <!-- Replace src with your .mp4 link or file path -->
                         <video autoplay muted loop playsinline src="images/video-1.mp4"></video>
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>Shopify Store from Scratch</h3>
-                        <p>Full build and customization</p>
+                        <h3 data-key="port_1_title">Shopify Store from Scratch</h3>
+                        <p data-key="port_1_desc">Full build and customization</p>
                     </div>
                 </div>
 
@@ -477,8 +538,8 @@
                         <video autoplay muted loop playsinline src="images/video-2.mp4"></video>
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>Custom Liquid Sections</h3>
-                        <p>Unique reusable components</p>
+                        <h3 data-key="port_2_title">Custom Liquid Sections</h3>
+                        <p data-key="port_2_desc">Unique reusable components</p>
                     </div>
                 </div>
 
@@ -488,8 +549,8 @@
                         <video autoplay muted loop playsinline src="images/video-3.mp4"></video>
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>Landing Page Design</h3>
-                        <p>Conversion-focused page</p>
+                        <h3 data-key="port_3_title">Landing Page Design</h3>
+                        <p data-key="port_3_desc">Conversion-focused page</p>
                     </div>
                 </div>
 
@@ -499,8 +560,8 @@
                         <img src="images/portfolio-4.jpg" alt="GitHub Project">
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>GitHub Project 1</h3>
-                        <p>See live project</p>
+                        <h3 data-key="port_4_title">GitHub Project 1</h3>
+                        <p data-key="port_4_desc">See live project</p>
                     </div>
                 </div>
 
@@ -510,8 +571,8 @@
                         <img src="images/portfolio-5.jpg" alt="GitHub Project">
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>GitHub Project 2</h3>
-                        <p>See live project</p>
+                        <h3 data-key="port_5_title">GitHub Project 2</h3>
+                        <p data-key="port_5_desc">See live project</p>
                     </div>
                 </div>
 
@@ -521,8 +582,8 @@
                         <img src="images/portfolio-6.jpg" alt="Behance Project">
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>Behance Portfolio</h3>
-                        <p>UX/UI Case Studies</p>
+                        <h3 data-key="port_6_title">Behance Portfolio</h3>
+                        <p data-key="port_6_desc">UX/UI Case Studies</p>
                     </div>
                 </div>
 
@@ -532,8 +593,8 @@
                         <img src="images/portfolio-7.jpg" alt="Graphic Design">
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>Graphic Design</h3>
-                        <p>Brand Identity & Visuals</p>
+                        <h3 data-key="port_7_title">Graphic Design</h3>
+                        <p data-key="port_7_desc">Brand Identity & Visuals</p>
                     </div>
                 </div>
 
@@ -573,39 +634,39 @@
     <section class="services reveal" id="services">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">My Services</h2>
-                <p class="section-subtitle">Comprehensive Shopify and eCommerce solutions</p>
+                <h2 class="section-title" data-key="serv_title">My Services</h2>
+                <p class="section-subtitle" data-key="serv_sub">Comprehensive Shopify and eCommerce solutions</p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
-                    <h3>Shopify Store Development</h3>
-                    <p>Build professional, responsive Shopify stores from scratch.</p>
+                    <h3 data-key="serv_1_title">Shopify Store Development</h3>
+                    <p data-key="serv_1_desc">Build professional, responsive Shopify stores from scratch.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
-                    <h3>Custom Liquid Sections</h3>
-                    <p>Develop unique, reusable Shopify sections using Liquid, HTML, CSS.</p>
+                    <h3 data-key="serv_2_title">Custom Liquid Sections</h3>
+                    <p data-key="serv_2_desc">Develop unique, reusable Shopify sections using Liquid, HTML, CSS.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-file-alt"></i></div>
-                    <h3>Landing Page Design</h3>
-                    <p>Create modern, conversion-focused landing pages.</p>
+                    <h3 data-key="serv_3_title">Landing Page Design</h3>
+                    <p data-key="serv_3_desc">Create modern, conversion-focused landing pages.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-desktop"></i></div>
-                    <h3>UX/UI Design</h3>
-                    <p>Design intuitive interfaces that enhance user experience.</p>
+                    <h3 data-key="serv_4_title">UX/UI Design</h3>
+                    <p data-key="serv_4_desc">Design intuitive interfaces that enhance user experience.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-wrench"></i></div>
-                    <h3>Website Customization</h3>
-                    <p>Redesign pages, add custom features, and improve layouts.</p>
+                    <h3 data-key="serv_5_title">Website Customization</h3>
+                    <p data-key="serv_5_desc">Redesign pages, add custom features, and improve layouts.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-tools"></i></div>
-                    <h3>Bug Fixing & Optimization</h3>
-                    <p>Troubleshoot issues and optimize website performance.</p>
+                    <h3 data-key="serv_6_title">Bug Fixing & Optimization</h3>
+                    <p data-key="serv_6_desc">Troubleshoot issues and optimize website performance.</p>
                 </div>
             </div>
         </div>
@@ -615,20 +676,20 @@
     <section class="about reveal" id="about">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">About Me</h2>
+                <h2 class="section-title" data-key="about_title">About Me</h2>
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p class="about-tagline">Shopify Specialist | eCommerce UX/UI Designer | Digital Commerce Expert</p>
-                    <p>Hi, I'm Syuzanna, and I help businesses create, manage, and improve their Shopify stores with thoughtful design and practical eCommerce solutions.</p>
-                    <p>Whether you're launching a new online store or looking to improve your website's design, I can help you turn those challenges into effective solutions.</p>
-                    <p>With a Master's degree in Economics and 12 years of experience, I bring real-world business knowledge to every project.</p>
+                    <p class="about-tagline" data-key="about_tag">Shopify Specialist | eCommerce UX/UI Designer | Digital Commerce Expert</p>
+                    <p data-key="about_p1">Hi, I'm Syuzanna, and I help businesses create, manage, and improve their Shopify stores with thoughtful design and practical eCommerce solutions.</p>
+                    <p data-key="about_p2">Whether you're launching a new online store or looking to improve your website's design, I can help you turn those challenges into effective solutions.</p>
+                    <p data-key="about_p3">With a Master's degree in Economics and 12 years of experience, I bring real-world business knowledge to every project.</p>
                     
                     <div class="about-stats">
-                        <div class="stat-item"><h3>12+</h3><p>Years Experience</p></div>
-                        <div class="stat-item"><h3>41%</h3><p>Year 1 Growth</p></div>
-                        <div class="stat-item"><h3>70%</h3><p>Year 2 Growth</p></div>
-                        <div class="stat-item"><h3>MSc</h3><p>Economics</p></div>
+                        <div class="stat-item"><h3>12+</h3><p data-key="stat_1">Years Experience</p></div>
+                        <div class="stat-item"><h3>41%</h3><p data-key="stat_2">Year 1 Growth</p></div>
+                        <div class="stat-item"><h3>70%</h3><p data-key="stat_3">Year 2 Growth</p></div>
+                        <div class="stat-item"><h3>MSc</h3><p data-key="stat_4">Economics</p></div>
                     </div>
                 </div>
             </div>
@@ -746,22 +807,22 @@
     <section class="ai-chat reveal" id="lets-talk">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Let's Talk with AI Assistant</h2>
-                <p class="section-subtitle">Get instant answers for your Shopify project</p>
+                <h2 class="section-title" data-key="chat_title">Let's Talk with AI Assistant</h2>
+                <p class="section-subtitle" data-key="chat_sub">Get instant answers for your Shopify project</p>
             </div>
             <div class="chat-container">
                 <div class="chat-window" id="chatWindow">
                     <div class="chat-messages" id="chatMessages">
                         <div class="message bot-message">
                             <div class="message-avatar"><i class="fas fa-robot"></i></div>
-                            <div class="message-content"><p>Hello! I'm Syuzanna's AI assistant. How can I help you today?</p></div>
+                            <div class="message-content"><p data-key="chat_welcome">Hello! I'm Syuzanna's AI assistant. How can I help you today?</p></div>
                         </div>
                     </div>
                     <div class="quick-options">
-                        <button class="quick-option" data-type="standard">Standard Shopify Store</button>
-                        <button class="quick-option" data-type="custom">Custom Design Needed</button>
-                        <button class="quick-option" data-type="fix">Fix Website Issues</button>
-                        <button class="quick-option" data-type="performance">Improve Performance</button>
+                        <button class="quick-option" data-type="standard" data-key="chat_opt1">Standard Shopify Store</button>
+                        <button class="quick-option" data-type="custom" data-key="chat_opt2">Custom Design Needed</button>
+                        <button class="quick-option" data-type="fix" data-key="chat_opt3">Fix Website Issues</button>
+                        <button class="quick-option" data-type="performance" data-key="chat_opt4">Improve Performance</button>
                     </div>
                     <div class="chat-input-area">
                         <input type="text" id="chatInput" placeholder="Type your message...">
@@ -776,12 +837,12 @@
     <section class="contact reveal" id="contact">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Ready to start your project?</p>
+                <h2 class="section-title" data-key="cont_title">Get In Touch</h2>
+                <p class="section-subtitle" data-key="cont_sub">Ready to start your project?</p>
             </div>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Contact Information</h3>
+                    <h3 data-key="cont_info">Contact Information</h3>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div><h4>Email</h4><a href="mailto:PASTE_EMAIL_HERE">PASTE_EMAIL_HERE</a></div>
@@ -795,7 +856,7 @@
                         <div><h4>LinkedIn</h4><a href="PASTE_LINKEDIN_URL_HERE">linkedin.com/in/syuzanna-sargsyan</a></div>
                     </div>
                     <div class="contact-social">
-                        <h4>Follow Me</h4>
+                        <h4 data-key="cont_follow">Follow Me</h4>
                         <div class="social-links">
                             <a href="PASTE_LINKEDIN_URL_HERE"><i class="fab fa-linkedin-in"></i></a>
                             <a href="PASTE_UPWORK_URL_HERE"><i class="fas fa-briefcase"></i></a>
@@ -807,11 +868,11 @@
                 </div>
                 <div class="contact-form-wrapper">
                     <form class="contact-form" id="contactForm">
-                        <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" required></div>
-                        <div class="form-group"><label for="email">Your Email</label><input type="email" id="email" name="email" required></div>
-                        <div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" required></div>
-                        <div class="form-group"><label for="message">Your Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <div class="form-group"><label for="name" data-key="form_name">Your Name</label><input type="text" id="name" name="name" required></div>
+                        <div class="form-group"><label for="email" data-key="form_email">Your Email</label><input type="email" id="email" name="email" required></div>
+                        <div class="form-group"><label for="subject" data-key="form_subj">Subject</label><input type="text" id="subject" name="subject" required></div>
+                        <div class="form-group"><label for="message" data-key="form_msg">Your Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
+                        <button type="submit" class="btn btn-primary" data-key="form_send">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -828,11 +889,11 @@
                 </div>
                 <div class="footer-center">
                     <div class="footer-links">
-                        <a href="#home">Home</a>
-                        <a href="#work">Work</a>
-                        <a href="#services">Services</a>
-                        <a href="#about">About</a>
-                        <a href="#contact">Contact</a>
+                        <a href="#home" data-key="nav_home">Home</a>
+                        <a href="#work" data-key="nav_work">Work</a>
+                        <a href="#services" data-key="nav_services">Services</a>
+                        <a href="#about" data-key="nav_about">About</a>
+                        <a href="#contact" data-key="nav_contact">Contact</a>
                     </div>
                 </div>
                 <div class="footer-right">
@@ -846,7 +907,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Syuzanna Sargsyan. All rights reserved.</p>
+                <p>&copy; 2026 Syuzanna Sargsyan. <span data-key="footer_rights">All rights reserved.</span></p>
             </div>
         </div>
     </footer>
@@ -882,108 +943,192 @@
 
         const translations = {
             en: {
+                nav_home: "Home", nav_work: "Work", nav_services: "Services", nav_about: "About", nav_contact: "Contact", nav_talk: "Let's Talk",
+                hero_subtitle: "Shopify Specialist & eCommerce UX/UI Designer",
+                hero_title: "Creating Digital Experiences That Drive Growth",
+                hero_desc: "I help businesses build professional Shopify stores with thoughtful design, optimized user experience, and strategic solutions that convert visitors into customers.",
+                btn_discuss: "Let's Discuss Your Project", btn_explore: "Explore My Services",
+                work_title: "My Work", work_sub: "Selected projects showcasing Shopify development and UX/UI design",
+                port_1_title: "Shopify Store from Scratch", port_1_desc: "Full build and customization",
+                port_2_title: "Custom Liquid Sections", port_2_desc: "Unique reusable components",
+                port_3_title: "Landing Page Design", port_3_desc: "Conversion-focused page",
+                port_4_title: "GitHub Project 1", port_4_desc: "See live project",
+                port_5_title: "GitHub Project 2", port_5_desc: "See live project",
+                port_6_title: "Behance Portfolio", port_6_desc: "UX/UI Case Studies",
+                port_7_title: "Graphic Design", port_7_desc: "Brand Identity & Visuals",
+                serv_title: "My Services", serv_sub: "Comprehensive Shopify and eCommerce solutions",
+                serv_1_title: "Shopify Store Development", serv_1_desc: "Build professional, responsive Shopify stores from scratch.",
+                serv_2_title: "Custom Liquid Sections", serv_2_desc: "Develop unique, reusable Shopify sections using Liquid, HTML, CSS.",
+                serv_3_title: "Landing Page Design", serv_3_desc: "Create modern, conversion-focused landing pages.",
+                serv_4_title: "UX/UI Design", serv_4_desc: "Design intuitive interfaces that enhance user experience.",
+                serv_5_title: "Website Customization", serv_5_desc: "Redesign pages, add custom features, and improve layouts.",
+                serv_6_title: "Bug Fixing & Optimization", serv_6_desc: "Troubleshoot issues and optimize website performance.",
+                about_title: "About Me", about_tag: "Shopify Specialist | eCommerce UX/UI Designer | Digital Commerce Expert",
+                about_p1: "Hi, I'm Syuzanna, and I help businesses create, manage, and improve their Shopify stores with thoughtful design and practical eCommerce solutions.",
+                about_p2: "Whether you're launching a new online store or looking to improve your website's design, I can help you turn those challenges into effective solutions.",
+                about_p3: "With a Master's degree in Economics and 12 years of experience, I bring real-world business knowledge to every project.",
+                stat_1: "Years Experience", stat_2: "Year 1 Growth", stat_3: "Year 2 Growth", stat_4: "Economics",
                 faq_title: "Frequently Asked Questions",
-                faq_q1: "What services do you offer?",
-                faq_a1: "I specialize in Shopify development, custom Liquid sections, landing pages, web design, UX/UI design, and website optimization.",
-                faq_q2: "Can you build a Shopify store from scratch?",
-                faq_a2: "Yes! I create professional, responsive Shopify stores tailored to your brand and business goals.",
-                faq_q3: "Can you customize my existing website?",
-                faq_a3: "Absolutely! I can redesign pages, add custom features, improve layouts and enhance functionality.",
-                faq_q4: "Can you create custom Shopify Liquid sections?",
-                faq_a4: "Yes! I develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript.",
-                faq_q5: "Can you fix website bugs and errors?",
-                faq_a5: "Yes! I troubleshoot coding issues, broken layouts, mobile problems, and Shopify theme errors.",
-                faq_q6: "Can you improve my website's performance?",
-                faq_a6: "Yes! I optimize website speed, mobile responsiveness, navigation, and user experience.",
-                faq_q7: "Do you design landing pages?",
-                faq_a7: "Yes! I create modern, conversion-focused landing pages for products, services, and marketing campaigns.",
-                faq_q8: "Can you help increase my online sales?",
-                faq_a8: "I improve website usability, product pages, and customer journeys to help reduce friction and support conversions.",
-                faq_q9: "How much do your services cost?",
-                faq_a9: "Pricing depends on your project's requirements. Contact me for a personalized quote.",
-                faq_q10: "How can I contact you?",
-                faq_a10: "Simply fill out the contact form on my website and share your project details. I'll get back to you to discuss the next steps.",
-                faq_cta_title: "Have a project in mind?",
-                faq_cta_desc: "Let's turn your ideas into a professional digital experience.",
-                btn_work: "Let's Work Together"
+                faq_q1: "What services do you offer?", faq_a1: "I specialize in Shopify development, custom Liquid sections, landing pages, web design, UX/UI design, and website optimization.",
+                faq_q2: "Can you build a Shopify store from scratch?", faq_a2: "Yes! I create professional, responsive Shopify stores tailored to your brand and business goals.",
+                faq_q3: "Can you customize my existing website?", faq_a3: "Absolutely! I can redesign pages, add custom features, improve layouts and enhance functionality.",
+                faq_q4: "Can you create custom Shopify Liquid sections?", faq_a4: "Yes! I develop unique, reusable Shopify sections using Liquid, HTML, CSS, and JavaScript.",
+                faq_q5: "Can you fix website bugs and errors?", faq_a5: "Yes! I troubleshoot coding issues, broken layouts, mobile problems, and Shopify theme errors.",
+                faq_q6: "Can you improve my website's performance?", faq_a6: "Yes! I optimize website speed, mobile responsiveness, navigation, and user experience.",
+                faq_q7: "Do you design landing pages?", faq_a7: "Yes! I create modern, conversion-focused landing pages for products, services, and marketing campaigns.",
+                faq_q8: "Can you help increase my online sales?", faq_a8: "I improve website usability, product pages, and customer journeys to help reduce friction and support conversions.",
+                faq_q9: "How much do your services cost?", faq_a9: "Pricing depends on your project's requirements. Contact me for a personalized quote.",
+                faq_q10: "How can I contact you?", faq_a10: "Simply fill out the contact form on my website and share your project details. I'll get back to you to discuss the next steps.",
+                faq_cta_title: "Have a project in mind?", faq_cta_desc: "Let's turn your ideas into a professional digital experience.",
+                btn_work: "Let's Work Together",
+                chat_title: "Let's Talk with AI Assistant", chat_sub: "Get instant answers for your Shopify project",
+                chat_welcome: "Hello! I'm Syuzanna's AI assistant. How can I help you today?",
+                chat_opt1: "Standard Shopify Store", chat_opt2: "Custom Design Needed", chat_opt3: "Fix Website Issues", chat_opt4: "Improve Performance",
+                cont_title: "Get In Touch", cont_sub: "Ready to start your project?",
+                cont_info: "Contact Information", cont_follow: "Follow Me",
+                form_name: "Your Name", form_email: "Your Email", form_subj: "Subject", form_msg: "Your Message", form_send: "Send Message",
+                footer_rights: "All rights reserved."
             },
             am: {
+                nav_home: "Գլխավոր", nav_work: "Աշխատանքներ", nav_services: "Ծառայություններ", nav_about: "Մասին", nav_contact: "Կապ", nav_talk: "Խոսենք",
+                hero_subtitle: "Shopify մասնագետ և էլեկտրոնային առևտրի UX/UI դիզայներ",
+                hero_title: "Ստեղծում եմ թվային փորձառություններ, որոնք նպաստում են աճին",
+                hero_desc: "Ես օգնում եմ բիզնեսներին կառուցել պրոֆեսիոնալ Shopify խանութներ՝ մտածված դիզայնով, օպտիմալացված օգտագործողի փորձառությամբ և ստրատեգիական լուծումներով։",
+                btn_discuss: "Քննարկենք Ձեր նախագիծը", btn_explore: "Ուսումնասիրեք իմ ծառայությունները",
+                work_title: "Իմ աշխատանքները", work_sub: "Ընտրված նախագծեր",
+                port_1_title: "Shopify խանութ զրոյից", port_1_desc: "Ամբողջական կառուցում",
+                port_2_title: "Հատուկ Liquid բաժիններ", port_2_desc: "Յուրահատուկ բաղադրիչներ",
+                port_3_title: "Լենդինգ էջի դիզայն", port_3_desc: "Կոնվերսիայի վրա կենտրոնացած",
+                port_4_title: "GitHub նախագիծ 1", port_4_desc: "Տեսնել կենդանի նախագիծը",
+                port_5_title: "GitHub նախագիծ 2", port_5_desc: "Տեսնել կենդանի նախագիծը",
+                port_6_title: "Behance պորտֆոլիո", port_6_desc: "UX/UI ուսումնասիրություններ",
+                port_7_title: "Գրաֆիկական դիզայն", port_7_desc: "Բրենդի ինքնություն",
+                serv_title: "Իմ ծառայությունները", serv_sub: "Համապարփակ Shopify լուծումներ",
+                serv_1_title: "Shopify խանութի մշակում", serv_1_desc: "Կառուցեք պրոֆեսիոնալ խանութներ զրոյից։",
+                serv_2_title: "Հատուկ Liquid բաժիններ", serv_2_desc: "Մշակեք յուրահատուկ բաժիններ։",
+                serv_3_title: "Լենդինգ էջի դիզայն", serv_3_desc: "Ստեղծեք ժամանակակից էջեր։",
+                serv_4_title: "UX/UI դիզայն", serv_4_desc: "Դիզայնեք ինտուիտիվ ինտերֆեյսներ։",
+                serv_5_title: "Կայքի հարմարեցում", serv_5_desc: "Վերադիզայն և բարելավում։",
+                serv_6_title: "Սխալների ուղղում", serv_6_desc: "Լուծեք խնդիրները և օպտիմալացրեք։",
+                about_title: "Իմ մասին", about_tag: "Shopify մասնագետ | UX/UI դիզայներ",
+                about_p1: "Ողջույն, ես Սյուզաննան եմ, և ես օգնում եմ բիզնեսներին ստեղծել և բարելավել իրենց Shopify խանութները։",
+                about_p2: "Անկախ նրանից, թե դուք մեկնարկում եք նոր խանութ, ես կարող եմ օգնել Ձեզ։",
+                about_p3: "Տնտեսագիտության մագիստրի աստիճանով և 12 տարվա փորձով։",
+                stat_1: "Տարիների փորձ", stat_2: "1-ին տարվա աճ", stat_3: "2-րդ տարվա աճ", stat_4: "Տնտեսագիտություն",
                 faq_title: "Հաճախակի տրվող հարցեր",
-                faq_q1: "Ինչ ծառայություններ եք առաջարկում",
-                faq_a1: "Ես մասնագիտացած եմ Shopify-ի մշակման, հատուկ Liquid բաժինների, լենդինգ էջերի, վեբ դիզայնի, UX/UI դիզայնի և կայքի օպտիմալացման մեջ։",
-                faq_q2: "Կարո՞ղ եք Shopify խանութ կառուցել զրոյից",
-                faq_a2: "Այո։ Ես ստեղծում եմ պրոֆեսիոնալ, հարմարվողական Shopify խանութներ՝ հարմարեցված Ձեր բրենդին և բիզնեսի նպատակներին։",
-                faq_q3: "Կարո՞ղ եք հարմարեցնել իմ գոյություն ունեցող կայքը",
-                faq_a3: "Անպայման։ Ես կարող եմ վերադիզայն անել էջերը, ավելացնել հատուկ ֆունկցիաներ, բարելավել դասավորությունները և բարձրացնել ֆունկցիոնալությունը։",
-                faq_q4: "Կարո՞ղ եք ստեղծել հատուկ Shopify Liquid բաժիններ",
-                faq_a4: "Այո։ Ես մշակում եմ յուրահատուկ, վերաօգտագործվող Shopify բաժիններ՝ օգտագործելով Liquid, HTML, CSS և JavaScript։",
-                faq_q5: "Կարո՞ղ եք ուղղել կայքի սխալները",
-                faq_a5: "Այո։ Ես լուծում եմ կոդավորման խնդիրները, կոտրված դասավորությունները, բջջային խնդիրները և Shopify թեմայի սխալները։",
-                faq_q6: "Կարո՞ղ եք բարելավել իմ կայքի աշխատանքը",
-                faq_a6: "Այո։ Ես օպտիմալացնում եմ կայքի արագությունը, բջջային հարմարվողականությունը, նավիգացիան և օգտագործողի փորձառությունը։",
-                faq_q7: "Դուք դիզայն եք անում լենդինգ էջեր",
-                faq_a7: "Այո։ Ես ստեղծում եմ ժամանակակից, կոնվերսիայի վրա կենտրոնացած լենդինգ էջեր՝ ապրանքների, ծառայությունների և մարքեթինգային արշավների համար։",
-                faq_q8: "Կարո՞ղ եք օգնել բարձրացնել իմ առցանց վաճառքները",
-                faq_a8: "Ես բարելավում եմ կայքի օգտագործելիությունը, ապրանքի էջերը և հաճախորդի ճանապարհը՝ նվազեցնելով խոչընդոտները և աջակցելով կոնվերսիաներին։",
-                faq_q9: "Որքան են արժում Ձեր ծառայությունները",
-                faq_a9: "Գինը կախված է Ձեր նախագծի պահանջներից։ Կապվեք ինձ հետ՝ անհատական գնահատականի համար։",
-                faq_q10: "Ինչպե՞ս կարող եմ կապվել Ձեզ հետ",
-                faq_a10: "Պարզապես լրացրեք կապի ձևաթուղթը իմ կայքում և կիսվեք Ձեր նախագծի մանրամասներով։ Ես կվերադառնամ Ձեզ՝ քննարկելու հաջորդ քայլերը։",
-                faq_cta_title: "Նախագիծ ունե՞ք մտքում",
-                faq_cta_desc: "Եկեք վերածենք Ձեր գաղափարները պրոֆեսիոնալ թվային փորձառության։",
-                btn_work: "Աշխատենք միասին"
+                faq_q1: "Ինչ ծառայություններ եք առաջարկում", faq_a1: "Ես մասնագիտացած եմ Shopify-ի մշակման և դիզայնի մեջ։",
+                faq_q2: "Կարո՞ղ եք խանութ կառուցել զրոյից", faq_a2: "Այո։ Ես ստեղծում եմ պրոֆեսիոնալ խանութներ։",
+                faq_q3: "Կարո՞ղ եք հարմարեցնել կայքը", faq_a3: "Անպայման։ Ես կարող եմ վերադիզայն անել էջերը։",
+                faq_q4: "Կարո՞ղ եք ստեղծել Liquid բաժիններ", faq_a4: "Այո։ Ես մշակում եմ յուրահատուկ բաժիններ։",
+                faq_q5: "Կարո՞ղ եք ուղղել սխալները", faq_a5: "Այո։ Ես լուծում եմ տեխնիկական խնդիրները։",
+                faq_q6: "Կարո՞ղ եք բարելավել աշխատանքը", faq_a6: "Այո։ Ես օպտիմալացնում եմ արագությունը։",
+                faq_q7: "Դուք դիզայն եք անում լենդինգ էջեր", faq_a7: "Այո։ Ես ստեղծում եմ ժամանակակից էջեր։",
+                faq_q8: "Կարո՞ղ եք բարձրացնել վաճառքները", faq_a8: "Ես բարելավում եմ օգտագործելիությունը։",
+                faq_q9: "Որքան են արժում ծառայությունները", faq_a9: "Գինը կախված է նախագծից։",
+                faq_q10: "Ինչպե՞ս կապվել", faq_a10: "Լրացրեք կապի ձևաթուղթը։",
+                faq_cta_title: "Նախագիծ ունե՞ք մտքում", faq_cta_desc: "Եկեք վերածենք գաղափարները թվային փորձառության։",
+                btn_work: "Աշխատենք միասին",
+                chat_title: "Խոսենք AI օգնականի հետ", chat_sub: "Ստացեք ակնթարթային պատասխաններ",
+                chat_welcome: "Ողջույն։ Ես Սյուզաննայի AI օգնականն եմ։",
+                chat_opt1: "Ստանդարտ խանութ", chat_opt2: "Հատուկ դիզայն", chat_opt3: "Ուղղել խնդիրները", chat_opt4: "Բարելավել աշխատանքը",
+                cont_title: "Կապվեք ինձ հետ", cont_sub: "Պատրա՞ստ եք սկսել նախագիծը",
+                cont_info: "Կապի տվյալներ", cont_follow: "Հետևեք ինձ",
+                form_name: "Ձեր անունը", form_email: "Ձեր էլ. հասցե", form_subj: "Թեմա", form_msg: "Հաղորդագրություն", form_send: "Ուղարկել",
+                footer_rights: "Բոլոր իրավունքները պաշտպանված են։"
             },
             ru: {
+                nav_home: "Главная", nav_work: "Работы", nav_services: "Услуги", nav_about: "Обо мне", nav_contact: "Контакт", nav_talk: "Связаться",
+                hero_subtitle: "Специалист по Shopify и UX/UI дизайнер",
+                hero_title: "Создаю цифровой опыт, который стимулирует рост",
+                hero_desc: "Я помогаю бизнесу создавать профессиональные магазины Shopify с продуманным дизайном и стратегическими решениями.",
+                btn_discuss: "Давайте обсудим ваш проект", btn_explore: "Изучите мои услуги",
+                work_title: "Мои работы", work_sub: "Избранные проекты",
+                port_1_title: "Магазин Shopify с нуля", port_1_desc: "Полная сборка",
+                port_2_title: "Секции Liquid", port_2_desc: "Уникальные компоненты",
+                port_3_title: "Дизайн лендингов", port_3_desc: "Страницы для конверсии",
+                port_4_title: "Проект GitHub 1", port_4_desc: "Смотреть проект",
+                port_5_title: "Проект GitHub 2", port_5_desc: "Смотреть проект",
+                port_6_title: "Портфолио Behance", port_6_desc: "Кейсы UX/UI",
+                port_7_title: "Графический дизайн", port_7_desc: "Айдентика бренда",
+                serv_title: "Мои услуги", serv_sub: "Комплексные решения Shopify",
+                serv_1_title: "Разработка магазина", serv_1_desc: "Создавайте профессиональные магазины с нуля.",
+                serv_2_title: "Секции Liquid", serv_2_desc: "Разрабатывайте уникальные секции.",
+                serv_3_title: "Дизайн лендингов", serv_3_desc: "Создавайте современные страницы.",
+                serv_4_title: "UX/UI дизайн", serv_4_desc: "Проектируйте интуитивные интерфейсы.",
+                serv_5_title: "Кастомизация сайта", serv_5_desc: "Перерабатывайте страницы.",
+                serv_6_title: "Исправление ошибок", serv_6_desc: "Устраняйте проблемы.",
+                about_title: "Обо мне", about_tag: "Специалист по Shopify | UX/UI дизайнер",
+                about_p1: "Привет, я Сюзанна, и я помогаю предприятиям создавать и улучшать свои магазины Shopify.",
+                about_p2: "Независимо от того, запускаете ли вы новый магазин, я могу помочь вам.",
+                about_p3: "С степенью магистра экономики и 12-летним опытом.",
+                stat_1: "Лет опыта", stat_2: "Рост 1-го года", stat_3: "Рост 2-го года", stat_4: "Экономика",
                 faq_title: "Часто задаваемые вопросы",
-                faq_q1: "Какие услуги вы предлагаете?",
-                faq_a1: "Я специализируюсь на разработке Shopify, пользовательских секциях Liquid, посадочных страницах, веб-дизайне, UX/UI дизайне и оптимизации сайтов.",
-                faq_q2: "Можете ли вы создать магазин Shopify с нуля?",
-                faq_a2: "Да! Я создаю профессиональные, адаптивные магазины Shopify, адаптированные к вашему бренду и бизнес-целям.",
-                faq_q3: "Можете ли вы настроить мой существующий сайт?",
-                faq_a3: "Абсолютно! Я могу переработать страницы, добавить пользовательские функции, улучшить макеты и расширить функциональность.",
-                faq_q4: "Можете ли вы создать пользовательские секции Shopify Liquid?",
-                faq_a4: "Да! Я разрабатываю уникальные, многоразовые секции Shopify с использованием Liquid, HTML, CSS и JavaScript.",
-                faq_q5: "Можете ли вы исправить ошибки сайта?",
-                faq_a5: "Да! Я устраняю проблемы с кодом, сломанные макеты, мобильные проблемы и ошибки тем Shopify.",
-                faq_q6: "Можете ли вы улучшить производительность моего сайта?",
-                faq_a6: "Да! Я оптимизирую скорость сайта, мобильную адаптивность, навигацию и пользовательский опыт.",
-                faq_q7: "Вы проектируете посадочные страницы?",
-                faq_a7: "Да! Я создаю современные посадочные страницы, ориентированные на конверсию, для продуктов, услуг и маркетинговых кампаний.",
-                faq_q8: "Можете ли вы помочь увеличить мои онлайн-продажи?",
-                faq_a8: "Я улучшаю удобство использования сайта, страницы продуктов и пути клиентов, чтобы уменьшить трение и поддержать конверсию.",
-                faq_q9: "Сколько стоят ваши услуги?",
-                faq_a9: "Цены зависят от требований вашего проекта. Свяжитесь со мной для персонализированной оценки.",
-                faq_q10: "Как я могу связаться с вами?",
-                faq_a10: "Просто заполните контактную форму на моем сайте и поделитесь деталями вашего проекта. Я свяжусь с вами, чтобы обсудить следующие шаги.",
-                faq_cta_title: "Есть проект на уме?",
-                faq_cta_desc: "Давайте превратим ваши идеи в профессиональный цифровой опыт.",
-                btn_work: "Давайте работать вместе"
+                faq_q1: "Какие услуги вы предлагаете?", faq_a1: "Я специализируюсь на разработке Shopify и дизайне.",
+                faq_q2: "Можете создать магазин с нуля?", faq_a2: "Да! Я создаю профессиональные магазины.",
+                faq_q3: "Можете настроить сайт?", faq_a3: "Абсолютно! Я могу переработать страницы.",
+                faq_q4: "Можете создать секции Liquid?", faq_a4: "Да! Я разрабатываю уникальные секции.",
+                faq_q5: "Можете исправить ошибки?", faq_a5: "Да! Я устраняю технические проблемы.",
+                faq_q6: "Можете улучшить производительность?", faq_a6: "Да! Я оптимизирую скорость сайта.",
+                faq_q7: "Вы проектируете лендинги?", faq_a7: "Да! Я создаю современные страницы.",
+                faq_q8: "Можете увеличить продажи?", faq_a8: "Я улучшаю удобство использования.",
+                faq_q9: "Сколько стоят услуги?", faq_a9: "Цены зависят от проекта.",
+                faq_q10: "Как связаться?", faq_a10: "Заполните контактную форму.",
+                faq_cta_title: "Есть проект?", faq_cta_desc: "Давайте превратим идеи в опыт.",
+                btn_work: "Давайте работать вместе",
+                chat_title: "Поговорим с AI помощником", chat_sub: "Получите мгновенные ответы",
+                chat_welcome: "Здравствуйте! Я AI помощник Сюзанны.",
+                chat_opt1: "Стандартный магазин", chat_opt2: "Индивидуальный дизайн", chat_opt3: "Исправить ошибки", chat_opt4: "Улучшить скорость",
+                cont_title: "Свяжитесь со мной", cont_sub: "Готовы начать проект?",
+                cont_info: "Контактная информация", cont_follow: "Подпишитесь на меня",
+                form_name: "Ваше имя", form_email: "Ваш email", form_subj: "Тема", form_msg: "Сообщение", form_send: "Отправить",
+                footer_rights: "Все права защищены."
             },
             es: {
+                nav_home: "Inicio", nav_work: "Trabajos", nav_services: "Servicios", nav_about: "Sobre mí", nav_contact: "Contacto", nav_talk: "Hablemos",
+                hero_subtitle: "Especialista en Shopify y Diseñador UX/UI",
+                hero_title: "Creando Experiencias Digitales Que Impulsan el Crecimiento",
+                hero_desc: "Ayudo a las empresas a crear tiendas Shopify profesionales con diseño reflexivo y soluciones estratégicas.",
+                btn_discuss: "Discutamos Su Proyecto", btn_explore: "Explorar Mis Servicios",
+                work_title: "Mi Trabajo", work_sub: "Proyectos seleccionados",
+                port_1_title: "Tienda Shopify desde cero", port_1_desc: "Construcción completa",
+                port_2_title: "Secciones Liquid", port_2_desc: "Componentes únicos",
+                port_3_title: "Diseño de Landing Pages", port_3_desc: "Página enfocada en conversión",
+                port_4_title: "Proyecto GitHub 1", port_4_desc: "Ver proyecto",
+                port_5_title: "Proyecto GitHub 2", port_5_desc: "Ver proyecto",
+                port_6_title: "Portafolio Behance", port_6_desc: "Estudios de caso UX/UI",
+                port_7_title: "Diseño Gráfico", port_7_desc: "Identidad de marca",
+                serv_title: "Mis Servicios", serv_sub: "Soluciones integrales de Shopify",
+                serv_1_title: "Desarrollo de Tienda", serv_1_desc: "Construya tiendas Shopify profesionales desde cero.",
+                serv_2_title: "Secciones Liquid", serv_2_desc: "Desarrolle secciones Shopify únicas.",
+                serv_3_title: "Diseño de Landing Pages", serv_3_desc: "Cree páginas de aterrizaje modernas.",
+                serv_4_title: "Diseño UX/UI", serv_4_desc: "Diseñe interfaces intuitivas.",
+                serv_5_title: "Personalización Web", serv_5_desc: "Rediseñe páginas y mejore la funcionalidad.",
+                serv_6_title: "Corrección de Errores", serv_6_desc: "Solucione problemas y optimice el rendimiento.",
+                about_title: "Sobre Mí", about_tag: "Especialista en Shopify | Diseñador UX/UI",
+                about_p1: "Hola, soy Syuzanna, y ayudo a las empresas a crear y mejorar sus tiendas Shopify.",
+                about_p2: "Ya sea que esté lanzando una nueva tienda, puedo ayudarle.",
+                about_p3: "Con una maestría en Economía y 12 años de experiencia.",
+                stat_1: "Años de Experiencia", stat_2: "Crecimiento Año 1", stat_3: "Crecimiento Año 2", stat_4: "Economía",
                 faq_title: "Preguntas Frecuentes",
-                faq_q1: "¿Qué servicios ofrece?",
-                faq_a1: "Me especializo en desarrollo Shopify, secciones Liquid personalizadas, páginas de aterrizaje, diseño web, diseño UX/UI y optimización de sitios web.",
-                faq_q2: "¿Puede construir una tienda Shopify desde cero?",
-                faq_a2: "¡Sí! Creo tiendas Shopify profesionales y responsivas adaptadas a su marca y objetivos comerciales.",
-                faq_q3: "¿Puede personalizar mi sitio web existente?",
-                faq_a3: "¡Absolutamente! Puedo rediseñar páginas, agregar funciones personalizadas, mejorar diseños y mejorar la funcionalidad.",
-                faq_q4: "¿Puede crear secciones Shopify Liquid personalizadas?",
-                faq_a4: "¡Sí! Desarrollo secciones Shopify únicas y reutilizables usando Liquid, HTML, CSS y JavaScript.",
-                faq_q5: "¿Puede corregir errores y bugs del sitio web?",
-                faq_a5: "¡Sí! Soluciono problemas de codificación, diseños rotos, problemas móviles y errores de temas Shopify.",
-                faq_q6: "¿Puede mejorar el rendimiento de mi sitio web?",
-                faq_a6: "¡Sí! Optimizo la velocidad del sitio web, la capacidad de respuesta móvil, la navegación y la experiencia del usuario.",
-                faq_q7: "¿Diseña páginas de aterrizaje?",
-                faq_a7: "¡Sí! Creo páginas de aterrizaje modernas enfocadas en conversión para productos, servicios y campañas de marketing.",
-                faq_q8: "¿Puede ayudar a aumentar mis ventas en línea?",
-                faq_a8: "Mejoro la usabilidad del sitio web, las páginas de productos y los recorridos del cliente para ayudar a reducir la fricción y apoyar las conversiones.",
-                faq_q9: "¿Cuánto cuestan sus servicios?",
-                faq_a9: "Los precios dependen de los requisitos de su proyecto. Contácteme para una cotización personalizada.",
-                faq_q10: "¿Cómo puedo contactarle?",
-                faq_a10: "Simplemente complete el formulario de contacto en mi sitio web y comparta los detalles de su proyecto. Me pondré en contacto con usted para discutir los próximos pasos.",
-                faq_cta_title: "¿Tiene un proyecto en mente?",
-                faq_cta_desc: "Convirtamos sus ideas en una experiencia digital profesional.",
-                btn_work: "Trabajemos Juntos"
+                faq_q1: "¿Qué servicios ofrece?", faq_a1: "Me especializo en desarrollo Shopify y diseño.",
+                faq_q2: "¿Puede construir una tienda desde cero?", faq_a2: "¡Sí! Creo tiendas profesionales.",
+                faq_q3: "¿Puede personalizar mi sitio?", faq_a3: "¡Absolutamente! Puedo rediseñar páginas.",
+                faq_q4: "¿Puede crear secciones Liquid?", faq_a4: "¡Sí! Desarrollo secciones únicas.",
+                faq_q5: "¿Puede corregir errores?", faq_a5: "¡Sí! Soluciono problemas técnicos.",
+                faq_q6: "¿Puede mejorar el rendimiento?", faq_a6: "¡Sí! Optimizo la velocidad del sitio.",
+                faq_q7: "¿Diseña landing pages?", faq_a7: "¡Sí! Creo páginas modernas.",
+                faq_q8: "¿Puede aumentar mis ventas?", faq_a8: "Mejoro la usabilidad del sitio.",
+                faq_q9: "¿Cuánto cuestan sus servicios?", faq_a9: "Los precios dependen del proyecto.",
+                faq_q10: "¿Cómo puedo contactarle?", faq_a10: "Complete el formulario de contacto.",
+                faq_cta_title: "¿Tiene un proyecto?", faq_cta_desc: "Convirtamos sus ideas en experiencia.",
+                btn_work: "Trabajemos Juntos",
+                chat_title: "Hablemos con el Asistente IA", chat_sub: "Obtenga respuestas instantáneas",
+                chat_welcome: "¡Hola! Soy el asistente IA de Syuzanna.",
+                chat_opt1: "Tienda Estándar", chat_opt2: "Diseño Personalizado", chat_opt3: "Arreglar Problemas", chat_opt4: "Mejorar Rendimiento",
+                cont_title: "Póngase en Contacto", cont_sub: "¿Listo para comenzar?",
+                cont_info: "Información de Contacto", cont_follow: "Sígueme",
+                form_name: "Su Nombre", form_email: "Su Email", form_subj: "Asunto", form_msg: "Su Mensaje", form_send: "Enviar Mensaje",
+                footer_rights: "Todos los derechos reservados."
             }
         };
 
