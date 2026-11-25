@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- ADDED user-scalable=no to prevent zoom issues on some Androids -->
+    <!-- CRITICAL FOR ANDROID: Prevents auto-zoom and scaling issues -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- SEO & GOOGLE OPTIMIZATION START -->
@@ -69,7 +69,7 @@
             background-color: var(--background);
             color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; /* PREVENTS HORIZONTAL SCROLL */
             max-width: 100vw;
             /* CRITICAL FIX FOR ANDROID TEXT ZOOM */
             -webkit-text-size-adjust: 100%;
@@ -365,7 +365,7 @@
         @media (max-width: 600px) {
             /* Force smaller fonts for Armenian/Russian on small screens */
             body[data-lang="am"] *, body[data-lang="ru"] * {
-                word-break: break-word !important; /* Forces long words to break */
+                word-break: break-word !important; /* Forces long words to break if needed */
             }
 
             body[data-lang="am"] h1, body[data-lang="am"] h2, body[data-lang="am"] h3,
@@ -382,15 +382,25 @@
             }
 
             /* SPECIFIC FOOTER FIX FOR MOBILE ARMENIAN/RUSSIAN */
+            /* This prevents footer from breaking and keeps text on one line but very small */
             body[data-lang="am"] .footer-left h3, body[data-lang="ru"] .footer-left h3,
             body[data-lang="am"] .footer-links a, body[data-lang="ru"] .footer-links a,
             body[data-lang="am"] .footer-bottom p, body[data-lang="ru"] .footer-bottom p {
-                font-size: 12px !important; /* Very small font for footer to fit */
+                font-size: 11px !important; /* Very small font to fit everything */
                 line-height: 1.4 !important;
+                white-space: nowrap !important; /* Prevents text from wrapping to next line */
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             body[data-lang="am"] .logo h1, body[data-lang="ru"] .logo h1 {
                  font-size: 15px !important;
+            }
+            
+            /* Fix for Buttons wrapping weirdly */
+            body[data-lang="am"] .btn, body[data-lang="ru"] .btn {
+                font-size: 13px !important;
+                padding: 12px 20px !important;
             }
         }
     </style>
