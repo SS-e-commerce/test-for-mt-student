@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- SEO & GOOGLE OPTIMIZATION START -->
     <title>Syuzanna Sargsyan | Shopify Developer, UX/UI Designer & GitHub Expert</title>
@@ -20,7 +20,7 @@
     <meta property="og:title" content="Syuzanna Sargsyan | Shopify & UX/UI Specialist">
     <meta property="og:description" content="Expert Shopify Developer and UX/UI Designer. Creating high-converting stores and custom web solutions.">
     <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0850/6494/1787/files/photo1-png.jpg?v=1793619682">
-    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:url" content="https://syuzannasargsyan.com">
     <meta property="og:type" content="website">
 
     <!-- JSON-LD SCHEMA FOR GOOGLE (Crucial for Search Ranking) -->
@@ -30,7 +30,7 @@
       "@type": "Person",
       "name": "Syuzanna Sargsyan",
       "alternateName": "Սյուզաննա Սարգսյան",
-      "url": "https://yourwebsite.com",
+      "url": "https://syuzannasargsyan.com",
       "image": "https://cdn.shopify.com/s/files/1/0850/6494/1787/files/photo1-png.jpg?v=1793619682",
       "jobTitle": "Shopify Developer and UX/UI Designer",
       "worksFor": {
@@ -45,7 +45,7 @@
         "https://www.linkedin.com/in/syuzannasargsyan/",
         "https://www.upwork.com/freelancers/~01e3e9ea13f268da60",
         "https://www.behance.net/syuzisargsyan2",
-        "https://github.com/yourusername", 
+        "https://github.com/syuzisargsyan", 
         "https://instagram.com/syuz_2012",
         "https://t.me/syuz_2012"
       ],
@@ -57,7 +57,7 @@
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="images/favicon.png">
 
-    <!-- FONTS -->
+    <!-- FONTS: Added Noto Sans Armenian for better mobile rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Noto+Sans+Armenian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -84,6 +84,8 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            /* Prevents horizontal scroll on mobile */
+            max-width: 100vw; 
         }
 
         h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', 'Noto Sans Armenian', sans-serif; font-weight: 700; color: var(--primary); }
@@ -468,26 +470,32 @@
             section { padding: 60px 0; }
         }
 
-        /* SPECIAL FIX FOR ARMENIAN/RUSSIAN ON MOBILE */
+        /* SPECIAL FIX FOR ARMENIAN/RUSSIAN ON MOBILE (SAMSUNG FIX) */
         @media (max-width: 600px) {
             /* When language is Armenian or Russian, reduce font sizes significantly */
             body[data-lang="am"] h1, body[data-lang="am"] h2, body[data-lang="am"] h3,
             body[data-lang="ru"] h1, body[data-lang="ru"] h2, body[data-lang="ru"] h3 {
-                font-size: 85% !important; /* Reduce heading size by 15% */
+                font-size: 80% !important; /* Reduce heading size by 20% for Samsung/Android */
             }
             
             body[data-lang="am"] .hero-title, body[data-lang="ru"] .hero-title {
-                font-size: 28px !important; /* Specific fix for hero title */
+                font-size: 26px !important; /* Specific fix for hero title */
             }
 
             body[data-lang="am"] .section-title, body[data-lang="ru"] .section-title {
-                font-size: 24px !important;
+                font-size: 22px !important;
             }
 
             body[data-lang="am"] p, body[data-lang="ru"] p,
             body[data-lang="am"] span, body[data-lang="ru"] span,
             body[data-lang="am"] a, body[data-lang="ru"] a {
-                font-size: 90% !important; /* Reduce text size by 10% */
+                font-size: 85% !important; /* Reduce text size by 15% */
+            }
+            
+            /* Force word break for long Armenian words if needed */
+            body[data-lang="am"] .logo h1, body[data-lang="ru"] .logo h1 {
+                 word-break: break-word;
+                 font-size: 16px !important;
             }
         }
     </style>
