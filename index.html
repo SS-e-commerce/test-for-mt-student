@@ -2,28 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- ADDED user-scalable=no to prevent zoom issues on some Androids -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- SEO & GOOGLE OPTIMIZATION START -->
     <title>Syuzanna Sargsyan | Shopify Developer, UX/UI Designer & GitHub Expert</title>
     
-    <!-- Main Description for Google Search Results -->
     <meta name="description" content="Syuzanna Sargsyan - Professional Shopify Developer, UX/UI Designer, and Web Expert. Specializing in Custom Liquid, Landing Pages, GitHub Projects, and eCommerce Growth. Հայաստանի վեբ մասնագետ։">
-    
-    <!-- Keywords people might search for -->
     <meta name="keywords" content="Syuzanna Sargsyan, Սյուզաննա Սարգսյան, Shopify Developer, UX/UI Designer, GitHub Portfolio, Web Design, Liquid Coding, eCommerce Expert, Frontend Developer, Landing Page Design, Website Optimization, Վեբ դիզայներ, Շոպիֆայ մասնագետ">
     
     <meta name="author" content="Syuzanna Sargsyan">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph for Social Media (LinkedIn/Facebook preview) -->
     <meta property="og:title" content="Syuzanna Sargsyan | Shopify & UX/UI Specialist">
     <meta property="og:description" content="Expert Shopify Developer and UX/UI Designer. Creating high-converting stores and custom web solutions.">
     <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0850/6494/1787/files/photo1-png.jpg?v=1793619682">
     <meta property="og:url" content="https://syuzannasargsyan.com">
     <meta property="og:type" content="website">
 
-    <!-- JSON-LD SCHEMA FOR GOOGLE (Crucial for Search Ranking) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -33,14 +29,8 @@
       "url": "https://syuzannasargsyan.com",
       "image": "https://cdn.shopify.com/s/files/1/0850/6494/1787/files/photo1-png.jpg?v=1793619682",
       "jobTitle": "Shopify Developer and UX/UI Designer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance"
-      },
-      "alumniOf": {
-        "@type": "CollegeOrUniversity",
-        "name": "Master's in Economics"
-      },
+      "worksFor": { "@type": "Organization", "name": "Freelance" },
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Master's in Economics" },
       "sameAs": [
         "https://www.linkedin.com/in/syuzannasargsyan/",
         "https://www.upwork.com/freelancers/~01e3e9ea13f268da60",
@@ -54,24 +44,20 @@
     </script>
     <!-- SEO END -->
 
-    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="images/favicon.png">
-
-    <!-- FONTS: Added Noto Sans Armenian for better mobile rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Noto+Sans+Armenian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ORIGINAL COLOR PALETTE RESTORED */
         :root {
-            --primary: #797d62;       /* Sage Green */
-            --secondary: #9b9b7a;     /* Olive Grey */
-            --accent: #d9ae94;        /* Soft Peach */
-            --highlight: #f1dca7;     /* Pale Gold */
-            --bg-warm: #baa587;       /* Warm Beige */
-            --background: #FDFBF7;    /* Very Light Beige */
+            --primary: #797d62;
+            --secondary: #9b9b7a;
+            --accent: #d9ae94;
+            --highlight: #f1dca7;
+            --bg-warm: #baa587;
+            --background: #FDFBF7;
             --white: #FFFFFF;
-            --text: #4A4A4A;          /* Dark Grey */
+            --text: #4A4A4A;
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -84,8 +70,10 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            /* Prevents horizontal scroll on mobile */
-            max-width: 100vw; 
+            max-width: 100vw;
+            /* CRITICAL FIX FOR ANDROID TEXT ZOOM */
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
 
         h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', 'Noto Sans Armenian', sans-serif; font-weight: 700; color: var(--primary); }
@@ -107,13 +95,12 @@
         }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
         
-        /* Logo Name Styling - Fixed for long names */
         .logo h1 { 
             font-size: 22px; 
             color: var(--primary); 
             font-weight: 800; 
             letter-spacing: -0.5px; 
-            white-space: nowrap; /* Keeps it on one line on Desktop */
+            white-space: nowrap;
         }
         
         .nav-list { display: flex; list-style: none; gap: 20px; align-items: center; }
@@ -130,7 +117,6 @@
 
         .header-right { display: flex; align-items: center; gap: 15px; }
         
-        /* Language Selector */
         .language-selector { position: relative; }
         .lang-btn {
             background: rgba(255,255,255,0.6); border: 1px solid var(--secondary);
@@ -164,19 +150,11 @@
         }
         
         .hero-orb {
-            position: absolute;
-            top: 50%;
-            right: 10%;
-            width: 600px;
-            height: 600px;
+            position: absolute; top: 50%; right: 10%; width: 600px; height: 600px;
             background: linear-gradient(45deg, var(--accent), var(--highlight));
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.3;
-            animation: floatOrb 15s infinite ease-in-out;
-            z-index: 0;
+            border-radius: 50%; filter: blur(100px); opacity: 0.3;
+            animation: floatOrb 15s infinite ease-in-out; z-index: 0;
         }
-
         @keyframes floatOrb {
             0% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(-30px, -50px) scale(1.1); }
@@ -197,36 +175,14 @@
         .btn-secondary:hover { background: var(--primary); color: var(--white); transform: translateY(-3px); }
         
         .hero-image { position: relative; perspective: 1000px; }
-        
         .profile-img-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 4/5;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 50px rgba(121, 125, 98, 0.2);
-            padding: 10px;
-            transition: var(--transition);
+            position: relative; width: 100%; max-width: 500px; aspect-ratio: 4/5; border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 20px 50px rgba(121, 125, 98, 0.2);
+            padding: 10px; transition: var(--transition);
         }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 25px;
-            opacity: 0.9;
-            transition: opacity 0.5s ease;
-        }
-
-        .hero-image:hover .profile-img-container {
-            transform: rotateY(0deg) scale(1.02);
-            box-shadow: 0 30px 60px rgba(121, 125, 98, 0.3);
-        }
-
+        .profile-img { width: 100%; height: 100%; object-fit: cover; border-radius: 25px; opacity: 0.9; transition: opacity 0.5s ease; }
+        .hero-image:hover .profile-img-container { transform: rotateY(0deg) scale(1.02); box-shadow: 0 30px 60px rgba(121, 125, 98, 0.3); }
         .hero-image:hover .profile-img { opacity: 1; }
 
         /* SECTIONS */
@@ -234,74 +190,33 @@
         .section-header { text-align: center; margin-bottom: 70px; }
         .section-title { font-size: 42px; color: var(--primary); margin-bottom: 16px; letter-spacing: -1px; }
         .section-subtitle { font-size: 18px; color: var(--secondary); max-width: 700px; margin: 0 auto; }
-        
         .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* RUNWAY / MARQUEE */
+        /* RUNWAY */
         .runway-section {
-            background: var(--primary);
-            padding: 25px 0;
-            overflow: hidden;
-            position: relative;
-            white-space: nowrap;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: var(--primary); padding: 25px 0; overflow: hidden; position: relative; white-space: nowrap;
+            border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .runway-track {
-            display: flex;
-            width: max-content;
-            animation: scroll 30s linear infinite;
-        }
+        .runway-track { display: flex; width: max-content; animation: scroll 30s linear infinite; }
         .runway-item {
-            font-family: 'Manrope', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--background);
-            padding: 0 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.9;
-            transition: var(--transition);
+            font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 600; color: var(--background);
+            padding: 0 30px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;
         }
-        .runway-item:hover { color: var(--highlight); opacity: 1; transform: scale(1.05); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* PORTFOLIO */
         .work { background: var(--white); }
-        .portfolio-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 40px; 
-        }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
         .portfolio-item { 
-            position: relative; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            cursor: pointer; 
-            box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); 
-            transition: var(--transition); 
-            background: #000; 
-            height: 100%; 
-            display: flex;
-            flex-direction: column;
+            position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; 
+            box-shadow: 0 10px 30px rgba(121, 125, 98, 0.1); transition: var(--transition); 
+            background: #000; height: 100%; display: flex; flex-direction: column;
         }
         .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(121, 125, 98, 0.2); }
-        
-        .portfolio-media { 
-            position: relative; 
-            width: 100%;
-            aspect-ratio: 16/9; 
-            overflow: hidden; 
-        }
-        .portfolio-media img, .portfolio-media video { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: transform 0.6s ease; 
-        }
+        .portfolio-media { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+        .portfolio-media img, .portfolio-media video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
         .portfolio-item:hover .portfolio-media img { transform: scale(1.05); }
-        
         .portfolio-overlay {
             position: absolute; bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(121, 125, 98, 0.95), transparent);
@@ -315,14 +230,8 @@
         .services { background: var(--bg-warm); }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .service-card { 
-            background: var(--white); 
-            padding: 40px 30px; 
-            border-radius: 20px; 
-            transition: var(--transition); 
-            border: 1px solid transparent; 
-            height: 100%; 
-            display: flex;
-            flex-direction: column;
+            background: var(--white); padding: 40px 30px; border-radius: 20px; transition: var(--transition); 
+            border: 1px solid transparent; height: 100%; display: flex; flex-direction: column;
         }
         .service-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(217, 174, 148, 0.2); }
         .service-icon { width: 60px; height: 60px; background: var(--background); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 24px; color: var(--primary); }
@@ -342,27 +251,11 @@
         /* FAQ */
         .faq { background: var(--background); }
         .faq-list { max-width: 900px; margin: 0 auto 50px; }
-        .faq-item { 
-            background: var(--white); 
-            margin-bottom: 16px; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            border: 1px solid rgba(121, 125, 98, 0.1); 
-        }
+        .faq-item { background: var(--white); margin-bottom: 16px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(121, 125, 98, 0.1); }
         .faq-question { 
-            width: 100%; 
-            padding: 24px 30px; 
-            background: transparent; 
-            border: none; 
-            text-align: left; 
-            font-size: 18px; 
-            font-weight: 600; 
-            color: var(--primary); 
-            cursor: pointer; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            transition: var(--transition); 
+            width: 100%; padding: 24px 30px; background: transparent; border: none; text-align: left; 
+            font-size: 18px; font-weight: 600; color: var(--primary); cursor: pointer; 
+            display: flex; justify-content: space-between; align-items: center; transition: var(--transition); 
         }
         .faq-question:hover { color: var(--accent); }
         .faq-icon { position: relative; width: 20px; height: 20px; transition: var(--transition); }
@@ -429,7 +322,7 @@
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
         .footer-bottom p { color: rgba(255, 255, 255, 0.6); font-size: 14px; }
 
-        /* RESPONSIVE FIXES FOR MOBILE FONTS */
+        /* RESPONSIVE FIXES */
         @media (max-width: 992px) {
             .hero-content { grid-template-columns: 1fr; text-align: center; }
             .hero-title { font-size: 44px; }
@@ -448,16 +341,14 @@
             .mobile-menu-btn { display: block; }
             .social-icons { display: none; }
             
-            /* CRITICAL MOBILE FONT FIXES */
             .hero-title { font-size: 32px; }
             .hero-description { font-size: 16px; }
             .section-title { font-size: 28px; }
             .section-subtitle { font-size: 15px; }
             
-            /* Fix for Long Names in Header on Mobile - Allow 2 lines */
             .logo h1 { 
                 font-size: 18px; 
-                white-space: normal; /* Allows wrapping to 2 lines */
+                white-space: normal; 
                 max-width: 150px; 
                 line-height: 1.2;
             } 
@@ -470,32 +361,36 @@
             section { padding: 60px 0; }
         }
 
-        /* SPECIAL FIX FOR ARMENIAN/RUSSIAN ON MOBILE (SAMSUNG FIX) */
+        /* AGGRESSIVE SAMSUNG/ANDROID FIX FOR ARMENIAN/RUSSIAN */
         @media (max-width: 600px) {
-            /* When language is Armenian or Russian, reduce font sizes significantly */
+            /* Force smaller fonts for Armenian/Russian on small screens */
+            body[data-lang="am"] *, body[data-lang="ru"] * {
+                word-break: break-word !important; /* Forces long words to break */
+            }
+
             body[data-lang="am"] h1, body[data-lang="am"] h2, body[data-lang="am"] h3,
             body[data-lang="ru"] h1, body[data-lang="ru"] h2, body[data-lang="ru"] h3 {
-                font-size: 80% !important; /* Reduce heading size by 20% for Samsung/Android */
+                font-size: 75% !important; /* Reduce headings by 25% */
             }
             
             body[data-lang="am"] .hero-title, body[data-lang="ru"] .hero-title {
-                font-size: 26px !important; /* Specific fix for hero title */
+                font-size: 24px !important;
             }
 
             body[data-lang="am"] .section-title, body[data-lang="ru"] .section-title {
-                font-size: 22px !important;
+                font-size: 20px !important;
             }
 
-            body[data-lang="am"] p, body[data-lang="ru"] p,
-            body[data-lang="am"] span, body[data-lang="ru"] span,
-            body[data-lang="am"] a, body[data-lang="ru"] a {
-                font-size: 85% !important; /* Reduce text size by 15% */
+            /* SPECIFIC FOOTER FIX FOR MOBILE ARMENIAN/RUSSIAN */
+            body[data-lang="am"] .footer-left h3, body[data-lang="ru"] .footer-left h3,
+            body[data-lang="am"] .footer-links a, body[data-lang="ru"] .footer-links a,
+            body[data-lang="am"] .footer-bottom p, body[data-lang="ru"] .footer-bottom p {
+                font-size: 12px !important; /* Very small font for footer to fit */
+                line-height: 1.4 !important;
             }
             
-            /* Force word break for long Armenian words if needed */
             body[data-lang="am"] .logo h1, body[data-lang="ru"] .logo h1 {
-                 word-break: break-word;
-                 font-size: 16px !important;
+                 font-size: 15px !important;
             }
         }
     </style>
@@ -527,14 +422,12 @@
                         </div>
                     </div>
                     
-                    <!-- SOCIAL MEDIA LINKS -->
                     <div class="social-icons">
                         <a href="https://www.linkedin.com/in/syuzannasargsyan/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                         <a href="https://www.upwork.com/freelancers/~01e3e9ea13f268da60" target="_blank"><i class="fas fa-briefcase"></i></a>
                         <a href="https://www.behance.net/syuzisargsyan2" target="_blank"><i class="fab fa-behance"></i></a>
                         <a href="https://instagram.com/syuz_2012" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="https://t.me/syuz_2012" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-                        <!-- FIXED EMAIL LINK -->
                         <a href="mailto:sargsyansyuz@gmail.com"><i class="fas fa-envelope"></i></a>
                     </div>
                     
@@ -575,84 +468,34 @@
                 <p class="section-subtitle" data-key="work_sub">Selected projects showcasing Shopify development and UX/UI design</p>
             </div>
             <div class="portfolio-grid">
-                
-                <!-- 1. VIDEO -->
                 <div class="portfolio-item">
-                    <div class="portfolio-media">
-                        <video autoplay muted loop playsinline src="test-mp4.mp4"></video>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3 data-key="port_1_title">Shopify Store from Scratch</h3>
-                        <p data-key="port_1_desc">Full build and customization</p>
-                    </div>
+                    <div class="portfolio-media"><video autoplay muted loop playsinline src="test-mp4.mp4"></video></div>
+                    <div class="portfolio-overlay"><h3 data-key="port_1_title">Shopify Store from Scratch</h3><p data-key="port_1_desc">Full build and customization</p></div>
                 </div>
-
-                <!-- 2. VIDEO -->
                 <div class="portfolio-item">
-                    <div class="portfolio-media">
-                        <video autoplay muted loop playsinline src="https://cdn.shopify.com/videos/c/o/v/0530ada9e95646eca509aeecdd62d9f5.mp4"></video>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3 data-key="port_2_title">Custom Liquid Sections</h3>
-                        <p data-key="port_2_desc">Unique reusable components</p>
-                    </div>
+                    <div class="portfolio-media"><video autoplay muted loop playsinline src="https://cdn.shopify.com/videos/c/o/v/0530ada9e95646eca509aeecdd62d9f5.mp4"></video></div>
+                    <div class="portfolio-overlay"><h3 data-key="port_2_title">Custom Liquid Sections</h3><p data-key="port_2_desc">Unique reusable components</p></div>
                 </div>
-
-                <!-- 3. VIDEO -->
                 <div class="portfolio-item">
-                    <div class="portfolio-media">
-                        <video autoplay muted loop playsinline src="https://cdn.shopify.com/videos/c/o/v/5c6e961cbd834e50a15b30a67274ad09.mp4"></video>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3 data-key="port_3_title">Landing Page Design</h3>
-                        <p data-key="port_3_desc">Conversion-focused page</p>
-                    </div>
+                    <div class="portfolio-media"><video autoplay muted loop playsinline src="https://cdn.shopify.com/videos/c/o/v/5c6e961cbd834e50a15b30a67274ad09.mp4"></video></div>
+                    <div class="portfolio-overlay"><h3 data-key="port_3_title">Landing Page Design</h3><p data-key="port_3_desc">Conversion-focused page</p></div>
                 </div>
-
-                <!-- 4. IMAGE -->
                 <div class="portfolio-item">
-                    <div class="portfolio-media">
-                        <img src="images/photo2-jpg.png" alt="GitHub Project">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3 data-key="port_4_title">GitHub Project 1</h3>
-                        <p data-key="port_4_desc">See live project</p>
-                    </div>
+                    <div class="portfolio-media"><img src="images/photo2-jpg.png" alt="GitHub Project"></div>
+                    <div class="portfolio-overlay"><h3 data-key="port_4_title">GitHub Project 1</h3><p data-key="port_4_desc">See live project</p></div>
                 </div>
-
-                <!-- 5. IMAGE -->
                 <div class="portfolio-item">
-                    <div class="portfolio-media">
-                        <img src="images/portfolio-5.jpg" alt="GitHub Project">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3 data-key="port_5_title">GitHub Project 2</h3>
-                        <p data-key="port_5_desc">See live project</p>
-                    </div>
+                    <div class="portfolio-media"><img src="images/portfolio-5.jpg" alt="GitHub Project"></div>
+                    <div class="portfolio-overlay"><h3 data-key="port_5_title">GitHub Project 2</h3><p data-key="port_5_desc">See live project</p></div>
                 </div>
-
-                <!-- 6. IMAGE -->
                 <div class="portfolio-item">
-                    <div class="portfolio-media">
-                        <img src="https://cdn.shopify.com/s/files/1/0850/6494/1787/files/Screenshot_2026-10-30_133848.png?v=1793806897" alt="Behance Project">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3 data-key="port_6_title">Behance Portfolio</h3>
-                        <p data-key="port_6_desc">UX/UI Case Studies</p>
-                    </div>
+                    <div class="portfolio-media"><img src="https://cdn.shopify.com/s/files/1/0850/6494/1787/files/Screenshot_2026-10-30_133848.png?v=1793806897" alt="Behance Project"></div>
+                    <div class="portfolio-overlay"><h3 data-key="port_6_title">Behance Portfolio</h3><p data-key="port_6_desc">UX/UI Case Studies</p></div>
                 </div>
-
-                <!-- 7. IMAGE -->
                 <div class="portfolio-item">
-                    <div class="portfolio-media">
-                        <img src="https://cdn.shopify.com/s/files/1/0850/6494/1787/files/Screenshot_2026-10-30_133935.png?v=1793805412" alt="Graphic Design">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3 data-key="port_7_title">Graphic Design</h3>
-                        <p data-key="port_7_desc">Brand Identity & Visuals</p>
-                    </div>
+                    <div class="portfolio-media"><img src="https://cdn.shopify.com/s/files/1/0850/6494/1787/files/Screenshot_2026-10-30_133935.png?v=1793805412" alt="Graphic Design"></div>
+                    <div class="portfolio-overlay"><h3 data-key="port_7_title">Graphic Design</h3><p data-key="port_7_desc">Brand Identity & Visuals</p></div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -660,28 +503,16 @@
     <!-- RUNWAY SECTION -->
     <div class="runway-section">
         <div class="runway-track">
-            <span class="runway-item">Shopify Development</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Custom Liquid Sections</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">UX/UI Design</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Landing Pages</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Website Optimization</span>
-            <span class="runway-item">•</span>
-            
-            <!-- REPEAT FOR LOOP -->
-            <span class="runway-item">Shopify Development</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Custom Liquid Sections</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">UX/UI Design</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Landing Pages</span>
-            <span class="runway-item">•</span>
-            <span class="runway-item">Website Optimization</span>
-            <span class="runway-item">•</span>
+            <span class="runway-item">Shopify Development</span><span class="runway-item">•</span>
+            <span class="runway-item">Custom Liquid Sections</span><span class="runway-item">•</span>
+            <span class="runway-item">UX/UI Design</span><span class="runway-item">•</span>
+            <span class="runway-item">Landing Pages</span><span class="runway-item">•</span>
+            <span class="runway-item">Website Optimization</span><span class="runway-item">•</span>
+            <span class="runway-item">Shopify Development</span><span class="runway-item">•</span>
+            <span class="runway-item">Custom Liquid Sections</span><span class="runway-item">•</span>
+            <span class="runway-item">UX/UI Design</span><span class="runway-item">•</span>
+            <span class="runway-item">Landing Pages</span><span class="runway-item">•</span>
+            <span class="runway-item">Website Optimization</span><span class="runway-item">•</span>
         </div>
     </div>
 
@@ -739,7 +570,6 @@
                     <p data-key="about_p1">Hi, I'm Syuzanna, and I help businesses create, manage, and improve their Shopify stores with thoughtful design and practical eCommerce solutions.</p>
                     <p data-key="about_p2">Whether you're launching a new online store or looking to improve your website's design, I can help you turn those challenges into effective solutions.</p>
                     <p data-key="about_p3">With a Master's degree in Economics and 12 years of experience, I bring real-world business knowledge to every project.</p>
-                    
                     <div class="about-stats">
                         <div class="stat-item"><h3>12+</h3><p data-key="stat_1">Years Experience</p></div>
                         <div class="stat-item"><h3>41%</h3><p data-key="stat_2">Year 1 Growth</p></div>
@@ -849,11 +679,7 @@
                     <h3 data-key="cont_info">Contact Information</h3>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <!-- FIXED MAILTO LINK -->
-                            <a href="mailto:sargsyansyuz@gmail.com">sargsyansyuz@gmail.com</a>
-                        </div>
+                        <div><h4>Email</h4><a href="mailto:sargsyansyuz@gmail.com">sargsyansyuz@gmail.com</a></div>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-telegram-plane"></i>
@@ -922,28 +748,20 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        // --- MENU ACTIVE STATE ---
         const sections = document.querySelectorAll("section");
         const navLi = document.querySelectorAll(".nav-list li a");
-
         window.onscroll = () => {
             var current = "";
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute("id");
-                }
+                if (pageYOffset >= sectionTop - 150) current = section.getAttribute("id");
             });
-
             navLi.forEach((li) => {
                 li.classList.remove("active");
-                if (li.getAttribute("href").includes(current)) {
-                    li.classList.add("active");
-                }
+                if (li.getAttribute("href").includes(current)) li.classList.add("active");
             });
         };
 
-        // --- LANGUAGE SWITCHER & TRANSLATIONS ---
         const langBtn = document.getElementById('langBtn');
         const langDropdown = document.getElementById('langDropdown');
         const currentLangSpan = document.getElementById('currentLang');
@@ -999,7 +817,7 @@
                 footer_rights: "All rights reserved."
             },
             am: {
-                brand_name: "Սյուզաննա\nՍարգսյան", /* \n creates a new line for mobile */
+                brand_name: "Սյուզաննա\nՍարգսյան",
                 nav_home: "Գլխավոր", nav_work: "Աշխատանքներ", nav_services: "Ծառայություններ", nav_about: "Մասին", nav_contact: "Կապ", nav_talk: "Խոսենք",
                 hero_subtitle: "Shopify մասնագետ և էլեկտրոնային առևտրի UX/UI դիզայներ",
                 hero_title: "Ստեղծում եմ թվային փորձառություններ, որոնք նպաստում են աճին",
@@ -1047,7 +865,7 @@
                 footer_rights: "Բոլոր իրավունքները պաշտպանված են։"
             },
             ru: {
-                brand_name: "Сюзанна\nСаргсян", /* \n creates a new line for mobile */
+                brand_name: "Сюзанна\nСаргсян",
                 nav_home: "Главная", nav_work: "Работы", nav_services: "Услуги", nav_about: "Обо мне", nav_contact: "Контакт", nav_talk: "Связаться",
                 hero_subtitle: "Специалист по Shopify и UX/UI дизайнер",
                 hero_title: "Создаю цифровой опыт, который стимулирует рост",
@@ -1144,15 +962,8 @@
             }
         };
 
-        langBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langDropdown.classList.toggle('active');
-        });
-
-        document.addEventListener('click', () => {
-            langDropdown.classList.remove('active');
-        });
-
+        langBtn.addEventListener('click', (e) => { e.stopPropagation(); langDropdown.classList.toggle('active'); });
+        document.addEventListener('click', () => { langDropdown.classList.remove('active'); });
         document.querySelectorAll('.lang-option').forEach(option => {
             option.addEventListener('click', () => {
                 const lang = option.getAttribute('data-lang');
@@ -1166,18 +977,14 @@
             const langNames = { 'en': 'EN', 'am': 'AM', 'ru': 'RU', 'es': 'ES' };
             currentLangSpan.textContent = langNames[lang];
             
-            // Update Brand Name in Header, Footer and Copyright
             if(translations[lang].brand_name) {
-                // Replace \n with <br> for HTML rendering
                 document.getElementById('brandName').innerHTML = translations[lang].brand_name.replace(/\n/g, '<br>');
                 document.getElementById('footerName').innerHTML = translations[lang].brand_name.replace(/\n/g, '<br>');
                 document.getElementById('copyrightName').textContent = translations[lang].brand_name.replace(/\n/g, ' ');
             }
 
-            // Update body attribute for CSS targeting
             document.body.setAttribute('data-lang', lang);
 
-            // Update all other text elements
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (translations[lang] && translations[lang][key]) {
@@ -1186,23 +993,18 @@
             });
         }
 
-        // --- FAQ ACCORDION LOGIC ---
         document.querySelectorAll('.faq-question').forEach(btn => {
             btn.addEventListener('click', () => {
                 const item = btn.parentElement;
                 const isActive = item.classList.contains('active');
                 document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                if (!isActive) {
-                    item.classList.add('active');
-                }
+                if (!isActive) item.classList.add('active');
             });
         });
 
-        // --- AI CHAT LOGIC ---
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const sendBtn = document.getElementById('sendBtn');
-
         const aiResponses = {
             standard: "For a **Standard Shopify Store**, I recommend starting with a professional theme customization.",
             custom: "For **Custom Design**, I can create unique Liquid sections tailored to your brand!",
@@ -1228,7 +1030,6 @@
             if (!message) return;
             addMessage(message, true);
             chatInput.value = '';
-            
             setTimeout(() => {
                 const lowerMsg = message.toLowerCase();
                 let responseKey = 'default';
@@ -1250,7 +1051,6 @@
 
         sendBtn.addEventListener('click', handleUserMessage);
         chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
-
         document.querySelectorAll('.quick-option').forEach(btn => {
             btn.addEventListener('click', () => {
                 const type = btn.getAttribute('data-type');
@@ -1259,16 +1059,13 @@
             });
         });
 
-        // Scroll Reveal Animation
         const revealElements = document.querySelectorAll('.reveal');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
             const elementVisible = 150;
             revealElements.forEach((reveal) => {
                 const elementTop = reveal.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveal.classList.add('active');
-                }
+                if (elementTop < windowHeight - elementVisible) reveal.classList.add('active');
             });
         };
         window.addEventListener('scroll', revealOnScroll);
