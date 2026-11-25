@@ -4,16 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO OPTIMIZATION -->
-    <title>Syuzanna Sargsyan | Shopify Specialist</title>
-    <meta name="description" content="Syuzanna Sargsyan - Professional Shopify Developer, UX/UI Designer, and eCommerce Expert. Custom Liquid sections, landing pages, and store optimization.">
-    <meta name="keywords" content="Syuzanna Sargsyan, Shopify Developer, UX/UI Design, eCommerce Expert, Liquid Coding, Web Design, Սյուզաննա Սարգսյան">
+    <!-- SEO & GOOGLE OPTIMIZATION START -->
+    <title>Syuzanna Sargsyan | Shopify Developer, UX/UI Designer & GitHub Expert</title>
+    
+    <!-- Main Description for Google Search Results -->
+    <meta name="description" content="Syuzanna Sargsyan - Professional Shopify Developer, UX/UI Designer, and Web Expert. Specializing in Custom Liquid, Landing Pages, GitHub Projects, and eCommerce Growth. Հայաստանի վեբ մասնագետ։">
+    
+    <!-- Keywords people might search for -->
+    <meta name="keywords" content="Syuzanna Sargsyan, Սյուզաննա Սարգսյան, Shopify Developer, UX/UI Designer, GitHub Portfolio, Web Design, Liquid Coding, eCommerce Expert, Frontend Developer, Landing Page Design, Website Optimization, Վեբ դիզայներ, Շոպիֆայ մասնագետ">
+    
     <meta name="author" content="Syuzanna Sargsyan">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph for Social Media (LinkedIn/Facebook preview) -->
+    <meta property="og:title" content="Syuzanna Sargsyan | Shopify & UX/UI Specialist">
+    <meta property="og:description" content="Expert Shopify Developer and UX/UI Designer. Creating high-converting stores and custom web solutions.">
+    <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0850/6494/1787/files/photo1-png.jpg?v=1793619682">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:type" content="website">
+
+    <!-- JSON-LD SCHEMA FOR GOOGLE (Crucial for Search Ranking) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Syuzanna Sargsyan",
+      "alternateName": "Սյուզաննա Սարգսյան",
+      "url": "https://yourwebsite.com",
+      "image": "https://cdn.shopify.com/s/files/1/0850/6494/1787/files/photo1-png.jpg?v=1793619682",
+      "jobTitle": "Shopify Developer and UX/UI Designer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Master's in Economics"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/syuzannasargsyan/",
+        "https://www.upwork.com/freelancers/~01e3e9ea13f268da60",
+        "https://www.behance.net/syuzisargsyan2",
+        "https://github.com/yourusername", 
+        "https://instagram.com/syuz_2012",
+        "https://t.me/syuz_2012"
+      ],
+      "description": "Syuzanna Sargsyan is a Shopify Specialist, UX/UI Designer, and Web Developer with expertise in Liquid coding, GitHub projects, and eCommerce optimization."
+    }
+    </script>
+    <!-- SEO END -->
 
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="images/favicon.png">
 
-    <!-- FONTS: Added Noto Sans Armenian for better mobile rendering -->
+    <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Noto+Sans+Armenian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -63,14 +107,11 @@
         
         /* Logo Name Styling - Fixed for long names */
         .logo h1 { 
-            font-size: 22px; /* Slightly smaller base size */
+            font-size: 22px; 
             color: var(--primary); 
             font-weight: 800; 
             letter-spacing: -0.5px; 
-            white-space: nowrap;
-            max-width: 200px; /* Limit width to prevent pushing menu */
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: nowrap; /* Keeps it on one line on Desktop */
         }
         
         .nav-list { display: flex; list-style: none; gap: 20px; align-items: center; }
@@ -411,8 +452,13 @@
             .section-title { font-size: 28px; }
             .section-subtitle { font-size: 15px; }
             
-            /* Fix for Long Names in Header on Mobile */
-            .logo h1 { font-size: 16px; max-width: 140px; } 
+            /* Fix for Long Names in Header on Mobile - Allow 2 lines */
+            .logo h1 { 
+                font-size: 18px; 
+                white-space: normal; /* Allows wrapping to 2 lines */
+                max-width: 150px; 
+                line-height: 1.2;
+            } 
             
             .portfolio-grid { grid-template-columns: 1fr; }
             .services-grid { grid-template-columns: 1fr; }
@@ -945,7 +991,7 @@
                 footer_rights: "All rights reserved."
             },
             am: {
-                brand_name: "Սյուզաննա Սարգսյան",
+                brand_name: "Սյուզաննա\nՍարգսյան", /* \n creates a new line for mobile */
                 nav_home: "Գլխավոր", nav_work: "Աշխատանքներ", nav_services: "Ծառայություններ", nav_about: "Մասին", nav_contact: "Կապ", nav_talk: "Խոսենք",
                 hero_subtitle: "Shopify մասնագետ և էլեկտրոնային առևտրի UX/UI դիզայներ",
                 hero_title: "Ստեղծում եմ թվային փորձառություններ, որոնք նպաստում են աճին",
@@ -993,7 +1039,7 @@
                 footer_rights: "Բոլոր իրավունքները պաշտպանված են։"
             },
             ru: {
-                brand_name: "Сюзанна Саргсян",
+                brand_name: "Сюзанна\nСаргсян", /* \n creates a new line for mobile */
                 nav_home: "Главная", nav_work: "Работы", nav_services: "Услуги", nav_about: "Обо мне", nav_contact: "Контакт", nav_talk: "Связаться",
                 hero_subtitle: "Специалист по Shopify и UX/UI дизайнер",
                 hero_title: "Создаю цифровой опыт, который стимулирует рост",
@@ -1114,9 +1160,10 @@
             
             // Update Brand Name in Header, Footer and Copyright
             if(translations[lang].brand_name) {
-                document.getElementById('brandName').textContent = translations[lang].brand_name;
-                document.getElementById('footerName').textContent = translations[lang].brand_name;
-                document.getElementById('copyrightName').textContent = translations[lang].brand_name;
+                // Replace \n with <br> for HTML rendering
+                document.getElementById('brandName').innerHTML = translations[lang].brand_name.replace(/\n/g, '<br>');
+                document.getElementById('footerName').innerHTML = translations[lang].brand_name.replace(/\n/g, '<br>');
+                document.getElementById('copyrightName').textContent = translations[lang].brand_name.replace(/\n/g, ' ');
             }
 
             // Update body attribute for CSS targeting
